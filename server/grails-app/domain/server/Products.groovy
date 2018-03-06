@@ -20,8 +20,8 @@ class Products{
     
     
     static belongsTo=[Category]   // depende de o es hijo de categoria   
-    static hasMany=[existenceLine: ExistenceLine] // marca la relaciòn 
-    
+    static hasMany=[existenceLine: ExistenceLine, purchasesDetail: PurchasesDetail, billDetail: BillDetail] // marca la relaciòn 
+   
     static constraints={
         name(nullable: false, size: 0..60)   
         barCode(nullable:true, size: 0..15)
