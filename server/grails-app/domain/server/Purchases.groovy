@@ -5,6 +5,7 @@ class Purchases {
          table 'Purchases'       
          version false
          id generator:'identity', column:'purId'    // assigned que yo los asigno 
+         providerId column: 'providerId'
          dynamicUpdate true
          dynamicInsert true
          sort 'purId'         
@@ -13,6 +14,10 @@ class Purchases {
         Date date 
         String documentNumber
         String description
+        Provider providerId 
+        
+    static belongsTo=[Provider]
+    static hasMany=[purchaseDetail: PurchasesDetail]
  
     static constraints={
         documentNumber(nullable: false, size: 0..60)   

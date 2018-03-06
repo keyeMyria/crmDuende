@@ -5,6 +5,8 @@ class PurchasesDetail {
          table 'PurchasesDetail'       
          version false
          id generator:'identity', column:'purDetailId'    // assigned que yo los asigno 
+         purId column: 'purId'
+         productId column: 'productId'
          dynamicUpdate true
          dynamicInsert true
          sort 'purDetailId'         
@@ -12,7 +14,11 @@ class PurchasesDetail {
     
         Integer count 
         String salesPrice
-        String cost 
+        String cost
+        Purchases purId
+        Products productId
+    
+    static belongsTo=[Purchases, Products]
  
     static constraints={
         count(nullable: false)   

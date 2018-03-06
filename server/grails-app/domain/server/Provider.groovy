@@ -19,6 +19,7 @@ class Provider {
         String email
         String contactName
  
+    static hasMany=[products: Products]
     
     static constraints={
         name(nullable: false, size: 0..60)   
