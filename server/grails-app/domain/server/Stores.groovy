@@ -15,7 +15,7 @@ class Stores {
         String address
         String phone 
        
-    static hasMany = [users: Users]
+    static hasMany = [users: Users, existenceLine: ExistenceLine]
     
     static constraints={
         name(nullable: false, size: 0..60)   
