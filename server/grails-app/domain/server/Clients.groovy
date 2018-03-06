@@ -1,8 +1,8 @@
 package server
 
-class Client {
+class Clients {
     static mapping = {
-         table 'Client'       
+         table 'Clients'       
          version false
          id generator:'identity', column:'clientId'    // assigned que yo los asigno 
          dynamicUpdate true
@@ -29,8 +29,8 @@ class Client {
     static constraints={
         name(nullable: false, size: 0..60)   
         lastName(nullable:true, size: 0..60)
-        userName(nullable:true, size: 0..20)
-        email(nullable: true, size: 0..60)
+        userName(nullable:false, size: 0..20)
+        email(nullable: false, size: 0..60)
         mobile(nullable: true, size: 0..20)
         phone(nullable: true, size: 0..20)
         picture(nullable: true, size: 0..20)

@@ -7,7 +7,7 @@ class ExistenceLine {
          version false
          id generator:'identity', column:'id'    // assigned que yo los asigno  
          storeId column: 'storeId' 
-         productId colum: 'productId'
+         productId column: 'productId'
          dynamicUpdate true
          dynamicInsert true
          sort 'id'         
