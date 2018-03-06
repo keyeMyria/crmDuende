@@ -6,6 +6,7 @@ class Products{
          version false
          id generator:'identity', column:'productId'    // assigned que yo los asigno  
          categoryId column: 'categoryId'
+         id column: 'id' // id que asocia a tabla con existence line 
          dynamicUpdate true
          dynamicInsert true
          sort 'name'         
@@ -19,6 +20,7 @@ class Products{
     
     
     static belongsTo=[Category]   // depende de o es hijo de categoria   
+    static hasMany=[existenceLine: ExistenceLine] // marca la relaciòn 
     
     static constraints={
         name(nullable: false, size: 0..60)   
