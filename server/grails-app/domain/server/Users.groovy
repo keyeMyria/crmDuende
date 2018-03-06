@@ -21,6 +21,7 @@ class Users {
         Stores storeId 
        
     static belogsTo = [Stores]
+    static hasMany=[bill: Bill]
     
     static constraints={
         name(nullable: false, size: 0..60)   

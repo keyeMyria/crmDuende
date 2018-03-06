@@ -24,9 +24,10 @@ class Clients {
         String location
         String placeName
         String picture
- 
     
-    static constraints={
+     static hasMany=[bill: Bill]
+ 
+     static constraints={
         name(nullable: false, size: 0..60)   
         lastName(nullable:true, size: 0..60)
         userName(nullable:false, size: 0..20)
