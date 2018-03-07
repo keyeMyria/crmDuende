@@ -1,0 +1,8 @@
+import server.Purchases
+
+model {
+	Iterable<Purchases> purchasesList
+}
+
+json tmpl.purchases(purchasesList ?: [])
+
