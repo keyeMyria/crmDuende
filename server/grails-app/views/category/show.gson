@@ -1,0 +1,7 @@
+import server.Category
+
+model {
+	Category category
+}
+
+json tmpl.category(category)

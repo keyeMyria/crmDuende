@@ -1,0 +1,8 @@
+import server.ExistenceLine
+
+model {
+	Iterable<ExistenceLine> existenceLineList
+}
+
+json tmpl.existenceLine(existenceLineList ?: [])
+

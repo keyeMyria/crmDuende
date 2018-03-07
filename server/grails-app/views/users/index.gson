@@ -1,0 +1,8 @@
+import server.Users
+
+model {
+	Iterable<Users> usersList
+}
+
+json tmpl.users(usersList ?: [])
+

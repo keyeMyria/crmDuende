@@ -1,0 +1,7 @@
+import server.Users
+
+model {
+	Users users
+}
+
+json tmpl.users(users)

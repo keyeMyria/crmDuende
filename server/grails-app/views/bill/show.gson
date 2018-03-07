@@ -1,0 +1,7 @@
+import server.Bill
+
+model {
+	Bill bill
+}
+
+json tmpl.bill(bill)

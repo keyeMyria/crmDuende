@@ -1,0 +1,7 @@
+import server.Clients
+
+model {
+	Clients clients
+}
+
+json tmpl.clients(clients)
