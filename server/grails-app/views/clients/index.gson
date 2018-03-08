@@ -1,0 +1,8 @@
+import server.Clients
+
+model {
+	Iterable<Clients> clientsList
+}
+
+json tmpl.clients(clientsList ?: [])
+

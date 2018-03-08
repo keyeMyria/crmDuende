@@ -1,0 +1,8 @@
+import server.Stores
+
+model {
+	Iterable<Stores> storesList
+}
+
+json tmpl.stores(storesList ?: [])
+

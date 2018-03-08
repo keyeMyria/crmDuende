@@ -1,0 +1,7 @@
+import server.Products
+
+model {
+	Products products
+}
+
+json g.render(products)

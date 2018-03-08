@@ -1,0 +1,7 @@
+import server.Provider
+
+model {
+	Provider provider
+}
+
+json tmpl.provider(provider)
