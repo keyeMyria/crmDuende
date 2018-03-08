@@ -1,0 +1,19 @@
+.checkbox {
+    font-size: 16px;
+    display: inline-block;
+    line-height: 0;
+}
+
+.enable {
+    cursor: pointer;
+    color: #0069FF;
+}
+
+.disabled {
+    cursor: not-allowed;
+    color: #D4D4D4;
+}
+
+.icon-check_box_outline_blank{
+    color: #D4D4D4 !important;
+}
