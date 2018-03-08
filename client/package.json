@@ -53,7 +53,9 @@
     "recharts": "1.0.0-alpha.2",
     "remove-accents": "0.4.1",
     "shortid": "2.2.8",
-    "typescript": "2.6.2"
+    "typescript": "2.6.2",
+    "@types/react-bootstrap": "file:src/common/types/react-bootstrap",
+    "@types/react-bootstrap-table": "file:src/common/types/react-bootstrap-table"
   },
   "scripts": {
     "start": "react-scripts-ts start",
