@@ -1,8 +1,6 @@
 import UsersStore from './users-store';
-import { computed } from 'mobx';
 import { Https } from '../../common/util/https';
-import ContextMessageStore from '../../common/components/context-message/context-m-store';
-
+import ContextMessageStore from '../../common/components/context-message/context-message-store';
 export class IndexStore {
     public user: UsersStore;
     public messages: ContextMessageStore;
