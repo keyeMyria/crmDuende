@@ -1,14 +1,16 @@
 import { format, distanceInWordsToNow } from 'date-fns';
 import DateFNS from '../types/date-fns';
 
+const dateDefaultFormat = 'DD MMM YYYY';
+
 export default (date: DateFNS, formateStr?: string) => format(
-    date, formateStr || window.__dateDefaultFormat__, {
-        locale: window.__localeId__
+    date, formateStr || dateDefaultFormat, {
+        locale: 'es'
     }
 );
 
 export function fromNow(date: DateFNS): string {
-    return distanceInWordsToNow(date, { locale: window.__localeId__ });
+    return distanceInWordsToNow(date, { locale: 'es' });
 }
 
-export const getFormat = (): string => window.__dateDefaultFormat__;
+export const getFormat = (): string => 'es';
