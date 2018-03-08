@@ -8,3 +8,5 @@ interface User {
     phone?: string;
     picture?: string;
 }
+
+export default User;
