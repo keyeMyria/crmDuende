@@ -85,18 +85,23 @@ dataSource:
     username: "postgres"
     password: "root"
 
+flyway:
+    url: jdbc:postgresql://localhost:5433/crmDuende
+    user: "postgres"
+    password: "root"
+    
 environments:
     development:
         dataSource:
-            dbCreate: create-drop
+            dbCreate: none
             url: jdbc:postgresql://localhost:5433/crmDuende
     test:
         dataSource:
-            dbCreate: update
+            dbCreate: none
             url:  jdbc:postgresql://localhost:5433/crmDuende
     production:
         dataSource:
-            dbCreate: update
+            dbCreate: none
             url:  jdbc:postgresql://localhost:5433/crmDuende
             properties:
                 jmxEnabled: true

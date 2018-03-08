@@ -1,0 +1,8 @@
+import server.PurchasesByMonth
+
+model {
+	Iterable<PurchasesByMonth> purchasesByMonthList
+}
+
+json tmpl.purchasesByMonth(purchasesByMonthList ?: [])
+
