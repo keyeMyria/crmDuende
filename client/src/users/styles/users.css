@@ -1,0 +1,203 @@
+#root {
+    margin-top: 150px;
+}
+
+.tabs-container ul.nav-tabsp {
+    padding-top: 0 !important;
+}
+
+i.icon-lens {
+    font-size: 8px !important;
+}
+
+.veh-status-select {
+    -webkit-appearance: none;
+    border: 1px solid transparent;
+    background: transparent;
+    padding: 2px 18px 2px 3px;
+    border-radius: 2px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.veh-status-select:hover {
+    border: 1px solid #eee;
+    cursor: pointer;
+}
+
+.veh-status-select:focus {
+    outline: none;
+}
+
+input[type=file] {
+    visibility: hidden;
+}
+
+.custom-radio-button {
+    margin-right: 7px;
+    width: 55px;
+    border-radius: 3px;
+    display: inline-block;
+    height: 32px;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.custom-radio-button input {
+    visibility: hidden;
+    position: absolute;
+}
+
+.custom-radio-button input+label {
+    width: 100%;
+    height: 32px;
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.custom-radio-button input:checked+label {
+    background: rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+
+.custom-radio-button input:checked+label:after {
+    line-height: 1.42857143;
+    font-family: 'font-stsa';
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+    font-size: 22px;
+    content: "\e206";
+    color: #fff;
+    font-weight: bold;
+}
+
+.button-es {
+    background: url("https://upload.wikimedia.org/wikipedia/en/9/9a/Flag_of_Spain.svg") center center no-repeat;
+    background-size: cover;
+}
+
+.button-en {
+    background: url("https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg") center center no-repeat;
+    background-size: cover;
+}
+
+.modal-buttons {
+    text-align: right;
+}
+
+.modal-buttons button:first-child {
+    margin-right: 5px;
+}
+
+.user-item {
+    display: flex;
+    padding: 10px;
+}
+
+.user-item:hover {
+    background: #eee;
+}
+
+.user-image img {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+}
+
+.user-info span {
+    font-weight: normal;
+    color: #808080;
+}
+
+.select-item {
+    right: 15px;
+    position: absolute;
+}
+
+.list-component-title {
+    height: 35px;
+    background: #ddd;
+    padding: 0 10px;
+    text-transform: uppercase;
+    border-radius: 3px 3px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-component-title span {
+    font-weight: 600;
+}
+
+.list-component-title .search-title {
+    border-radius: 3px;
+    width: 200px;
+    padding: 3px 10px;
+    transition: all 0.2s ease;
+}
+
+.list-component-title .search-title:focus {
+    width: 230px;
+    transition: all 0.2s ease;
+}
+
+.list-component-body {
+    border: 1px solid #ddd;
+    border-radius: 0 0 3px 3px;
+}
+
+.react-bs-table-search-form {
+    display: none;
+}
+
+.tab-subtitle {
+    width: 90%;
+    border-bottom: 1px solid #d3d3d3;
+    color: #4d4d4d;
+    padding-bottom: 5px;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.tab-info-row {
+    height: 70px;
+}
+
+.tab-info-label {
+    font-size: 16px;
+}
+
+.tab-info-value {
+    font-weight: bold;
+    font-size: 17px;
+    color: #4d4d4d;
+}
+
+tab-integration-info {
+    max-width: 10px;
+}
+
+.description {
+    margin-top: 5px !important;
+    font-size: 12px !important;
+}
+
+.option-label {
+    font-weight: normal !important;
+}
+
+.input-label {
+    line-height: 1;
+}
+
+.label-height-14 {
+    line-height: 1.4 !important;
+}
