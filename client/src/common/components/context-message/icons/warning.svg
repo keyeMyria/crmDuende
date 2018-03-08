@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="44px" height="42px" viewBox="0 0 44 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>notification-warning-icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-5.8%" y="-25.0%" width="111.6%" height="170.0%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="5" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="mockups" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="user-module" transform="translate(-1116.000000, -241.000000)">
+            <g id="warning" filter="url(#filter-1)" transform="translate(1108.000000, 231.000000)">
+                <g id="notification-warning-icon" transform="translate(15.000000, 10.000000)">
+                    <polygon id="Shape" points="0 0 30 0 30 30 0 30"></polygon>
+                    <path d="M4.71889457,26.25 L25.2811054,26.25 L25.2811054,26.25 C26.3856749,26.25 27.2811054,25.3545695 27.2811054,24.25 C27.2811054,23.8981148 27.1882652,23.5524581 27.011958,23.2479275 L16.7308526,5.48965444 L16.7308526,5.48965444 C16.1774232,4.53373096 14.9538509,4.20744503 13.9979275,4.76087441 C13.6955044,4.93596143 13.4442345,5.1872314 13.2691474,5.48965444 L2.988042,23.2479275 L2.988042,23.2479275 C2.43461261,24.2038509 2.76089855,25.4274232 3.71682203,25.9808526 C4.02135272,26.1571598 4.36700938,26.25 4.71889457,26.25 Z M15,22.5 L15,22.5 L15,22.5 C14.3096441,22.5 13.75,21.9403559 13.75,21.25 L13.75,21.25 L13.75,21.25 C13.75,20.5596441 14.3096441,20 15,20 L15,20 L15,20 C15.6903559,20 16.25,20.5596441 16.25,21.25 L16.25,21.25 L16.25,21.25 C16.25,21.9403559 15.6903559,22.5 15,22.5 Z M15,17.5 L15,17.5 L15,17.5 C14.3096441,17.5 13.75,16.9403559 13.75,16.25 L13.75,13.75 L13.75,13.75 C13.75,13.0596441 14.3096441,12.5 15,12.5 L15,12.5 L15,12.5 C15.6903559,12.5 16.25,13.0596441 16.25,13.75 L16.25,16.25 L16.25,16.25 C16.25,16.9403559 15.6903559,17.5 15,17.5 Z" id="Shape" fill="#F5A623" fill-rule="nonzero"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
