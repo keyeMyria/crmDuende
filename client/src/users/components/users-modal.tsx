@@ -1,17 +1,16 @@
 import * as React from 'react';
-import User from '../types/user';
+import User from '../types/users';
 import { Modal, Tabs, Tab } from 'react-bootstrap';
 import ModalField from '../../common/components/modal-field';
-import ModalPicture from '../../common/components/modal-picture';
 import {
     required, isEmail, isUnique, isPhone, noNumbers, noAccents
 } from '../../common/components/input-validation/validators';
 import UserStore from '../stores/users-store';
 import { observer } from 'mobx-react';
 import { toJS } from 'mobx';
-
 const AvatarDefault = require('../../common/resources/pictures/avatar-default.svg');
 import '../styles/user-modal.css';
+import ModalPicture from '../../common/components/modal-picture';
 
 interface UserModalProps {
     show: boolean;
@@ -45,16 +44,16 @@ export default class UserModal extends React.Component<UserModalProps, UserModal
     }
 
     shouldComponentUpdate(nextProps: UserModalProps, nextState: UserModalState) {
-        const requiredFields = nextProps.user.id === '-1' ? 4 : 4;
+        const requiredFields = nextProps.user.userId === -1 ? 4 : 4;
         if (nextState.wantSubmit && Object.keys(nextState.errors).length === requiredFields) {
             this.trySubmit();
         }
         return true;
     }
 
-    isEditing = () => this.props.user.id !== '-1';
+    isEditing = () => this.props.user.userId !== -1;
 
-    getUsernameList = (): string[] => toJS(this.props.userStore.users.map(user => user.username || ''));
+    getUsernameList = (): string[] => toJS(this.props.userStore.users.map(user => user.userName || ''));
 
     onInputErrorsChanges = (valueKey: string, error?: string | JSX.Element) => {
         const haveError = !!error;
@@ -89,10 +88,10 @@ export default class UserModal extends React.Component<UserModalProps, UserModal
     renderHeader = () => (
         <Modal.Header closeButton={true}>
             <Modal.Title>
-                {this.props.user.id !== '-1'
+                {this.props.user.userId !== -1
                     ?
                     <span>
-                        Editar Usuario {this.state.user.name + this.state.user.last_name}
+                        Editar Usuario {this.state.user.name + this.state.user.lastName!}
                     </span>
                     : <span> Nuevo Usuario </span>}
             </Modal.Title>
@@ -116,7 +115,7 @@ export default class UserModal extends React.Component<UserModalProps, UserModal
                 <div className="col-sm-3">
                     <ModalPicture
                         valueName="picture"
-                        picture={this.props.user.picture}
+                        picture={this.props.user.picture!}
                         picturePlaceholder={AvatarDefault}
                     />
                 </div>
@@ -125,7 +124,7 @@ export default class UserModal extends React.Component<UserModalProps, UserModal
                         valueName="name"
                         onChange={this.handleValueChanges}
                         labelText="Nombre"
-                        inputValue={this.props.user.first_name}
+                        inputValue={this.props.user.name}
                         autoFocus={true}
                         externalErrors={this.props.userStore.errors}
                         isRequired={true}
@@ -135,10 +134,10 @@ export default class UserModal extends React.Component<UserModalProps, UserModal
                         forceVerify={this.state.forceVerify}
                     />
                     <ModalField
-                        valueName="last_name"
+                        valueName="lastName"
                         onChange={this.handleValueChanges}
                         labelText="Apellido"
-                        inputValue={this.props.user.last_name}
+                        inputValue={this.props.user.lastName}
                         externalErrors={this.props.userStore.errors}
                         isRequired={true}
                         validators={[required, noNumbers, noAccents]}
@@ -147,10 +146,10 @@ export default class UserModal extends React.Component<UserModalProps, UserModal
                         forceVerify={this.state.forceVerify}
                     />
                     <ModalField
-                        valueName="username"
+                        valueName="userName"
                         onChange={this.handleValueChanges}
                         labelText="Nombre de Usuario"
-                        inputValue={this.props.user.username}
+                        inputValue={this.props.user.userName}
                         externalErrors={this.props.userStore.errors}
                         isRequired={true}
                         validators={[required, isUnique(this.getUsernameList(), this.state.user.username || '')]}
@@ -223,7 +222,7 @@ export default class UserModal extends React.Component<UserModalProps, UserModal
         return (
             <Modal bsSize="lg" show={true} onHide={this.props.onClose}>
                 {this.renderHeader()}
-                {this.chooseRender(this.props.user.id !== '-1')}
+                {this.chooseRender(this.props.user.userId !== -1)}
                 {this.renderFooter()}
             </Modal>
         );

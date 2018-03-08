@@ -23,7 +23,6 @@ export default class UsersManagerRoute extends React.Component<UserProps, UsersR
 
     componentDidMount() {
         this.props.store.user.fetchUsersIfNeed();
-        this.props.store.userGroup.fetchUserGroupsIfNeeded();
     }
 
     onDeleteUser = async (id: string, user: User) => {
@@ -40,7 +39,7 @@ export default class UsersManagerRoute extends React.Component<UserProps, UsersR
     }
 
     onUserClick = async (user: User) => {
-        const success = await this.props.store.user.fetchUser(user.id);
+        const success = await this.props.store.user.fetchUser(user.userId);
         if (success) { this.setState({ showModal: true }); }
     }
 
@@ -52,18 +51,12 @@ export default class UsersManagerRoute extends React.Component<UserProps, UsersR
 
     onSubmitUser = async () => {
         const user = toJS(this.props.store.user.user);
-        const create = user.id === '-1';
+        const create = user.userId === -1;
         if (create) {
-            this.props.store.messages.confirm({
-                content: 'users.send_welcome_msg',
-                extra: user,
-                onResponse: this.handleCreateUser,
-                declineButtonText: 'global.dialog.no',
-                confirmButtonText: 'global.dialog.yes'
-            });
+            this.handleCreateUser(user);
         } else {
             const isOk = await this.props.store.user.updateUser(user);
-            const name = `${user.name || ''} ${user.last_name || ''}`;
+            const name = `${user.name || ''} ${user.lastName || ''}`;
             if (isOk) {
                 const message = 'Se ha actualizado correctamente';
                 this.props.store.messages.add(message.replace('{name}', name), 'success');
@@ -75,8 +68,7 @@ export default class UsersManagerRoute extends React.Component<UserProps, UsersR
         }
     }
 
-    handleCreateUser = async (shouldSendEmail: boolean, user: User) => {
-        user.send_email = shouldSendEmail ? '1' : '0';
+    handleCreateUser = async (user: User) => {
         const wasCreated = await this.props.store.user.createUser(toJS(user));
         const { name = '' } = user;
         if (wasCreated) {
@@ -91,7 +83,7 @@ export default class UsersManagerRoute extends React.Component<UserProps, UsersR
 
     handleDeleteUser = async (shouldDelete: boolean, user: User) => {
         if (shouldDelete) {
-            const wasDeleted = await this.props.store.user.deleteUser(user.id);
+            const wasDeleted = await this.props.store.user.deleteUser(user.userId);
             const { name = '' } = user;
             if (wasDeleted) {
                 const message = 'Se ha eliminado correctamente al usuario ' + name;
@@ -105,7 +97,7 @@ export default class UsersManagerRoute extends React.Component<UserProps, UsersR
     }
 
     handleNewUser = () => {
-        this.props.store.user.user = { id: '-1' } as User;
+        this.props.store.user.user = { userId: -1 } as User;
         this.setState({ showModal: true });
     }
 
