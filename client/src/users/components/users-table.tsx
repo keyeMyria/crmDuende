@@ -48,7 +48,7 @@ export default class UserTable extends React.Component<UserTableProps> {
         `${mobile} ${user.phone}`
     )
 
-    filterValueName = (name: string, user: User) => `${user.name} ${user.username}`;
+    filterValueName = (name: string, user: User) => `${user.name} ${user.userName}`;
 
     renderLoading = () => {
         return (
@@ -70,7 +70,7 @@ export default class UserTable extends React.Component<UserTableProps> {
                 {user.name}
             </div>
             <div className="description">
-                <span>@{user.username}</span>
+                <span>@{user.userName}</span>
             </div>
         </span>
     )
