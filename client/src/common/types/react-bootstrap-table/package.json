@@ -1,0 +1,57 @@
+{
+    "_from": "@types/react-bootstrap-table@^2.6.6",
+    "_id": "@types/react-bootstrap-table@2.6.6",
+    "_inBundle": false,
+    "_integrity": "sha512-mXF3Qx9GfQ7mg1m9Ka4TBTkX3dVbYPFvReLEdeSflK4HvR3KO+b2sgttxGyD6EMEL77sRyjGdHnIHsO2pXUvKA==",
+    "_location": "/@types/react-bootstrap-table",
+    "_phantomChildren": {},
+    "_requested": {
+      "type": "range",
+      "registry": true,
+      "raw": "@types/react-bootstrap-table@^2.6.6",
+      "name": "@types/react-bootstrap-table",
+      "escapedName": "@types%2freact-bootstrap-table",
+      "scope": "@types",
+      "rawSpec": "^2.6.6",
+      "saveSpec": null,
+      "fetchSpec": "^2.6.6"
+    },
+    "_requiredBy": [
+      "#USER",
+      "/"
+    ],
+    "_resolved": "https://registry.npmjs.org/@types/react-bootstrap-table/-/react-bootstrap-table-2.6.6.tgz",
+    "_shasum": "090efe9ada54c27efcba24fde6676028cf642f55",
+    "_spec": "@types/react-bootstrap-table@^2.6.6",
+    "_where": "/Users/fernandobarrios/Developer/gitlab/skel/ts",
+    "bundleDependencies": false,
+    "contributors": [
+      {
+        "name": "Frank Laub",
+        "url": "https://github.com/flaub"
+      },
+      {
+        "name": "Aleksander Lode",
+        "url": "https://github.com/alelode"
+      }
+    ],
+    "dependencies": {
+      "@types/node": "*",
+      "@types/react": "*"
+    },
+    "deprecated": false,
+    "description": "TypeScript definitions for react-bootstrap-table",
+    "license": "MIT",
+    "main": "",
+    "name": "@types/react-bootstrap-table",
+    "peerDependencies": {},
+    "repository": {
+      "type": "git",
+      "url": "https://www.github.com/DefinitelyTyped/DefinitelyTyped.git"
+    },
+    "scripts": {},
+    "typeScriptVersion": "2.3",
+    "typesPublisherContentHash": "71ed29208e688cd3da1081392ac62d8d7b11b8e015b8cc984fb078652c5a9661",
+    "version": "2.6.6"
+  }
+  

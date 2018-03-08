@@ -1,0 +1,9 @@
+.label-validation-alert {
+    color: #FF5252;
+    font-weight: normal !important;
+    font-size: 11px;
+    letter-spacing: 0 !important;
+}
+.input-validation-alert {
+    border: 1px solid #FF5252;
+}

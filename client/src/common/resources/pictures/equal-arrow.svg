@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="8px" viewBox="0 0 12 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>equal-arrow</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="dashboard-v2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-617.000000, -374.000000)">
+        <g id="POIs-created" transform="translate(519.000000, 162.000000)">
+            <g id="comparison" transform="translate(95.000000, 206.000000)">
+                <g id="trend">
+                    <g id="equal-arrow" transform="translate(0.000000, 1.000000)">
+                        <polygon id="Shape" points="0 0 18 0 18 18 0 18"></polygon>
+                        <polygon id="Shape" fill="#798D9D" fill-rule="nonzero" transform="translate(13.000000, 9.000000) rotate(90.000000) translate(-13.000000, -9.000000) " points="13 7 9 11 17 11"></polygon>
+                        <polygon id="Shape-Copy" fill="#798D9D" fill-rule="nonzero" transform="translate(5.000000, 9.000000) scale(-1, 1) rotate(90.000000) translate(-5.000000, -9.000000) " points="5 7 1 11 9 11"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,57 @@
+.icon-clipboard{
+    vertical-align: middle;
+    color: #0069FF;
+    padding: 3px;
+    border-radius: 100%;
+    margin-left: 5px;
+    display: none;
+    transition: all .3s ease-in;
+}
+.icon-clipboard:hover{
+    background: rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+.ReactVirtualized__Table__row:hover .icon-clipboard{
+    color: #0069FF;
+    display: inline-block;
+}
+.ReactVirtualized__Table__headerRow{
+    background: #DDDDDD;
+    text-transform: none !important;
+}
+.ReactVirtualized__Table{
+    margin-top: 10px !important;
+    width: 100% !important;
+}
+.ReactVirtualized__Table__row{
+    outline: none !important;
+}
+.ReactVirtualized__Table__row:hover,
+.ReactVirtualized__Table__row:nth-child(even):hover{
+    background: #E3E7F4;
+    cursor: pointer;
+}
+.ReactVirtualized__Table__row:nth-child(even){
+    background: #F0F3F7;
+}
+.ReactVirtualized__Grid ReactVirtualized__Table__Grid{
+    outline: none !important;
+    background: red;
+}
+.report-results-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.report-result{
+    width: 50%;
+}
+div#hPanel{
+    border-top: 1px solid #ddd;
+    padding-top: 10px !important;
+}
+.ReactVirtualized__Table__rowColumn{
+    font-size: 13px;
+    white-space: normal !important;
+}
