@@ -1,0 +1,15 @@
+.mt-warning {
+    background-color: #FBECCA; 
+    border-color: #FBECCA; 
+    border-radius: 0px;
+    padding: 15px;
+    border: 1px solid transparent;
+}
+
+.mt-error {
+    background-color: rgba(228, 148, 221, 0.88);
+    border-color: rgba(228, 148, 221, 0.88);
+    border-radius: 0px;
+    padding: 15px;
+    border: 1px solid transparent;
+}

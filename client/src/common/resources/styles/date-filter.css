@@ -1,0 +1,24 @@
+.date-filter-container .Select {
+  position: absolute !important;
+  max-width:150px;
+  width: 100%;
+  height: 26px;
+}
+
+.date-filter-container .Select-control {
+  height: 26px;
+}
+
+.date-filter-container .Select-input {
+  height: 26px; 
+}
+
+.date-filter-container .Select-value, .date-filter-container .Select-placeholder {
+  line-height: 26px !important;
+}
+
+.date-filter-container .Select-placeholder {
+  font-weight: 200;
+  font-style: italic;
+  color: #d8d8d8
+}

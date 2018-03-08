@@ -1,0 +1,21 @@
+.rg-shadow-hover:hover {
+    background-color: rgba(236,240,248,0.46);
+}
+
+.rg-hand-cursor {
+    cursor: pointer;
+}
+
+.Select-control {
+    max-width: 900px !important;
+}
+
+.label-like-input{
+    text-align: left !important;
+}
+.css-hx30u2{
+    background: transparent !important;
+}
+.css-hx30u2 .css-1vuw43k{
+    display: none;
+}
