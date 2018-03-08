@@ -1,0 +1,15 @@
+.mp-image {
+    border-radius: 100%;
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    margin: 0 auto;
+}
+
+#mp-input {
+    display: none;
+}
+
+.mp-button {
+    padding: 6px 12px !important;
+}
