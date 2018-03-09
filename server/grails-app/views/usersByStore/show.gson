@@ -1,0 +1,7 @@
+import server.UsersByStore
+
+model {
+	UsersByStore usersByStore
+}
+
+json tmpl.usersByStore(usersByStore)

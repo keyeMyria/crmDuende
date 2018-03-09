@@ -1,0 +1,7 @@
+import server.UsersByStore
+
+model {
+	UsersByStore usersByStore
+}
+
+json g.render(usersByStore)

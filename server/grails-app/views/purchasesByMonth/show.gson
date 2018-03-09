@@ -1,0 +1,7 @@
+import server.PurchasesByMonth
+
+model {
+	PurchasesByMonth purchasesByMonth
+}
+
+json tmpl.purchasesByMonth(purchasesByMonth)

@@ -1,0 +1,7 @@
+import server.SalesByUser
+
+model {
+	SalesByUser salesByUser
+}
+
+json tmpl.salesByUser(salesByUser)

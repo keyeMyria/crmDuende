@@ -4,69 +4,68 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
-class ClientsController {
+class UsersByStoreController {
 
-    static responseFormats = ['json']
+    static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Clients.list(params), model:[clientsCount: Clients.count()]
+        respond UsersByStore.list(params), model:[usersByStoreCount: UsersByStore.count()]
     }
 
-    def show(Clients clients) {
-        respond clients
+    def show(UsersByStore usersByStore) {
+        respond usersByStore
     }
 
     @Transactional
-    def save(Clients clients) {
-        if (clients == null) {
+    def save(UsersByStore usersByStore) {
+        if (usersByStore == null) {
             transactionStatus.setRollbackOnly()
             render status: NOT_FOUND
             return
         }
 
-        if (clients.hasErrors()) {
+        if (usersByStore.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond clients.errors, view:'create'
+            respond usersByStore.errors, view:'create'
             return
         }
 
-        clients.save flush:true
-        
-      // clients.executeQuery("INSERT INTO Clients",[])
-       respond clients, [status: CREATED, view:"show"]
+        usersByStore.save flush:true
+
+        respond usersByStore, [status: CREATED, view:"show"]
     }
 
     @Transactional
-    def update(Clients clients) {
-        if (clients == null) {
+    def update(UsersByStore usersByStore) {
+        if (usersByStore == null) {
             transactionStatus.setRollbackOnly()
             render status: NOT_FOUND
             return
         }
 
-        if (clients.hasErrors()) {
+        if (usersByStore.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond clients.errors, view:'edit'
+            respond usersByStore.errors, view:'edit'
             return
         }
 
-        clients.save flush:true
+        usersByStore.save flush:true
 
-        respond clients, [status: OK, view:"show"]
+        respond usersByStore, [status: OK, view:"show"]
     }
 
     @Transactional
-    def delete(Clients clients) {
+    def delete(UsersByStore usersByStore) {
 
-        if (clients == null) {
+        if (usersByStore == null) {
             transactionStatus.setRollbackOnly()
             render status: NOT_FOUND
             return
         }
 
-        clients.delete flush:true
+        usersByStore.delete flush:true
 
         render status: NO_CONTENT
     }
