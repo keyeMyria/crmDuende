@@ -3,25 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react": "15.6.1",
+    "react-dom": "15.6.1",
     "react-scripts-ts": "2.13.0",
     "@types/d3": "4.9.0",
     "@types/downloadjs": "1.4.0",
-    "@types/jest": "20.0.2",
     "@types/js-search": "1.4.0",
     "@types/lodash": "4.14.80",
-    "@types/node": "8.0.2",
     "@types/react-color": "2.11.4",
     "@types/react-dates": "12.1.2",
-    "@types/react-dom": "15.5.1",
     "@types/react-intl": "2.3.1",
     "@types/react-router-dom": "4.0.5",
     "@types/react-select": "1.0.59",
     "@types/react-toggle": "4.0.0",
-    "@types/react-virtualized": "9.7.3",
     "@types/recharts": "1.0.7",
     "@types/shortid": "0.0.29",
+    "@types/react": "15.6.0",
     "antd": "2.13.8",
     "bootstrap": "3.3.7",
     "copy-to-clipboard": "3.0.8",
@@ -49,7 +46,6 @@
     "react-svg-components": "1.4.2",
     "react-telephone-input": "^4.3.4",
     "react-toggle": "4.0.2",
-    "react-virtualized": "9.9.0",
     "recharts": "1.0.0-alpha.2",
     "remove-accents": "0.4.1",
     "shortid": "2.2.8",
@@ -64,10 +60,10 @@
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
-    "@types/jest": "^22.2.0",
-    "@types/node": "^9.4.6",
-    "@types/react": "^16.0.40",
-    "@types/react-dom": "^16.0.4",
-    "typescript": "^2.7.2"
+    "@types/jest": "20.0.2",
+    "@types/node": "8.0.2",
+    "@types/react": "16.0.40",
+    "@types/react-dom": "15.5.1",
+    "typescript": "2.7.2"
   }
 }

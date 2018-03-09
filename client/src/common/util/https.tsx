@@ -91,29 +91,29 @@ export class Https {
                 return response.json();
             } else if (response.status === STATUS.LOGGED_OUT) {
                 this.contextMessageStore.alert({
-                    content: 'global.http_errors.logged_out',
-                    title: 'global.http_errors.loged_out_title',
+                    content: 'No tiene sesión',
+                    title: 'Sessión ha expirado',
                     onResponse: this.doLoginAndReturn,
                     status: 'warning'
                 });
                 return response;
             } else if (response.status === STATUS.WITHOUT_PERMISSIONS) {
-                this.contextMessageStore.add(this.renderMessage('global.http_errors.without_perms'), 'error');
+                this.contextMessageStore.add(this.renderMessage('Error interno del servidor'), 'error');
                 return { success: false };
             } else if (response.status === STATUS.BAD_REQUEST) {
                 const res = await response.json();
-                this.contextMessageStore.add(this.renderMessage('global.http_errors.500'), 'error');
+                this.contextMessageStore.add(this.renderMessage('Error interno del servidor'), 'error');
                 const errors = this.errorsArrayToJSON(res.errors);
                 return { success: false, status: STATUS.BAD_REQUEST, errors };
             } else if (response.status === STATUS.BAD_REQUEST || response.status === STATUS.SKELETON_ERROR) {
-                this.contextMessageStore.add(this.renderMessage('global.http_errors.500'), 'error');
+                this.contextMessageStore.add(this.renderMessage('Error interno del servidor '), 'error');
                 return { success: false };
             } else {
-                this.contextMessageStore.add(this.renderMessage('global.http_errors.500'), 'error');
+                this.contextMessageStore.add(this.renderMessage('Error interno del servidor'), 'error');
                 return { success: false };
             }
         } catch (error) {
-            this.contextMessageStore.add(this.renderMessage('global.http_errors.500'), 'error');
+            this.contextMessageStore.add(this.renderMessage('Error interno del servidor'), 'error');
         }
     }
 
@@ -130,14 +130,14 @@ export class Https {
     }
 
     private showNoInternetMessage = () => {
-        this.contextMessageStore.add(this.renderMessage('global.http_errors.no_internet'), 'warning');
+        this.contextMessageStore.add(this.renderMessage('No tiene internet'), 'warning');
     }
 
     private renderMessage = (id: string): JSX.Element => (
         <FormattedMessage id={id}>
-            {(text: string) => (
-                <label>{text}</label>
-            )}
-        </FormattedMessage>
-    )
+            { // tslint:disable-next-line:jsx-no-multiline-js
+                (text: string) => (
+                    <label>{text}</label>
+                )}
+        </FormattedMessage>)
 }

@@ -9,6 +9,8 @@ const alphaNumRegex = /^[\-0-9a-záéíóúñÑ_. ]{1,}$/i;
 const maxTwoDecimalsRegex = /^-?[0-9]+(\.[0-9]{1,2})?$/i;
 const numRegex = /^((-)?(?=\d))\d*(\.\d*)?$/;
 
+const isNotEmpty = (value?: string) => (!!value && value.trim() !== '');
+
 export const required = (value?: string) => (value && value.length > 0) ? null : Messages.isRequired;
 
 export const minLength = (min: number) => {
@@ -134,6 +136,3 @@ export const noNegativeNumber = (value: string) => {
     }
     return null;
 };
-
-
-const isNotEmpty = (value?: string) => (!!value && value.trim() !== '');

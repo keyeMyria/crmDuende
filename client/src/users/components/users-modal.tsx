@@ -152,7 +152,7 @@ export default class UserModal extends React.Component<UserModalProps, UserModal
                         inputValue={this.props.user.userName}
                         externalErrors={this.props.userStore.errors}
                         isRequired={true}
-                        validators={[required, isUnique(this.getUsernameList(), this.state.user.username || '')]}
+                        validators={[required, isUnique(this.getUsernameList(), this.state.user.userName || '')]}
                         inputPlaceholder="fresa2000"
                         onChangeError={this.onInputErrorsChanges}
                         forceVerify={this.state.forceVerify}

@@ -1,76 +1,75 @@
 {
-    "_args": [
-      [
-        "@types/react-bootstrap@0.0.51",
-        "/Users/mariamercedesretolaza/Documents/ts-ui-proyect/ts-ui"
-      ]
-    ],
-    "_from": "@types/react-bootstrap@0.0.51",
-    "_id": "@types/react-bootstrap@0.0.51",
-    "_inBundle": false,
-    "_location": "/@types/react-bootstrap",
-    "_phantomChildren": {},
-    "_requested": {
-      "type": "version",
-      "registry": true,
-      "raw": "@types/react-bootstrap@0.0.51",
-      "name": "@types/react-bootstrap",
-      "escapedName": "@types%2freact-bootstrap",
-      "scope": "@types",
-      "rawSpec": "0.0.51",
-      "saveSpec": null,
-      "fetchSpec": "0.0.51"
-    },
-    "_requiredBy": [
-      "/"
-    ],
-    "_spec": "0.0.51",
-    "_where": "/Users/mariamercedesretolaza/Documents/ts-ui-proyect/ts-ui",
-    "contributors": [
-      {
-        "name": "Walker Burgin",
-        "url": "https://github.com/walkerburgin"
-      },
-      {
-        "name": "Vincent Siao",
-        "url": "https://github.com/vsiao"
-      },
-      {
-        "name": "Danilo Barros",
-        "url": "https://github.com/danilojrr"
-      },
-      {
-        "name": "Batbold Gansukh",
-        "url": "https://github.com/Batbold-Gansukh"
-      },
-      {
-        "name": "Raymond May Jr.",
-        "url": "https://github.com/octatone"
-      },
-      {
-        "name": "Cheng Sieu Ly",
-        "url": "https://github.com/chengsieuly"
-      },
-      {
-        "name": "Kat Busch",
-        "url": "https://github.com/katbusch"
-      }
-    ],
-    "dependencies": {
-      "@types/react": "*"
-    },
-    "description": "TypeScript definitions for react-bootstrap",
-    "license": "MIT",
-    "main": "",
+  "_args": [
+    [
+      "@types/react-bootstrap@0.0.51",
+      "/Users/mariamercedesretolaza/Documents/ts-ui-proyect/ts-ui"
+    ]
+  ],
+  "_from": "@types/react-bootstrap@0.0.51",
+  "_id": "@types/react-bootstrap@0.0.51",
+  "_inBundle": false,
+  "_location": "/@types/react-bootstrap",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@types/react-bootstrap@0.0.51",
     "name": "@types/react-bootstrap",
-    "peerDependencies": {},
-    "repository": {
-      "type": "git",
-      "url": "https://www.github.com/DefinitelyTyped/DefinitelyTyped.git"
+    "escapedName": "@types%2freact-bootstrap",
+    "scope": "@types",
+    "rawSpec": "0.0.51",
+    "saveSpec": null,
+    "fetchSpec": "0.0.51"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_spec": "0.0.51",
+  "_where": "/Users/mariamercedesretolaza/Documents/ts-ui-proyect/ts-ui",
+  "contributors": [
+    {
+      "name": "Walker Burgin",
+      "url": "https://github.com/walkerburgin"
     },
-    "scripts": {},
-    "typeScriptVersion": "2.3",
-    "typesPublisherContentHash": "205999f5dde8abe2c1858e88fb19b06252b17e82559556cadaf908783d5103e5",
-    "version": "0.0.51"
-  }
-  
+    {
+      "name": "Vincent Siao",
+      "url": "https://github.com/vsiao"
+    },
+    {
+      "name": "Danilo Barros",
+      "url": "https://github.com/danilojrr"
+    },
+    {
+      "name": "Batbold Gansukh",
+      "url": "https://github.com/Batbold-Gansukh"
+    },
+    {
+      "name": "Raymond May Jr.",
+      "url": "https://github.com/octatone"
+    },
+    {
+      "name": "Cheng Sieu Ly",
+      "url": "https://github.com/chengsieuly"
+    },
+    {
+      "name": "Kat Busch",
+      "url": "https://github.com/katbusch"
+    }
+  ],
+  "dependencies": {
+    "@types/react": "*"
+  },
+  "description": "TypeScript definitions for react-bootstrap",
+  "license": "MIT",
+  "main": "",
+  "name": "@types/react-bootstrap",
+  "peerDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/DefinitelyTyped/DefinitelyTyped.git"
+  },
+  "scripts": {},
+  "typeScriptVersion": "2.3",
+  "typesPublisherContentHash": "205999f5dde8abe2c1858e88fb19b06252b17e82559556cadaf908783d5103e5",
+  "version": "0.0.51"
+}

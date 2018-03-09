@@ -9,7 +9,7 @@ const API_URL = 'nose que ira aqui';
 export default class UserStore implements Store {
     @observable isFetching: boolean = false;
     @observable users: User[] = [] as User[];
-    @observable user: User = { id: -1 } as User;
+    @observable user: User = { userId: -1 } as User;
     @observable isFetchingUser: boolean = false;
     @observable errors: { [valueKey: string]: string };
     https: Https;
@@ -32,9 +32,9 @@ export default class UserStore implements Store {
         return response.success;
     }
 
-    @action async fetchUser(id: number) {
+    @action async fetchUser(userId: number) {
         this.isFetchingUser = true;
-        const response = await this.https.get(`${API_URL}?cmd=detail&id=${id}`);
+        const response = await this.https.get(`${API_URL}?cmd=detail&userId=${userId}`);
         if (response.success) {
             this.user = response.data;
         }
@@ -42,10 +42,10 @@ export default class UserStore implements Store {
         return response.success;
     }
 
-    @action async deleteUser(id: number) {
-        const response = await this.https.get(`${API_URL}?cmd=delete&id=${id}`);
+    @action async deleteUser(userId: number) {
+        const response = await this.https.get(`${API_URL}?cmd=delete&userId=${userId}`);
         if (response.success) {
-            this.users = this.users.filter(user => user.userId !== id);
+            this.users = this.users.filter(user => user.userId !== userId);
         } else { this.errors = response.errors; }
         return response.success;
     }
@@ -53,7 +53,7 @@ export default class UserStore implements Store {
     @action async updateUser(user: User) {
         const form = new FormData();
         const response = await
-            this.https.post(`${API_URL}?cmd=update&user_id=${user.userId}&${encodeObject(user)}`, form);
+            this.https.post(`${API_URL}?cmd=update&userId=${user.userId}&${encodeObject(user)}`, form);
         if (response.success) {
             const userList = toJS(this.users);
             const users = userList.map(usr => usr.userId === user.userId
@@ -75,8 +75,8 @@ export default class UserStore implements Store {
                 name: `${user.name} ${user.lastName}`
             });
         } else {
-            if (response.errors.id) {
-                this.errors = { ...response.errors, username: response.errors.id };
+            if (response.errors.userId) {
+                this.errors = { ...response.errors, userName: response.errors.userId };
             } else {
                 this.errors = { ...response.errors };
             }
