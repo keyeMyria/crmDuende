@@ -11,7 +11,3 @@ export const validators = Validators;
 import Validator from './validator';
 
 export type Validator = Validator;
-
-import phoneValidation from './phone-validation';
-
-export const PhoneValidation = phoneValidation;
