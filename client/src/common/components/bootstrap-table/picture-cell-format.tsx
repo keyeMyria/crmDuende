@@ -21,6 +21,7 @@ export default function PictureCellFormat(picture: string, row: {}, formatExtraD
             className={formatExtraData.className}
             placeholder={formatExtraData.picturePlaceholder}
             src={picture}
+            // tslint:disable-next-line:jsx-no-multiline-js
             style={formatExtraData.style || {
                 borderRadius,
                 width: width,
