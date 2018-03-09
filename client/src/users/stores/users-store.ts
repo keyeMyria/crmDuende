@@ -4,7 +4,7 @@ import { Https } from '../../common/util/https';
 import Store from '../../common/types/store';
 import { encodeObject } from '../../common/util/encode-object';
 
-const API_URL = 'nose que ira aqui';
+const API_URL = 'users';
 
 export default class UserStore implements Store {
     @observable isFetching: boolean = false;
@@ -24,7 +24,7 @@ export default class UserStore implements Store {
 
     @action async fetchUsers() {
         this.isFetching = true;
-        const response = await this.https.get(`${API_URL}?cmd=list`);
+        const response = await this.https.get(`http://localhost:8080/${API_URL}`);
         if (response.success) {
             this.users = response.data || [];
         }

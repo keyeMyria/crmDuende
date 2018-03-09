@@ -88,6 +88,8 @@ export class Https {
     manageResponse = async (response: Response) => {
         try {
             if (response.status === STATUS.OK) {
+                // console.log('hola mundo');
+
                 return response.json();
             } else if (response.status === STATUS.LOGGED_OUT) {
                 this.contextMessageStore.alert({
