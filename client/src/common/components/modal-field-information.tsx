@@ -20,7 +20,7 @@ export default function ModalFieldInformation(props: ModalFieldInformationProps)
         <div className="row">
             <div className={`${props.labelClassNames || 'col-sm-3'} veh-general-form-label`}>
                 <label>
-                    {labelText || "\xa0"}:
+                    {labelText || '\xa0'}:
                 </label>
             </div>
             <div className={`${props.inputClassNames || 'col-sm-9'} form-group`}>
