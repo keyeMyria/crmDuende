@@ -1,0 +1,8 @@
+import server.ProductsByCategory
+
+model {
+	Iterable<ProductsByCategory> productsByCategoryList
+}
+
+json tmpl.productsByCategory(productsByCategoryList ?: [])
+

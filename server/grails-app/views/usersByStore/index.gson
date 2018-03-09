@@ -1,0 +1,8 @@
+import server.UsersByStore
+
+model {
+	Iterable<UsersByStore> usersByStoreList
+}
+
+json tmpl.usersByStore(usersByStoreList ?: [])
+

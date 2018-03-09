@@ -1,0 +1,7 @@
+import server.ProductsByCategory
+
+model {
+	ProductsByCategory productsByCategory
+}
+
+json tmpl.productsByCategory(productsByCategory)

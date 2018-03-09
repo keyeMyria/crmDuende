@@ -1,0 +1,8 @@
+import server.SalesByUser
+
+model {
+	Iterable<SalesByUser> salesByUserList
+}
+
+json tmpl.salesByUser(salesByUserList ?: [])
+
