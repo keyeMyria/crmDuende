@@ -13,51 +13,8 @@ const isNotEmpty = (value?: string) => (!!value && value.trim() !== '');
 
 export const required = (value?: string) => (value && value.length > 0) ? null : Messages.isRequired;
 
-export const minLength = (min: number) => {
-    return (value?: string) => {
-        return (value || '').length < min ? Messages.minLength(min) : null;
-    };
-};
-
-export const maxLength = (max: number) => {
-    return (value?: string) => {
-        return (value || '').length > max ? Messages.maxLength(max) : null;
-    };
-};
-
-export const mustMatch = (otherLabel: string, otherValue?: string) => {
-    return (value?: string) => {
-        return value === otherValue ? null : Messages.mustMatch(otherLabel);
-    };
-};
-
-export const minMaxLength = (min: number, max: number) => {
-    return (value?: string) => {
-        return ((value || '').length >= min && (value || '').length <= max)
-            ? null
-            : Messages.minMaxLength(min, max);
-    };
-};
-
 export const isEmail = (email?: string) =>
     (!email || email.trim() === '' || emailRegex.test(email.trim())) ? null : Messages.isEmail;
-
-export const equalLength = (length: number) => {
-    return (value?: string) => {
-        return (isNotEmpty(value) && (value || '').length !== length) ? Messages.equalLength(length) : null;
-    };
-};
-
-export const matchPassword = (password?: string) =>
-    (verifyPassword?: string) => {
-        if (
-            verifyPassword !== password
-        ) {
-            return Messages.passwordDontMatch;
-        } else {
-            return null;
-        }
-    };
 
 export const isUnique = (takenOptions: string[], currentValue: string) =>
     (value: string) => {

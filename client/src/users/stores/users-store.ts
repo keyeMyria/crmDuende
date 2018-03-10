@@ -34,7 +34,7 @@ export default class UserStore implements Store {
 
     @action async fetchUser(userId: number) {
         this.isFetchingUser = true;
-        const response = await this.https.get(`${API_URL}?cmd=detail&userId=${userId}`);
+        const response = await this.https.get(`http://localhost:8080/${API_URL}?cmd=detail&userId=${userId}`);
         if (response.success) {
             this.user = response.data;
         }
@@ -43,7 +43,7 @@ export default class UserStore implements Store {
     }
 
     @action async deleteUser(userId: number) {
-        const response = await this.https.get(`${API_URL}?cmd=delete&userId=${userId}`);
+        const response = await this.https.get(`http://localhost:8080/${API_URL}?cmd=delete&userId=${userId}`);
         if (response.success) {
             this.users = this.users.filter(user => user.userId !== userId);
         } else { this.errors = response.errors; }
@@ -53,7 +53,8 @@ export default class UserStore implements Store {
     @action async updateUser(user: User) {
         const form = new FormData();
         const response = await
-            this.https.post(`${API_URL}?cmd=update&userId=${user.userId}&${encodeObject(user)}`, form);
+            // tslint:disable-next-line:max-line-length
+            this.https.post(`http://localhost:8080/${API_URL}?cmd=update&userId=${user.userId}&${encodeObject(user)}`, form);
         if (response.success) {
             const userList = toJS(this.users);
             const users = userList.map(usr => usr.userId === user.userId
@@ -67,7 +68,8 @@ export default class UserStore implements Store {
 
     @action async createUser(user: User): Promise<boolean> {
         const form = new FormData();
-        const response = await this.https.post(`${API_URL}?cmd=create&${encodeObject(user)}`, form);
+        // tslint:disable-next-line:max-line-length
+        const response = await this.https.post(`http://localhost:8080/${API_URL}?cmd=create&${encodeObject(user)}`, form);
         if (response.success) {
             this.users = this.users.concat({
                 ...user,

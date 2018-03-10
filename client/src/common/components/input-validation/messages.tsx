@@ -1,85 +1,50 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
 
 export const isRequired = (fieldName: string) => (
-    <FormattedMessage id="global.validators.is_required" values={{ fieldName }} />
+    <span> {fieldName} Es un campo requerido </span>
 );
-
-export const minLength = (min: number) => {
-    return (fieldName: string) => (
-        <FormattedMessage id="global.validators.min_length" values={{ fieldName, min }} />
-    );
-};
-
-export const maxLength = (max: number) => {
-    return (fieldName: string) => (
-        <FormattedMessage id="global.validators.max_length" values={{ fieldName, max }} />
-    );
-};
-
-export const mustMatch = (otherFieldName: string) => {
-    return (fieldName: string) => (
-        <FormattedMessage id="global.validators.max_length" values={{ fieldName, otherFieldName }} />
-    );
-};
-
-export const minMaxLength = (min: number, max: number) => {
-    return (fieldName: string) => (
-        <FormattedMessage id="global.validators.min_max_length" values={{ fieldName, min, max }} />
-    );
-};
 
 export const isEmail = () => (
-    <FormattedMessage id="global.validators.is_email" />
-);
-
-export const equalLength = (length: number) => {
-    return (fieldName: string) => (
-        <FormattedMessage id="global.validators.equal_length" values={{ fieldName, length }} />
-    );
-};
-
-export const passwordDontMatch = () => (
-    <FormattedMessage id="global.validators.password_dont_match" />
+    <span>  Ingresar un correo válido </span>
 );
 
 export const isUnique = (value: string) => (fieldName: string) => (
-    <FormattedMessage id="global.validators.isUnique" values={{ value, fieldName }} />
+    <span> {fieldName} Ya existe debe de ingresar otro nombre {value} </span>
 );
 
-export const isPhone = (fieldName: string) => <FormattedMessage id="global.validators.is_phone" />;
+export const isPhone = (fieldName: string) =>  <span> {fieldName} no es un número válido </span>; 
 
 export const noNumbers = (fieldName: string) => (
-    <FormattedMessage id="global.validators.no_numbers" values={{ fieldName }} />
+    <span> {fieldName}No debe de contener números </span>  
 );
 
 export const noAccents = (fieldName: string) => (
-    <FormattedMessage id="global.validators.no_accents" values={{ fieldName }} />
+    <span> {fieldName} No debe de contener tildes </span>
 );
 
 export const noSpecialCharacters = (fieldName: string) => (
-    <FormattedMessage id="global.validators.no_special_characters" values={{ fieldName }} />
+    <span> {fieldName} No debe de contener carácteres especiales </span>
 );
 export const alphaNum = (fieldName: string) => (
-    <FormattedMessage id="global.validators.alpha_num" values={{ fieldName }} />
+    <span> {fieldName} Error </span>
 );
 
 export const telephone = (fieldName: string) => (
-    <FormattedMessage id="global.validators.telephone" values={{ fieldName }} />
+    <span> {fieldName} Debe de ser un télefono </span>
 );
 
 export const maxTwoDecimals = (fieldName: string) => (
-    <FormattedMessage id="global.validators.maxTwoDecimals_num" values={{ fieldName }} />
+    <span> {fieldName} Máximo dos decimales </span>
 );
 
 export const isNumber = (fieldName: string) => (
-    <FormattedMessage id="global.validators.is_number" values={{ fieldName }} />
+    <span> {fieldName} Debe ser un número </span>
 );
 
 export const noZero = (fieldName: string) => (
-    <FormattedMessage id="global.validators.no_zero" values={{ fieldName }} />
+    <span> {fieldName} No puede ser 0 </span>
 );
 
 export const noNegativeNumber = (fieldName: string) => (
-    <FormattedMessage id="global.validators.no_negative_number" values={{ fieldName }} />
+    <span> {fieldName}No numeros negativos </span>
 );
