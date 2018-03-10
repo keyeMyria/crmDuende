@@ -22,7 +22,7 @@ export default class UsersManagerRoute extends React.Component<UserProps, UsersR
     };
 
     componentDidMount() {
-        this.props.store.user.fetchUsersIfNeed();
+       // this.props.store.user.fetchUsersIfNeed();
     }
 
     onDeleteUser = async (id: string, user: User) => {

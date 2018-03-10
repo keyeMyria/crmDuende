@@ -4,7 +4,6 @@ import '../resources/styles/modal-field.css';
 import OneSelectProps from '../types/select-props';
 import Select from './select/index';
 import { FormGroup, InputGroup } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
 
 export interface ModalButtonProps extends OneSelectProps {
     inputPlaceholder?: string;
@@ -95,7 +94,7 @@ export default function ModalButton(props: ModalButtonProps) {
                     </InputGroup>
                     {!isEditing() &&
                         <label className="sms-message">
-                            <FormattedMessage id="cellphone_modal.message_sms" />
+                           Mensaje 
                         </label>
                     }
                 </FormGroup>
