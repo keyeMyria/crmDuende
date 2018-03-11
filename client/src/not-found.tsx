@@ -10,7 +10,7 @@ export default function() {
                 The page you're looking for could not be found.
             </p>
             <p>
-                <a href="https://google.com" className="button">Go back home.</a>
+                <a href="https://www.elduendemall.com/" className="button">Go back home.</a>
             </p>
             </Alert>
         </div>
