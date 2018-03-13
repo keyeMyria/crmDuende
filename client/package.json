@@ -44,7 +44,7 @@
     "react-router-dom": "4.1.1",
     "react-select": "1.0.0-rc.10",
     "react-svg-components": "1.4.2",
-    "react-telephone-input": "^4.3.4",
+    "react-telephone-input": "4.3.4",
     "react-toggle": "4.0.2",
     "recharts": "1.0.0-alpha.2",
     "remove-accents": "0.4.1",
