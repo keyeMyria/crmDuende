@@ -1,5 +1,5 @@
-// import ClientManager from './routes/';
-// import '../common/resources/styles/styles.css';
+import ClientManager from './routes/';
+import '../common/resources/styles/styles.css';
 
-// export default ClientManager;
+export default ClientManager;
 

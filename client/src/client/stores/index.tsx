@@ -6,12 +6,12 @@ import ClientStore from './client-store';
 export class RootStore {
 
     clientStore: ClientStore;
-    messageStore: ContextMessageStore;
+    messages: ContextMessageStore;
     https: Https;
 
     constructor() {
-        this.messageStore = new ContextMessageStore();
-        this.https = new Https(this.messageStore);
+        this.messages = new ContextMessageStore();
+        this.https = new Https(this.messages);
         this.clientStore = new ClientStore(this.https);
     }
 
