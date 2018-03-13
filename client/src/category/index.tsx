@@ -1,5 +1,5 @@
-import CategoryManager from './routes/';
-import '../common/resources/styles/styles.css';
+// import CategoryManager from './routes/';
+// import '../common/resources/styles/styles.css';
 
-export default CategoryManager;
+// export default CategoryManager;
 
