@@ -6,9 +6,3 @@ export interface Provider {
     barCode?: string;
     name?: string;
 }
-
-export interface Category {
-    categoryId: number;
-    name: string;
-    description?: string;
-}
