@@ -1,2 +1,2 @@
 DELETE FROM public.users
-	WHERE <userid = delUserid>;
+	WHERE <userid = params.userid>;
