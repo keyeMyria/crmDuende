@@ -23,31 +23,19 @@ class UsersController {
         def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/users_select.sql")
         String sqlString = new File(sqlFilePath).text  
-        if (sqlString) {
-            sqlString = sqlString.replace( "?userid", users.userId)
-            sqlString = sqlString.replace(" ?phone", users.phone)
-            sqlString = sqlString.replace(" ?user_name", users.userName)
-            sqlString = sqlString.replace(" ?mobile", users.mobile)
-            sqlString = sqlString.replace(" ?storeid", users.storeId)
-            sqlString = sqlString.replace(" ?name", users.name)
-            sqlString = sqlString.replace(" ?picture", users.picture)
-            sqlString = sqlString.replace(" ?last_name", users.lastName)
-            sqlString = sqlString.replace(" ?email", users.email)   
-        }
         respond users
     }
     
     @Transactional
     // create users 
     def save(Users users) {
-        // def sql = new Sql(dataSource)
+        def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/users_insert.sql")
         String sqlString = new File(sqlFilePath).text  
         if(sqlString) {
              sqlString = sqlString.replace(" ?phone", users.phone)
              sqlString = sqlString.replace(" ?user_name", users.userName)
              sqlString = sqlString.replace(" ?mobile", users.mobile)
-             //sqlString = sqlString.replace(" ?storeid", users.storeId.name)
              sqlString = sqlString.replace(" ?name", users.name)
              sqlString = sqlString.replace(" ?picture", users.picture)
              sqlString = sqlString.replace(" ?last_name", users.lastName)
@@ -77,19 +65,19 @@ class UsersController {
         def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/users_update.sql")
         String sqlString = new File(sqlFilePath).text  
-        
-        // agregar validacion sql 
-        
-        if (users == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        if(sqlString) {
+            sqlString = sqlString.replace(" ?paramUserId", users.userId)
+            if (users == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
 
-        if (users.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond users.errors, view:'edit'
-            return
+            if (users.hasErrors()) {
+                transactionStatus.setRollbackOnly()
+                respond users.errors, view:'edit'
+                return
+            }
         }
 
         users.save flush:true
@@ -103,14 +91,14 @@ class UsersController {
         def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/users_delete.sql")
         String sqlString = new File(sqlFilePath).text  
-        
-        // agregar extension sql 
-
-        if (users == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+         if(sqlString) {
+            //sqlString = sqlString.replace(" ?delUserid")
+            if (users == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
+         }
 
         users.delete flush:true
 
