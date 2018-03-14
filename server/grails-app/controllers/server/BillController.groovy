@@ -18,15 +18,7 @@ class BillController {
     def show(Bill bill) {
         def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/bill_select.sql")
-        String sqlString = new File(sqlFilePath).text 
-        if (sqlString) {
-            sqlString = sqlString.replace( "?billid", bill.billId)
-            sqlString = sqlString.replace(" ?userid", bill.userId)
-            sqlString = sqlString.replace(" ?date", bill.date)
-            sqlString = sqlString.replace(" ?num_bill", bill.numBill)
-            sqlString = sqlString.replace(" ?clientid", bill.clientId) 
-        }
-        
+        String sqlString = new File(sqlFilePath).text  
         respond bill
     }
 

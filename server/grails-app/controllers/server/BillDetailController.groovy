@@ -19,14 +19,6 @@ class BillDetailController {
         def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/billdetail_select.sql")
         String sqlString = new File(sqlFilePath).text
-        if (sqlString) {
-            sqlString = sqlString.replace( "?billdetailid", billDetail.billDetailId)
-            sqlString = sqlString.replace(" ?billid", billDetail.billId)
-            sqlString = sqlString.replace(" ?cost", billDetail.cost)
-            sqlString = sqlString.replace(" ?count", billDetail.count)
-            sqlString = sqlString.replace(" ?sale_price", billDetail.salePrice)
-            sqlString = sqlString.replace(" ?productid", billDetail.productId)
-        }
         respond billDetail
     }
 

@@ -19,11 +19,6 @@ class CategoryController {
         def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/category_select.sql")
         String sqlString = new File(sqlFilePath).text
-        if (sqlString) {
-            sqlString = sqlString.replace( "?categoryid", category.categoryId)
-            sqlString = sqlString.replace(" ?name", category.name)
-            sqlString = sqlString.replace(" ?description", category.description)
-        }
         respond category
     }
 

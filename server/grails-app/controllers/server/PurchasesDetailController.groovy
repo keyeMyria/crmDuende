@@ -19,7 +19,7 @@ class PurchasesDetailController {
          def sql = new Sql(dataSource)
          String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/purchasesdetail_select.sql")
          String sqlString = new File(sqlFilePath).text
-        respond purchasesDetail
+         respond purchasesDetail
     }
 
     @Transactional

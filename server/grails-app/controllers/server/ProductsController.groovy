@@ -19,16 +19,7 @@ class ProductsController {
     def show(Products products) {
         def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/products_select.sql")
-        String sqlString = new File(sqlFilePath).text
-        if (sqlString) {
-            sqlString = sqlString.replace(" ?id", products.productId)
-            sqlString = sqlString.replace(" ?place_name", products.placeName)
-            sqlString = sqlString.replace(" ?bar_code", products.barCode)
-            sqlString = sqlString.replace(" ?serial_code", products.serialCode)
-            sqlString = sqlString.replace(" ?name", products.name)
-            sqlString = sqlString.replace(" ?categoryid", products.categoryId)
-        }
-        
+        String sqlString = new File(sqlFilePath).text 
         respond products
     }
 

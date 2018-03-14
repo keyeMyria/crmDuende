@@ -2,6 +2,7 @@ package server
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import groovy.sql.Sql
 
 @Transactional(readOnly = false)
 class StoresController {
@@ -15,6 +16,9 @@ class StoresController {
     }
 
     def show(Stores stores) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/stores_select.sql")
+        String sqlString = new File(sqlFilePath).text
         respond stores
     }
 
