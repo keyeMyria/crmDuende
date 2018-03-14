@@ -1,3 +1,7 @@
 UPDATE public.products
-	SET id=?, place_name=?, bar_code=?, serial_code=?, name=?, categoryid=?
-	WHERE <condition>;
+	SET 
+		place_name=?paramPlaceName, 
+		bar_code=?paramBarCode, 
+		serial_code=?paramSerialCode, 
+		name=?paramName, 
+	WHERE <id=?paramId>;

@@ -1,2 +1,2 @@
 DELETE FROM public.products
-	WHERE <condition>;
+	WHERE <id = param.ids>;
