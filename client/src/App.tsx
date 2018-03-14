@@ -5,7 +5,7 @@ import {
   Route
 } from 'react-router-dom';
 import UsersManager from './users';
-// import StoresManager from './store';
+import StoresManager from './store';
 import ClientsManager from './client';
 import NotFound from './not-found';
 
@@ -15,7 +15,7 @@ class App extends React.Component<{}, {}> {
       <BrowserRouter>
         <div>
           <Switch>
-            {/* <Route path="/store" component={StoresManager} /> */}
+            <Route path="/store" component={StoresManager} />
             <Route path="/users" component={UsersManager} />
             <Route path="/client" component={ClientsManager} />
             <Route component={NotFound} />
