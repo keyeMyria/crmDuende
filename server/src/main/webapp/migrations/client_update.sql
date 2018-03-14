@@ -1,3 +1,17 @@
 UPDATE public.clients
-	SET clientid=?, phone=?, birthday_date=?, place_name=?, location=?, user_name=?, last_buy=?, mobile=?, address=?, country_code=?, first_buy=?, name=?, picture=?, last_name=?, email=?
-	WHERE <condition>;
+	SET  
+		phone=?paramPhone, 
+		birthday_date=?paramBirthdayDate, 
+		place_name=?paramPlaceName, 
+		location=?paramLocation, 
+		user_name=?paramUserName, 
+		last_buy=?paramLastBuy, 
+		mobile=?paramMobile,
+		address=?paramAddress, 
+		country_code=?paramCountryCode, 
+		first_buy=?paramFirstBuy, 
+		name=?paramName, 
+		picture=?paramPicture, 
+		last_name=?paramLastName, 
+		email=?paramEmail
+	WHERE <clientid=?paramClientId>;
