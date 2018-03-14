@@ -1,52 +1,43 @@
 import * as React from 'react';
 import { BootstrapTable, TableHeaderColumn, SortOrder } from 'react-bootstrap-table';
-import DeleteIcon from '../../common/components/delete-icon';
 import { observer } from 'mobx-react';
 import { Https } from '../../common/util/https';
 import { Loading } from '../../common/components/labels';
+import { Product } from '../types/product';
 import { Category } from '../types/category';
 
 const defaultSortOrder: SortOrder = 'asc';
 
-interface CategoryTableProps {
-    categories: Category[];
-    onCategoryClick: (clients: Category) => void;
-    onDeleteCategory: (id: number, client: Category) => void;
+interface ProductsTableProps {
+    products: Product[];
+    onProductsClick: (clients: Product) => void;
     isFetching: boolean;
     https: Https;
 }
 @observer
-export default class CategoryTable extends React.Component<CategoryTableProps> {
+export default class ClientTable extends React.Component<ProductsTableProps> {
 
-    nameFilterValue = (name: string, catego: Category) => (
-        `${name} ${catego.description} ${catego.categoryId}`
+    nameFilterValue = (name: string, catego: Product) => (
+        `${name} ${catego.serialCode} ${catego.categoryId}`
     )
 
-    renderActionsCell = (id: number, cat: Category) => {
-        return (
-            <span className="table-options">
-                <DeleteIcon id={id} extra={cat} onDelete={this.props.onDeleteCategory} />
-            </span>
-        );
-    }
-
-    renderCellName = (name: string, cat: Category) => {
+    renderCellName = (name: string, prdu: Product) => {
         return (
             <span>
                 <div>
-                    {name} {cat.name}
+                    {name} {prdu.name}
                 </div>
                 <div className="description">
-                    Código de Categoría {cat.categoryId}
+                    Código de Categoría {prdu.categoryId}
                 </div>
             </span>
         );
     }
 
     renderTable = () => {
-        const { categories, onCategoryClick } = this.props;
+        const { products, onProductsClick } = this.props;
         const options = {
-            onRowClick: onCategoryClick,
+            onRowClick: onProductsClick,
             defaultSortName: 'name',
             sizePerPageList: [50],
             sizePerPage: 50,
@@ -56,7 +47,7 @@ export default class CategoryTable extends React.Component<CategoryTableProps> {
 
         return (
             <BootstrapTable
-                data={categories}
+                data={products}
                 striped={true}
                 hover={true}
                 options={options}
@@ -88,12 +79,6 @@ export default class CategoryTable extends React.Component<CategoryTableProps> {
                 >
                     Descripción de Categoría
                 </TableHeaderColumn>
-                <TableHeaderColumn
-                    width="7%"
-                    dataField="categoryId"
-                    isKey={true}
-                    dataFormat={this.renderActionsCell}
-                />
             </BootstrapTable>
         );
     }

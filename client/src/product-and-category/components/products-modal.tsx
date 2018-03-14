@@ -5,52 +5,52 @@ import { observer } from 'mobx-react';
 import {
     required, noNumbers, noAccents
 } from '../../common/components/input-validation/validators';
-import { Category } from '../types/category';
+import { Product } from '../types/product';
 
-interface CategoryModalProps {
+interface ProductsModalProps {
     store: IndexStore;
-    category: Category;
+    product: Product;
     show: boolean;
     onClose: () => void;
     onSubmit: () => void;
     showError: boolean;
 }
 
-interface CategoryModalState {
+interface ProductsModalState {
     errors: { [valueName: string]: boolean };
     forceVerify: boolean;
     wantSubmit: boolean;
-    category: Category;
+    product: Product;
 
 }
 
 @observer
-export default class CategoryModal extends React.Component<CategoryModalProps, CategoryModalState> {
+export default class ProductModal extends React.Component<ProductsModalProps, ProductsModalState> {
 
     state = {
         errors: {},
         forceVerify: false,
         wantSubmit: false,
-        category: {} as Category
+        product: {} as Product
     };
 
     componentDidMount() {
-        this.setState({ category: this.props.category });
+        this.setState({ product: this.props.product });
     }
 
     componentWillUnmount() {
         this.props.store.driverStore.resetDriver();
     }
 
-    shouldComponentUpdate(nextProps: CategoryModalProps, nextState: CategoryModalState) {
-        const requiredFields = nextProps.category.id === -1 ? 1 : 1;
+    shouldComponentUpdate(nextProps: ProductsModalProps, nextState: ProductsModalState) {
+        const requiredFields = nextProps.product.productId === -1 ? 1 : 1;
         if (nextState.wantSubmit && Object.keys(nextState.errors).length === requiredFields) {
             this.trySubmit();
         }
         return true;
     }
 
-    isEditing = () => this.props.category.categoryId !== -1;
+    isEditing = () => this.props.product.productId !== -1;
 
     onInputErrorsChanges = (valueKey: string, error?: string | JSX.Element) => {
         const haveError = !!error;
@@ -87,7 +87,7 @@ export default class CategoryModal extends React.Component<CategoryModalProps, C
             <Modal.Title>
                 {
                     this.isEditing()
-                        ? <span> Editando Categoría-ID: + {this.props.store.driver.categoryId}</span>
+                        ? <span> Editando Categoría-ID: + {this.props.store.driver.}</span>
                         : <span> Nueva Categoría</span>
                 }
             </Modal.Title>
@@ -115,25 +115,39 @@ export default class CategoryModal extends React.Component<CategoryModalProps, C
                         valueName="name"
                         onChange={this.handleValueChanges}
                         labelText="Nombre"
-                        inputValue={this.props.category.name}
+                        inputValue={this.props.product.name}
                         isRequired={true}
                         validators={[required, noNumbers, noAccents]}
                         onChangeError={this.onInputErrorsChanges}
                         forceVerify={this.state.forceVerify}
                         autoFocus={true}
-                        labelClassNames={'col-sm-4'}
-                        inputClassNames={'col-sm-8'}
                     />
                     <ModalField
-                        valueName="description"
+                        valueName="barCode"
                         onChange={this.handleValueChanges}
-                        labelText="Descripción"
-                        inputValue={this.props.category.description}
+                        labelText="Código de Barras"
+                        inputValue={this.props.product.barCode}
                         validators={[noAccents]}
                         onChangeError={this.onInputErrorsChanges}
                         forceVerify={this.state.forceVerify}
-                        labelClassNames={'col-sm-4'}
-                        inputClassNames={'col-sm-8'}
+                    />
+                    <ModalField
+                        valueName="serialCode"
+                        onChange={this.handleValueChanges}
+                        labelText="Número de Serie"
+                        inputValue={this.props.product.serialCode}
+                        validators={[noAccents]}
+                        onChangeError={this.onInputErrorsChanges}
+                        forceVerify={this.state.forceVerify}
+                    />
+                    <ModalField
+                        valueName="placeName"
+                        onChange={this.handleValueChanges}
+                        labelText="Lugar del Producto"
+                        inputValue={this.props.product.placeName}
+                        validators={[noAccents]}
+                        onChangeError={this.onInputErrorsChanges}
+                        forceVerify={this.state.forceVerify}
                     />
                 </div>
             </div>
@@ -164,7 +178,7 @@ export default class CategoryModal extends React.Component<CategoryModalProps, C
         return (
             <Modal bsSize="lg" show={true} onHide={this.props.onClose}>
                 {this.renderHeader()}
-                {this.chooseRender(this.props.category.categoryId !== -1)}
+                {this.chooseRender(this.props.product.categoryId !== -1)}
                 {this.renderFooter()}
             </Modal>
         );
