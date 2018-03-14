@@ -2,14 +2,15 @@ import * as React from 'react';
 import ModalField from '../../common/components/modal-field';
 import { Modal } from 'react-bootstrap';
 import { Tabs, Tab } from 'react-bootstrap';
-import '../styles/stores-modal.css';
 import ModalPicture from '../../common/components/modal-picture';
-const AvatarDefault = require('../../common/resources/pictures/avatar-default.svg');
 import { Store } from '../types/store';
 import { isPhone } from '../../common/components/input-validation/validators';
+import IndexStore from '../stores';
+const AvatarDefault = require('../../common/resources/pictures/avatar-default.svg');
+import '../styles/stores-modal.css';
 
 interface EditModalProps {
-    store: RootStore;
+    store: IndexStore;
     show: boolean;
     shop: Store;
     onClose: () => void;
@@ -44,7 +45,7 @@ export default class EditModal extends React.Component<EditModalProps, EditModal
     }
 
     componentWillUnmount() {
-        this.props.store.accounts.resetAccounts();
+        this.props.store.stores.resetAccounts();
     }
 
     trySubmit = (fromButton?: boolean) => {
@@ -71,7 +72,7 @@ export default class EditModal extends React.Component<EditModalProps, EditModal
     }
 
     handleValueChanges = (change: number | string, valueName: string) => {
-        this.props.store.accounts.account = { ...this.props.shop, [valueName]: change };
+        this.props.store.stores.store = { ...this.props.shop, [valueName]: change };
     }
 
     handleClose = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -134,7 +135,6 @@ export default class EditModal extends React.Component<EditModalProps, EditModal
                 <ModalField
                     valueName="phone"
                     onChange={this.handleValueChanges}
-                    externalErrors={this.props.store.account.errors}
                     labelText="Teléfono"
                     inputValue={this.props.shop.phone}
                     validators={[isPhone]}
@@ -157,7 +157,6 @@ export default class EditModal extends React.Component<EditModalProps, EditModal
                 <ModalField
                     valueName="address"
                     onChange={this.handleValueChanges}
-                    externalErrors={this.props.store.account.errors}
                     labelText="Dirección"
                     inputValue={this.props.shop.address}
                     inputPlaceholder="Colonia Miraflores zona 11"
@@ -165,7 +164,6 @@ export default class EditModal extends React.Component<EditModalProps, EditModal
                 <ModalField
                     valueName="placeName"
                     onChange={this.handleValueChanges}
-                    externalErrors={this.props.store.account.errors}
                     labelText="Lugar"
                     inputValue={this.props.shop.placeName}
                     inputPlaceholder="Ciudad de Guatemala"
