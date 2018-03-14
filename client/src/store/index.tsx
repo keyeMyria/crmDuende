@@ -1,5 +1,4 @@
-// import StoresManager from './routes/';
-// import '../common/resources/styles/styles.css';
+import StoresManager from './routes/';
+import '../common/resources/styles/styles.css';
 
-// export default StoresManager;
-
+export default StoresManager;

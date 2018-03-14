@@ -7,19 +7,20 @@ interface ModalPictureProps {
     picturePlaceholder?: string;
     valueName?: string;
     getRef?: (ref: HTMLInputElement) => void;
+    labelClassNames?: string;
 }
 
 export default function ModalPicture(props: ModalPictureProps) {
 
     return (
-        <div className="col-sm-12">
+        <div className={props.labelClassNames || "col-sm-12"}>
             <div className="row center">
                 <div>
-                <Img
-                    placeholder={props.picturePlaceholder || ''}
-                    src={props.picture}
-                    className="mp-image"
-                />
+                    <Img
+                        placeholder={props.picturePlaceholder || ''}
+                        src={props.picture}
+                        className="mp-image"
+                    />
                 </div>
             </div>
         </div>
