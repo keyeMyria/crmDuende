@@ -1,0 +1,132 @@
+.modal-items {
+    padding: 25px;
+    margin-left: 45px;
+}
+
+.modal-buttons {
+    text-align: right;
+}
+
+.modal-buttons button:first-child {
+    margin-right: 5px;
+}
+
+.select-item {
+    right: 15px;
+    position: absolute;
+}
+
+.react-bs-table-search-form {
+    display: none;
+}
+
+.option-label {
+    font-weight: normal !important;
+}
+
+.input-label {
+    line-height: 1;
+}
+
+.modal-subtitle {
+    text-align: left !important;
+}
+
+.input-style {
+    max-width: 335px;
+    width: 100%
+}
+
+.form-field {
+    text-align: left;
+    margin: 5px 0 15px;
+}
+
+.Select:not(.is-disabled)>.Select-control>.Select-multi-value-wrapper>.Select-placeholder {
+    color: #333 !important;
+}
+
+.Select.is-disabled>.Select-control>.Select-multi-value-wrapper>.Select-value>.Select-value-label {
+    color: #aaa !important;
+}
+
+.acc-tab-content {
+    padding-top: 20px;
+}
+
+.acc-add-rows {
+    color: #0069FF;
+}
+
+.acc-add-rows:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #0069FF;
+}
+
+.ant-time-picker-input {
+    height: 36px;
+}
+
+.ant-time-picker-input>span:first-child {
+    font-weight: 600;
+}
+
+.ant-time-picker {
+    margin-left: 10px;
+}
+
+.row-container {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.close-icon,
+.tracking-schedule-controls {
+    text-align: right;
+}
+
+.close-icon i {
+    font-size: 26px;
+    opacity: 0.8;
+}
+
+.close-icon i:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.ant-time-picker-panel-select ul {
+    padding: 0;
+}
+
+@media (max-width: 425px) {
+    .row-container {
+        flex-direction: column;
+        position: relative;
+        padding: 15px 0;
+        border: 1px solid #EEEEEE;
+        border-radius: 3px;
+        margin-bottom: 20px;
+    }
+    .row-container .day-selector,
+    .row-container .tracking-schedule-controls {
+        margin-bottom: 10px;
+    }
+    .close-icon,
+    .tracking-schedule-controls {
+        text-align: left;
+    }
+    .close-icon {
+        position: absolute;
+        top: -9px;
+        right: 0;
+    }
+    .close-icon i {
+        background: #dadada;
+        border-radius: 50%;
+        padding: 5px;
+        font-size: 22px;
+    }
+}
