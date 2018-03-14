@@ -2,6 +2,7 @@ package server
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import groovy.sql.Sql
 
 @Transactional(readOnly = true)
 class BillDetailController {
@@ -15,21 +16,44 @@ class BillDetailController {
     }
 
     def show(BillDetail billDetail) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/billdetail_select.sql")
+        String sqlString = new File(sqlFilePath).text
+        if (sqlString) {
+            sqlString = sqlString.replace( "?billdetailid", billDetail.billDetailId)
+            sqlString = sqlString.replace(" ?billid", billDetail.billId)
+            sqlString = sqlString.replace(" ?cost", billDetail.cost)
+            sqlString = sqlString.replace(" ?count", billDetail.count)
+            sqlString = sqlString.replace(" ?sale_price", billDetail.salePrice)
+            sqlString = sqlString.replace(" ?productid", billDetail.productId)
+        }
         respond billDetail
     }
 
     @Transactional
     def save(BillDetail billDetail) {
-        if (billDetail == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/billdetail_insert.sql")
+        String sqlString = new File(sqlFilePath).text
+         if (sqlString) {
+            sqlString = sqlString.replace( "?billdetailid", billDetail.billDetailId)
+            sqlString = sqlString.replace(" ?billid", billDetail.billId)
+            sqlString = sqlString.replace(" ?cost", billDetail.cost)
+            sqlString = sqlString.replace(" ?count", billDetail.count)
+            sqlString = sqlString.replace(" ?sale_price", billDetail.salePrice)
+            sqlString = sqlString.replace(" ?productid", billDetail.productId)
+        
+            if (billDetail == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
 
-        if (billDetail.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond billDetail.errors, view:'create'
-            return
+            if (billDetail.hasErrors()) {
+                transactionStatus.setRollbackOnly()
+                respond billDetail.errors, view:'create'
+                return
+            }
         }
 
         billDetail.save flush:true
@@ -39,6 +63,10 @@ class BillDetailController {
 
     @Transactional
     def update(BillDetail billDetail) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/billdetail_update.sql")
+        String sqlString = new File(sqlFilePath).text
+        // agregar extension sql 
         if (billDetail == null) {
             transactionStatus.setRollbackOnly()
             render status: NOT_FOUND
@@ -58,7 +86,10 @@ class BillDetailController {
 
     @Transactional
     def delete(BillDetail billDetail) {
-
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/billdetail_delte.sql")
+        String sqlString = new File(sqlFilePath).text
+        // agregar extension sql 
         if (billDetail == null) {
             transactionStatus.setRollbackOnly()
             render status: NOT_FOUND

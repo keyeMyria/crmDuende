@@ -2,6 +2,7 @@ package server
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import groovy.sql.Sql
 
 @Transactional(readOnly = true)
 class ExistenceLineController {
@@ -15,21 +16,40 @@ class ExistenceLineController {
     }
 
     def show(ExistenceLine existenceLine) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/existenceline_select.sql")
+        String sqlString = new File(sqlFilePath).text
+        if (sqlString) {
+            sqlString = sqlString.replace(" ?id", existenceLine.id)
+            sqlString = sqlString.replace(" ?storeid", existenceLine.storeId)
+            sqlString = sqlString.replace(" ?quantity", existenceLine.quantity)
+            sqlString = sqlString.replace(" ?productid", existenceLine.productId)
+        }
         respond existenceLine
     }
 
     @Transactional
     def save(ExistenceLine existenceLine) {
-        if (existenceLine == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/existenceline_insert.sql")
+        String sqlString = new File(sqlFilePath).text
+        if (sqlString) {
+            sqlString = sqlString.replace(" ?id", existenceLine.id)
+            sqlString = sqlString.replace(" ?storeid", existenceLine.storeId)
+            sqlString = sqlString.replace(" ?quantity", existenceLine.quantity)
+            sqlString = sqlString.replace(" ?productid", existenceLine.productId)
+        
+            if (existenceLine == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
 
-        if (existenceLine.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond existenceLine.errors, view:'create'
-            return
+            if (existenceLine.hasErrors()) {
+                transactionStatus.setRollbackOnly()
+                respond existenceLine.errors, view:'create'
+                return
+            }
         }
 
         existenceLine.save flush:true
@@ -39,6 +59,10 @@ class ExistenceLineController {
 
     @Transactional
     def update(ExistenceLine existenceLine) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/existenceline_update.sql")
+        String sqlString = new File(sqlFilePath).text
+        
         if (existenceLine == null) {
             transactionStatus.setRollbackOnly()
             render status: NOT_FOUND
@@ -58,6 +82,9 @@ class ExistenceLineController {
 
     @Transactional
     def delete(ExistenceLine existenceLine) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/existenceline_delete.sql")
+        String sqlString = new File(sqlFilePath).text
 
         if (existenceLine == null) {
             transactionStatus.setRollbackOnly()

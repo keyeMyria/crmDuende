@@ -2,6 +2,7 @@ package server
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import groovy.sql.Sql
 
 @Transactional(readOnly = true)
 class PurchasesDetailController {
@@ -15,6 +16,9 @@ class PurchasesDetailController {
     }
 
     def show(PurchasesDetail purchasesDetail) {
+         def sql = new Sql(dataSource)
+         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/purchasesdetail_select.sql")
+         String sqlString = new File(sqlFilePath).text
         respond purchasesDetail
     }
 
@@ -38,6 +42,8 @@ class PurchasesDetailController {
     }
 
     @Transactional
+     
+    // pasar todos los parametros 
     def update(PurchasesDetail purchasesDetail) {
         if (purchasesDetail == null) {
             transactionStatus.setRollbackOnly()
@@ -58,7 +64,7 @@ class PurchasesDetailController {
 
     @Transactional
     def delete(PurchasesDetail purchasesDetail) {
-
+        // solo el id 
         if (purchasesDetail == null) {
             transactionStatus.setRollbackOnly()
             render status: NOT_FOUND

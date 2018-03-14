@@ -2,43 +2,84 @@ package server
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import groovy.sql.Sql
 
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 class UsersController {
 
     static responseFormats = ['json']
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"] 
+    
+    def dataSource
+    
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Users.list(params), model:[usersCount: Users.count()]
     }
-
+    
+    // Objeto que retorna el usuario
+    
     def show(Users users) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/users_select.sql")
+        String sqlString = new File(sqlFilePath).text  
+        if (sqlString) {
+            sqlString = sqlString.replace( "?userid", users.userId)
+            sqlString = sqlString.replace(" ?phone", users.phone)
+            sqlString = sqlString.replace(" ?user_name", users.userName)
+            sqlString = sqlString.replace(" ?mobile", users.mobile)
+            sqlString = sqlString.replace(" ?storeid", users.storeId)
+            sqlString = sqlString.replace(" ?name", users.name)
+            sqlString = sqlString.replace(" ?picture", users.picture)
+            sqlString = sqlString.replace(" ?last_name", users.lastName)
+            sqlString = sqlString.replace(" ?email", users.email)   
+        }
         respond users
     }
-
+    
     @Transactional
+    // create users 
     def save(Users users) {
-        if (users == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        // def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/users_insert.sql")
+        String sqlString = new File(sqlFilePath).text  
+        if(sqlString) {
+             sqlString = sqlString.replace(" ?phone", users.phone)
+             sqlString = sqlString.replace(" ?user_name", users.userName)
+             sqlString = sqlString.replace(" ?mobile", users.mobile)
+             //sqlString = sqlString.replace(" ?storeid", users.storeId.name)
+             sqlString = sqlString.replace(" ?name", users.name)
+             sqlString = sqlString.replace(" ?picture", users.picture)
+             sqlString = sqlString.replace(" ?last_name", users.lastName)
+             sqlString = sqlString.replace(" ?email", users.email)
+             
+            if (users == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
 
-        if (users.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond users.errors, view:'create'
-            return
+            if (users.hasErrors()) {
+                transactionStatus.setRollbackOnly()
+                respond users.errors, view:'create'
+                return
+            }
         }
 
         users.save flush:true
 
         respond users, [status: CREATED, view:"show"]
     }
-
+    // update user 
+    
     @Transactional
     def update(Users users) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/users_update.sql")
+        String sqlString = new File(sqlFilePath).text  
+        
+        // agregar validacion sql 
+        
         if (users == null) {
             transactionStatus.setRollbackOnly()
             render status: NOT_FOUND
@@ -55,9 +96,15 @@ class UsersController {
 
         respond users, [status: OK, view:"show"]
     }
-
+    
+    // delete user  
     @Transactional
     def delete(Users users) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/users_delete.sql")
+        String sqlString = new File(sqlFilePath).text  
+        
+        // agregar extension sql 
 
         if (users == null) {
             transactionStatus.setRollbackOnly()

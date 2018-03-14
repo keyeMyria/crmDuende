@@ -2,6 +2,7 @@ package server
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import groovy.sql.Sql
 
 @Transactional(readOnly = true)
 class PurchasesController {
@@ -15,11 +16,18 @@ class PurchasesController {
     }
 
     def show(Purchases purchases) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/purchases_select.sql")
+        String sqlString = new File(sqlFilePath).text
         respond purchases
     }
 
     @Transactional
     def save(Purchases purchases) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/purchases_insert.sql")
+        String sqlString = new File(sqlFilePath).text
+        
         if (purchases == null) {
             transactionStatus.setRollbackOnly()
             render status: NOT_FOUND
@@ -39,6 +47,10 @@ class PurchasesController {
 
     @Transactional
     def update(Purchases purchases) {
+           def sql = new Sql(dataSource)
+           String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/purchases_update.sql")
+           String sqlString = new File(sqlFilePath).text
+        
         if (purchases == null) {
             transactionStatus.setRollbackOnly()
             render status: NOT_FOUND
@@ -58,6 +70,9 @@ class PurchasesController {
 
     @Transactional
     def delete(Purchases purchases) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/purchases_delete.sql")
+        String sqlString = new File(sqlFilePath).text
 
         if (purchases == null) {
             transactionStatus.setRollbackOnly()

@@ -2,6 +2,8 @@ package server
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import groovy.sql.Sql
+
 
 @Transactional(readOnly = true)
 class ProductsController {
@@ -15,22 +17,46 @@ class ProductsController {
     }
 
     def show(Products products) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/products_select.sql")
+        String sqlString = new File(sqlFilePath).text
+        if (sqlString) {
+            sqlString = sqlString.replace(" ?id", products.productId)
+            sqlString = sqlString.replace(" ?place_name", products.placeName)
+            sqlString = sqlString.replace(" ?bar_code", products.barCode)
+            sqlString = sqlString.replace(" ?serial_code", products.serialCode)
+            sqlString = sqlString.replace(" ?name", products.name)
+            sqlString = sqlString.replace(" ?categoryid", products.categoryId)
+        }
+        
         respond products
     }
 
     @Transactional
     def save(Products products) {
-        if (products == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/products_insert.sql")
+        String sqlString = new File(sqlFilePath).text
+        if (sqlString) {
+            sqlString = sqlString.replace(" ?id", products.productId)
+            sqlString = sqlString.replace(" ?place_name", products.placeName)
+            sqlString = sqlString.replace(" ?bar_code", products.barCode)
+            sqlString = sqlString.replace(" ?serial_code", products.serialCode)
+            sqlString = sqlString.replace(" ?name", products.name)
+            sqlString = sqlString.replace(" ?categoryid", products.categoryId)
+            
+            if (products == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
 
-        if (products.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond products.errors, view:'create'
-            return
-        }
+            if (products.hasErrors()) {
+                transactionStatus.setRollbackOnly()
+                respond products.errors, view:'create'
+                return
+            }
+        } 
 
         products.save flush:true
 
@@ -39,6 +65,10 @@ class ProductsController {
 
     @Transactional
     def update(Products products) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/products_update.sql")
+        String sqlString = new File(sqlFilePath).text
+        
         if (products == null) {
             transactionStatus.setRollbackOnly()
             render status: NOT_FOUND
@@ -58,6 +88,9 @@ class ProductsController {
 
     @Transactional
     def delete(Products products) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/products_delete.sql")
+        String sqlString = new File(sqlFilePath).text
 
         if (products == null) {
             transactionStatus.setRollbackOnly()

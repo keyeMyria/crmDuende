@@ -2,6 +2,8 @@ package server
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import groovy.sql.Sql
+
 
 @Transactional(readOnly = true)
 class ProviderController {
@@ -15,11 +17,19 @@ class ProviderController {
     }
 
     def show(Provider provider) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/provider_select.sql")
+        String sqlString = new File(sqlFilePath).text
+        
         respond provider
     }
 
     @Transactional
     def save(Provider provider) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/provider_insert.sql")
+        String sqlString = new File(sqlFilePath).text
+        
         if (provider == null) {
             transactionStatus.setRollbackOnly()
             render status: NOT_FOUND
@@ -39,6 +49,10 @@ class ProviderController {
 
     @Transactional
     def update(Provider provider) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/provider_update.sql")
+        String sqlString = new File(sqlFilePath).text
+        
         if (provider == null) {
             transactionStatus.setRollbackOnly()
             render status: NOT_FOUND
@@ -58,6 +72,9 @@ class ProviderController {
 
     @Transactional
     def delete(Provider provider) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/provider_delete.sql")
+        String sqlString = new File(sqlFilePath).text
 
         if (provider == null) {
             transactionStatus.setRollbackOnly()

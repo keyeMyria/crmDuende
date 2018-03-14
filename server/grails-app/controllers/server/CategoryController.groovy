@@ -2,6 +2,7 @@ package server
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import groovy.sql.Sql
 
 @Transactional(readOnly = true)
 class CategoryController {
@@ -15,21 +16,38 @@ class CategoryController {
     }
 
     def show(Category category) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/category_select.sql")
+        String sqlString = new File(sqlFilePath).text
+        if (sqlString) {
+            sqlString = sqlString.replace( "?categoryid", category.categoryId)
+            sqlString = sqlString.replace(" ?name", category.name)
+            sqlString = sqlString.replace(" ?description", category.description)
+        }
         respond category
     }
 
     @Transactional
     def save(Category category) {
-        if (category == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/category_insert.sql")
+        String sqlString = new File(sqlFilePath).text
+        if (sqlString) {
+            sqlString = sqlString.replace( "?categoryid", category.categoryId)
+            sqlString = sqlString.replace(" ?name", category.name)
+            sqlString = sqlString.replace(" ?description", category.description)
+           
+            if (category == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
 
-        if (category.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond category.errors, view:'create'
-            return
+            if (category.hasErrors()) {
+                transactionStatus.setRollbackOnly()
+                respond category.errors, view:'create'
+                return
+            }
         }
 
         category.save flush:true
@@ -39,6 +57,10 @@ class CategoryController {
 
     @Transactional
     def update(Category category) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/category_update.sql")
+        String sqlString = new File(sqlFilePath).text
+        
         if (category == null) {
             transactionStatus.setRollbackOnly()
             render status: NOT_FOUND
@@ -58,6 +80,9 @@ class CategoryController {
 
     @Transactional
     def delete(Category category) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/category_delete.sql")
+        String sqlString = new File(sqlFilePath).text
 
         if (category == null) {
             transactionStatus.setRollbackOnly()

@@ -2,6 +2,7 @@ package server
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import groovy.sql.Sql
 
 @Transactional(readOnly = true)
 class ClientsController {
@@ -15,21 +16,60 @@ class ClientsController {
     }
 
     def show(Clients clients) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/client_select.sql")
+        String sqlString = new File(sqlFilePath).text
+        if (sqlString) {
+            sqlString = sqlString.replace(" ?clientid", clients.clientId)
+            sqlString = sqlString.replace(" ?phone", clients.phone)
+            sqlString = sqlString.replace(" ?birthday_date", clients.birthdayDate)
+            sqlString = sqlString.replace(" ?place_name", clients.placeName)
+            sqlString = sqlString.replace(" ?user_name", clients.userName)
+            sqlString = sqlString.replace(" ?last_buy", clients.lastBuy)
+            sqlString = sqlString.replace(" ?mobile", clients.mobile)
+            sqlString = sqlString.replace(" ?address", clients.address)
+            sqlString = sqlString.replace(" ?country_code", clients.countryCode)
+            sqlString = sqlString.replace(" ?first_buy", clients.firstBuy)
+            sqlString = sqlString.replace(" ?name", clients.name)
+            sqlString = sqlString.replace(" ?picture", clients.picture)
+            sqlString = sqlString.replace(" ?last_name", clients.lastName)
+            sqlString = sqlString.replace(" ?email", clients.email)
+        }   
         respond clients
     }
 
     @Transactional
     def save(Clients clients) {
-        if (clients == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/client_select.sql")
+        String sqlString = new File(sqlFilePath).text
+         if (sqlString) {
+            sqlString = sqlString.replace(" ?clientid", clients.clientId)
+            sqlString = sqlString.replace(" ?phone", clients.phone)
+            sqlString = sqlString.replace(" ?birthday_date", clients.birthdayDate)
+            sqlString = sqlString.replace(" ?place_name", clients.placeName)
+            sqlString = sqlString.replace(" ?user_name", clients.userName)
+            sqlString = sqlString.replace(" ?last_buy", clients.lastBuy)
+            sqlString = sqlString.replace(" ?mobile", clients.mobile)
+            sqlString = sqlString.replace(" ?address", clients.address)
+            sqlString = sqlString.replace(" ?country_code", clients.countryCode)
+            sqlString = sqlString.replace(" ?first_buy", clients.firstBuy)
+            sqlString = sqlString.replace(" ?name", clients.name)
+            sqlString = sqlString.replace(" ?picture", clients.picture)
+            sqlString = sqlString.replace(" ?last_name", clients.lastName)
+            sqlString = sqlString.replace(" ?email", clients.email)
+        
+            if (clients == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
 
-        if (clients.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond clients.errors, view:'create'
-            return
+            if (clients.hasErrors()) {
+                transactionStatus.setRollbackOnly()
+                respond clients.errors, view:'create'
+                return
+            }
         }
 
         clients.save flush:true
@@ -40,6 +80,10 @@ class ClientsController {
 
     @Transactional
     def update(Clients clients) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/client_update.sql")
+        String sqlString = new File(sqlFilePath).text
+        
         if (clients == null) {
             transactionStatus.setRollbackOnly()
             render status: NOT_FOUND
@@ -59,6 +103,9 @@ class ClientsController {
 
     @Transactional
     def delete(Clients clients) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/client_delete.sql")
+        String sqlString = new File(sqlFilePath).text
 
         if (clients == null) {
             transactionStatus.setRollbackOnly()
