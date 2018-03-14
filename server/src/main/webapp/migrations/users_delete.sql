@@ -1,2 +1,2 @@
 DELETE FROM public.users
-	WHERE <condition>;
+	WHERE <userid = params.userids>;
