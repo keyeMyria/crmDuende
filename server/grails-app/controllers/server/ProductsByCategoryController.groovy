@@ -3,7 +3,7 @@ package server
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 class ProductsByCategoryController {
 
     static responseFormats = ['json']

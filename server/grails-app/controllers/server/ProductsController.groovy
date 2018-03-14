@@ -5,7 +5,7 @@ import grails.transaction.Transactional
 import groovy.sql.Sql
 
 
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 class ProductsController {
 
     static responseFormats = ['json']

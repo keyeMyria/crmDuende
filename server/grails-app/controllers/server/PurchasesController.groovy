@@ -4,7 +4,7 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import groovy.sql.Sql
 
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 class PurchasesController {
 
     static responseFormats = ['json']
