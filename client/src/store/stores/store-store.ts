@@ -19,6 +19,13 @@ export default class StoreStore {
         this.https = https;
     }
 
+    encodeObject = (shop: Store) => {
+        const keys = Object.keys(shop).filter(key => !!shop[key]);
+        return keys.map(key => {
+            return `${encodeURIComponent(key)}=${encodeURIComponent(shop[key])}`;
+        }).join('&');
+    }
+
     @action fetchDataIfNeeded() {
         if (!this.stores || this.stores.length === 0) {
             this.fetchData();
@@ -39,7 +46,7 @@ export default class StoreStore {
     }
 
     @action updateStore(shop: Store): Promise<boolean> {
-        return fetch(`${API_URL}?cmd=update&${encodeObject(shop)}`, defaultRequest)
+        return fetch(`${API_URL}?cmd=update&${this.encodeObject(shop)}`, defaultRequest)
             .then((response: Response) => response.json()
             ).then(({ success }: { success: boolean }) => {
                 if (success) {
@@ -51,10 +58,3 @@ export default class StoreStore {
             }).catch(() => false);
     }
 }
-
-const encodeObject = (shop: Store) => {
-    const keys = Object.keys(shop).filter(key => !!shop[key]);
-    return keys.map(key => {
-        return `${encodeURIComponent(key)}=${encodeURIComponent(shop[key])}`;
-    }).join('&');
-};
