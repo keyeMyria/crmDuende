@@ -1,2 +1,2 @@
 DELETE FROM public.bill
-	WHERE <condition>;
+	WHERE <billid = param.billids>;

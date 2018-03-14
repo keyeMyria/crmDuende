@@ -1,3 +1,5 @@
 UPDATE public.bill
-	SET billid=?, userid=?, date=?, num_bill=?, clientid=?
-	WHERE <condition>;
+	SET 
+		date=?paramDate, 
+		num_bill=?paramNumBill, 
+	WHERE <billid = ?paramBillId>;
