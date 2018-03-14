@@ -1,7 +1,8 @@
 export interface Store {
     storeId: number;
     placeName: string;
-    name: string;
+    name?: string;
     address: string;
-    phone: string;
+    phone?: string;
+    picture?: string; //unicamente se agrega para control interno 
 }
