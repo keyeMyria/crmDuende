@@ -1,3 +1,7 @@
 UPDATE public.stores
-	SET storeid=?, phone=?, address=?, place_name=?, name=?
-	WHERE <condition>;
+	SET 
+		phone=?paramPhone, 
+		address=?paramAddress, 
+		place_name=?paramPlaceName, 
+		name=?paramName
+	WHERE <storeid=?paramStoreId >;

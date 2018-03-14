@@ -1,2 +1,2 @@
 DELETE FROM public.stores
-	WHERE <condition>;
+	WHERE <storeid = params.storeids>;

@@ -1,3 +1,8 @@
 INSERT INTO public.stores(
-	storeid, phone, address, place_name, name)
-	VALUES (?storeid, ?phone, ?address, ?place_name, ?name);
+	phone, address, place_name, name)
+	VALUES ( 
+		?phone, 
+		?address, 
+		?place_name, 
+		?name
+	);
