@@ -1,3 +1,4 @@
 UPDATE public.existenceline
-	SET id=?, storeid=?, quantity=?, productid=?
-	WHERE <condition>;
+	SET  
+		quantity=?,
+	WHERE <id=?paramId>;

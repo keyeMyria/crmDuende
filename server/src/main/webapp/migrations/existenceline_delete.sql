@@ -1,2 +1,2 @@
 DELETE FROM public.existenceline
-	WHERE <condition>;
+	WHERE <id = params.ids>;
