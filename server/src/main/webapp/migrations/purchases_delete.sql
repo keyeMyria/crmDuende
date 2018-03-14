@@ -1,2 +1,2 @@
 DELETE FROM public.purchases
-	WHERE <condition>;
+	WHERE <puiid = params.purids>;
