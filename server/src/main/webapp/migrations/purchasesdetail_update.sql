@@ -1,7 +1,6 @@
 UPDATE public.purchasesdetail
 	SET  
-		productid=?paramproductid, 
-		cost=?paramcost, 
-		sales_price=?paramsales_price, 
+		cost=?paramCost, 
+		sales_price=?paramSalesPrice, 
 		count=?
-	WHERE <purdetailid = ?paramid>;
+	WHERE <purdetailid = ?paramId>;
