@@ -1,8 +1,0 @@
-import server.Inventory
-
-model {
-	Iterable<Inventory> inventoryList
-}
-
-json tmpl.inventory(inventoryList ?: [])
-
