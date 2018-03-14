@@ -1,3 +1,5 @@
 UPDATE public.category
-	SET categoryid=?, name=?, description=?
-	WHERE <condition>;
+	SET 
+		name=?, 
+		description=?
+	WHERE <categoryid=?paramCategoryId >;

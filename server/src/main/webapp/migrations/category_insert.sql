@@ -1,3 +1,6 @@
 INSERT INTO public.category(
-	categoryid, name, description)
-	VALUES (?categoryid, ?name, ?description);
+	name, description)
+	VALUES (
+		?name, 
+		?description
+	);

@@ -1,2 +1,2 @@
 DELETE FROM public.category
-	WHERE <condition>;
+	WHERE <categoryid = param.categoryids>;
