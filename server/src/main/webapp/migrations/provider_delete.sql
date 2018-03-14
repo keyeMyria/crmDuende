@@ -1,2 +1,2 @@
 DELETE FROM public.provider
-	WHERE <condition>;
+	WHERE <providerid = params.providerids>;

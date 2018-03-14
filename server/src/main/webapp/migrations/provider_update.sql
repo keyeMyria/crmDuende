@@ -1,3 +1,11 @@
 UPDATE public.provider
-	SET providerid=?, phone=?, mobile=?, address=?, country_code=?, contact_name=?, location=?, name=?, email=?
-	WHERE <condition>;
+	SET 
+		phone=?paramPhone, 
+		mobile=?paramMobile, 
+		address=?paramAddress, 
+		country_code=?paramCountryCode, 
+		contact_name=?paramContactName, 
+		location=?paramLocation, 
+		name=?paramName, 
+		email=?paramEmail
+	WHERE <providerid=?paramProviderId >;
