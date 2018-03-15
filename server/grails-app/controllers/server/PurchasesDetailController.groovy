@@ -32,7 +32,7 @@ class PurchasesDetailController {
         if(sqlString) { 
              sqlString = sqlString.replace(" ?cost", purchasesDetail.cost)
              sqlString = sqlString.replace(" ?sales_price", purchasesDetail.salePrice)
-             sqlString = sqlString.replace(" ?count", purchasesDetail.placeName)
+             sqlString = sqlString.replace(" ?count", purchasesDetail.placeName.toString())
        
             if (purchasesDetail == null) {
                 transactionStatus.setRollbackOnly()

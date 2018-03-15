@@ -33,7 +33,7 @@ class BillDetailController {
      
         if (sqlString) {
             sqlString = sqlString.replace(" ?sale_price", billDetail.salePrice)
-            sqlString = sqlString.replace(" ?cost", billDetail.cost)
+            sqlString = sqlString.replace(" ?cost", billDetail.cost.toString())
             sqlString = sqlString.replace(" ?count", billDetail.count)
             
             if (billDetail == null) {

@@ -31,7 +31,7 @@ class PurchasesController {
         String sqlString = new File(sqlFilePath).text
         
         if (sqlString) { 
-             sqlString = sqlString.replace(" ?date", purchases.date)
+             sqlString = sqlString.replace(" ?date", purchases.date.toString())
              sqlString = sqlString.replace(" ?document_number", purchases.documentNumber)
              sqlString = sqlString.replace(" ?description", purchases.description)
         

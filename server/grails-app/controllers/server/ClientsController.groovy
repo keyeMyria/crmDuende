@@ -31,14 +31,14 @@ class ClientsController {
         String sqlString = new File(sqlFilePath).text
          if (sqlString) {
             sqlString = sqlString.replace(" ?phone", clients.phone)
-            sqlString = sqlString.replace(" ?birthday_date", clients.birthdayDate)
+            sqlString = sqlString.replace(" ?birthday_date", clients.birthdayDate.toString())
             sqlString = sqlString.replace(" ?place_name", clients.placeName)
             sqlString = sqlString.replace(" ?user_name", clients.userName)
-            sqlString = sqlString.replace(" ?last_buy", clients.lastBuy)
+            sqlString = sqlString.replace(" ?last_buy", clients.lastBuy.toString())
             sqlString = sqlString.replace(" ?mobile", clients.mobile)
             sqlString = sqlString.replace(" ?address", clients.address)
             sqlString = sqlString.replace(" ?country_code", clients.countryCode)
-            sqlString = sqlString.replace(" ?first_buy", clients.firstBuy)
+            sqlString = sqlString.replace(" ?first_buy", clients.firstBuy.toString())
             sqlString = sqlString.replace(" ?name", clients.name)
             sqlString = sqlString.replace(" ?picture", clients.picture)
             sqlString = sqlString.replace(" ?last_name", clients.lastName)
