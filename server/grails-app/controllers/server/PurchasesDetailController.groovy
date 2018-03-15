@@ -4,11 +4,13 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import groovy.sql.Sql
 
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 class PurchasesDetailController {
 
     static responseFormats = ['json']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    
+    def dataSource
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)

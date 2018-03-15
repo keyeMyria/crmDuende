@@ -4,12 +4,14 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import groovy.sql.Sql
 
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 class BillController {
 
     static responseFormats = ['json']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
+    
+    def dataSource
+    
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Bill.list(params), model:[billCount: Bill.count()]
@@ -29,7 +31,7 @@ class BillController {
         String sqlString = new File(sqlFilePath).text  
         if (sqlString) {
              sqlString = sqlString.replace(" ?date", bill.date)
-             sqlString = sqlString.replace(" ?user_name", bill.numBill)
+             sqlString = sqlString.replace(" ?num_bill", bill.numBill)
         
             if (bill == null) {
                 transactionStatus.setRollbackOnly()

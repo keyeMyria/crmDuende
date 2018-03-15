@@ -5,12 +5,14 @@ import grails.transaction.Transactional
 import groovy.sql.Sql
 
 
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 class BillDetailController {
 
     static responseFormats = ['json']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
+    
+    def dataSource
+    
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond BillDetail.list(params), model:[billDetailCount: BillDetail.count()]
@@ -31,7 +33,7 @@ class BillDetailController {
      
         if (sqlString) {
             sqlString = sqlString.replace(" ?sale_price", billDetail.salePrice)
-            sqlString = sqlString.replace(" ?cost", billDetail.userName)
+            sqlString = sqlString.replace(" ?cost", billDetail.cost)
             sqlString = sqlString.replace(" ?count", billDetail.count)
             
             if (billDetail == null) {
@@ -57,7 +59,6 @@ class BillDetailController {
         def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/billdetail_update.sql")
         String sqlString = new File(sqlFilePath).text  
-        
         if (sqlString) {
             sqlString = sqlString.replace(" ?paramBillDetailId", billDetail.id.toString())
             

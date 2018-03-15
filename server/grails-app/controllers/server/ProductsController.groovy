@@ -10,6 +10,8 @@ class ProductsController {
 
     static responseFormats = ['json']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    
+    def dataSource
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -28,7 +30,6 @@ class ProductsController {
         def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/products_insert.sql")
         String sqlString = new File(sqlFilePath).text
-        
         if (sqlString) {
             sqlString = sqlString.replace(" ?place_name", products.placeName)
             sqlString = sqlString.replace(" ?bar_code", products.barCode)

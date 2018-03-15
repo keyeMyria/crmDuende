@@ -9,6 +9,8 @@ class StoresController {
 
     static responseFormats = ['json']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    
+    def dataSource
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -53,7 +55,7 @@ class StoresController {
 
     @Transactional
     def update(Stores stores) {
-        def sql = new Sql(dataSource)
+       // def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/stores_update.sql")
         String sqlString = new File(sqlFilePath).text
         if(sqlString) { 
@@ -78,7 +80,7 @@ class StoresController {
 
     @Transactional
     def delete(Stores stores) {
-        def sql = new Sql(dataSource)
+      //  def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/stores_delete.sql")
         String sqlString = new File(sqlFilePath).text
         if (sqlString) { 

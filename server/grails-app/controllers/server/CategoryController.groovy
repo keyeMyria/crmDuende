@@ -9,7 +9,9 @@ class CategoryController {
 
     static responseFormats = ['json']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
+    
+    def dataSource
+    
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Category.list(params), model:[categoryCount: Category.count()]
