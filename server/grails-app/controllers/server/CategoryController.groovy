@@ -27,6 +27,7 @@ class CategoryController {
         def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/category_insert.sql")
         String sqlString = new File(sqlFilePath).text
+        
         if (sqlString) {
             sqlString = sqlString.replace(" ?name", category.name)
             sqlString = sqlString.replace(" ?description", category.description)
@@ -54,19 +55,21 @@ class CategoryController {
         def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/category_update.sql")
         String sqlString = new File(sqlFilePath).text
-        
-        if (category == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        if (sqlString) { 
+            sqlString = sqlString.replace(" ?paramCategoryId", category.id.toString())
+            
+            if (category == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
 
-        if (category.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond category.errors, view:'edit'
-            return
+            if (category.hasErrors()) {
+                transactionStatus.setRollbackOnly()
+                respond category.errors, view:'edit'
+                return
+            }
         }
-
         category.save flush:true
 
         respond category, [status: OK, view:"show"]
@@ -77,12 +80,16 @@ class CategoryController {
         def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/category_delete.sql")
         String sqlString = new File(sqlFilePath).text
-
-        if (category == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        
+        if (sqlString) {
+             sqlString = sqlString.replace(" categoryids", category.id.toString())
+             
+            if (category == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
+        } 
 
         category.delete flush:true
 

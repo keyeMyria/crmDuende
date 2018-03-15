@@ -28,6 +28,7 @@ class ProductsController {
         def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/products_insert.sql")
         String sqlString = new File(sqlFilePath).text
+        
         if (sqlString) {
             sqlString = sqlString.replace(" ?place_name", products.placeName)
             sqlString = sqlString.replace(" ?bar_code", products.barCode)
@@ -56,17 +57,20 @@ class ProductsController {
         def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/products_update.sql")
         String sqlString = new File(sqlFilePath).text
-        
-        if (products == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        if (sqlString) {
+             sqlString = sqlString.replace(" ?paramId", products.id.toString())
+             
+            if (products == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
 
-        if (products.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond products.errors, view:'edit'
-            return
+            if (products.hasErrors()) {
+                transactionStatus.setRollbackOnly()
+                respond products.errors, view:'edit'
+                return
+            }
         }
 
         products.save flush:true
@@ -79,12 +83,16 @@ class ProductsController {
         def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/products_delete.sql")
         String sqlString = new File(sqlFilePath).text
-
-        if (products == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        
+        if(sqlString) {
+            sqlString = sqlString.replace(" ids", products.id.toString())
+             
+            if (products == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
+        } 
 
         products.delete flush:true
 

@@ -2,11 +2,12 @@ package server
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import groovy.sql.Sql
 
 @Transactional(readOnly = true)
 class PurchasesDetailController {
 
-    static responseFormats = ['json', 'xml']
+    static responseFormats = ['json']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -15,22 +16,34 @@ class PurchasesDetailController {
     }
 
     def show(PurchasesDetail purchasesDetail) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/purchasesdetail_select.sql")
+        String sqlString = new File(sqlFilePath).text
         respond purchasesDetail
     }
 
     @Transactional
     def save(PurchasesDetail purchasesDetail) {
-        if (purchasesDetail == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/purchasesdetail_insert.sql")
+        String sqlString = new File(sqlFilePath).text
+        if(sqlString) { 
+             sqlString = sqlString.replace(" ?cost", purchasesDetail.cost)
+             sqlString = sqlString.replace(" ?sales_price", purchasesDetail.salePrice)
+             sqlString = sqlString.replace(" ?count", purchasesDetail.placeName)
+       
+            if (purchasesDetail == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
 
-        if (purchasesDetail.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond purchasesDetail.errors, view:'create'
-            return
-        }
+            if (purchasesDetail.hasErrors()) {
+                transactionStatus.setRollbackOnly()
+                respond purchasesDetail.errors, view:'create'
+                return
+            }
+        } 
 
         purchasesDetail.save flush:true
 
@@ -39,18 +52,24 @@ class PurchasesDetailController {
 
     @Transactional
     def update(PurchasesDetail purchasesDetail) {
-        if (purchasesDetail == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/purchasesdetail_update.sql")
+        String sqlString = new File(sqlFilePath).text
+        if (sqlString) {
+             sqlString = sqlString.replace(" ?paramId", purchasesDetail.id.toString())
+        
+            if (purchasesDetail == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
 
-        if (purchasesDetail.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond purchasesDetail.errors, view:'edit'
-            return
+            if (purchasesDetail.hasErrors()) {
+                transactionStatus.setRollbackOnly()
+                respond purchasesDetail.errors, view:'edit'
+                return
+            }
         }
-
         purchasesDetail.save flush:true
 
         respond purchasesDetail, [status: OK, view:"show"]
@@ -58,12 +77,17 @@ class PurchasesDetailController {
 
     @Transactional
     def delete(PurchasesDetail purchasesDetail) {
-
-        if (purchasesDetail == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/purchasesdetail_delete.sql")
+        String sqlString = new File(sqlFilePath).text
+        if(sqlString) { 
+            sqlString = sqlString.replace(" purchasesdetailids", purchasesDetail.id.toString())
+            if (purchasesDetail == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
+        } 
 
         purchasesDetail.delete flush:true
 

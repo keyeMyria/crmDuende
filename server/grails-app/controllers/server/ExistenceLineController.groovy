@@ -29,6 +29,7 @@ class ExistenceLineController {
         String sqlString = new File(sqlFilePath).text
         if (sqlString) {
             sqlString = sqlString.replace(" ?quantity", existenceLine.quantity)
+            
             if (existenceLine == null) {
                 transactionStatus.setRollbackOnly()
                 render status: NOT_FOUND
@@ -53,17 +54,20 @@ class ExistenceLineController {
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/existenceline_update.sql")
         String sqlString = new File(sqlFilePath).text
         
-        if (existenceLine == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        if(sqlString) {
+           sqlString = sqlString.replace(" ?paramId", existenceLine.id.toString())
+            if (existenceLine == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
 
-        if (existenceLine.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond existenceLine.errors, view:'edit'
-            return
-        }
+            if (existenceLine.hasErrors()) {
+                transactionStatus.setRollbackOnly()
+                respond existenceLine.errors, view:'edit'
+                return
+            }
+        } 
 
         existenceLine.save flush:true
 
@@ -75,12 +79,16 @@ class ExistenceLineController {
         def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/existenceline_delete.sql")
         String sqlString = new File(sqlFilePath).text
-
-        if (existenceLine == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        
+        if(sqlString) { 
+            sqlString = sqlString.replace(" ids", existenceLine.id.toString())
+             
+            if (existenceLine == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
+        } 
 
         existenceLine.delete flush:true
 

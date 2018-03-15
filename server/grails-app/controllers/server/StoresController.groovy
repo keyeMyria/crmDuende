@@ -24,18 +24,27 @@ class StoresController {
 
     @Transactional
     def save(Stores stores) {
-      // falta validacion 
-        if (stores == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/stores_insert.sql")
+        String sqlString = new File(sqlFilePath).text
+        if (sqlString) {
+             sqlString = sqlString.replace(" ?phone", stores.phone)
+             sqlString = sqlString.replace(" ?address", stores.address)
+             sqlString = sqlString.replace(" ?place_name", stores.placeName)
+             sqlString = sqlString.replace(" ?name", stores.name)
+             
+            if (stores == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
 
-        if (stores.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond stores.errors, view:'create'
-            return
-        }
+            if (stores.hasErrors()) {
+                transactionStatus.setRollbackOnly()
+                respond stores.errors, view:'create'
+                return
+            }
+        } 
 
         stores.save flush:true
 
@@ -44,17 +53,23 @@ class StoresController {
 
     @Transactional
     def update(Stores stores) {
-        if (stores == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/stores_update.sql")
+        String sqlString = new File(sqlFilePath).text
+        if(sqlString) { 
+             sqlString = sqlString.replace(" ?paramStoreId", stores.id.toString())
+            if (stores == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
 
-        if (stores.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond stores.errors, view:'edit'
-            return
-        }
+            if (stores.hasErrors()) {
+                transactionStatus.setRollbackOnly()
+                respond stores.errors, view:'edit'
+                return
+            }
+        } 
 
         stores.save flush:true
 
@@ -63,12 +78,18 @@ class StoresController {
 
     @Transactional
     def delete(Stores stores) {
-
-        if (stores == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/stores_delete.sql")
+        String sqlString = new File(sqlFilePath).text
+        if (sqlString) { 
+            sqlString = sqlString.replace(" storeids", stores.id.toString())
+            
+            if (stores == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
+        } 
 
         stores.delete flush:true
 

@@ -2,11 +2,13 @@ package server
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import groovy.sql.Sql
+
 
 @Transactional(readOnly = true)
 class BillDetailController {
 
-    static responseFormats = ['json', 'xml']
+    static responseFormats = ['json']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -15,22 +17,35 @@ class BillDetailController {
     }
 
     def show(BillDetail billDetail) {
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/billdetail_select.sql")
+        String sqlString = new File(sqlFilePath).text  
         respond billDetail
     }
 
     @Transactional
     def save(BillDetail billDetail) {
-        if (billDetail == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/billdetail_insert.sql")
+        String sqlString = new File(sqlFilePath).text  
+     
+        if (sqlString) {
+            sqlString = sqlString.replace(" ?sale_price", billDetail.salePrice)
+            sqlString = sqlString.replace(" ?cost", billDetail.userName)
+            sqlString = sqlString.replace(" ?count", billDetail.count)
+            
+            if (billDetail == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
 
-        if (billDetail.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond billDetail.errors, view:'create'
-            return
-        }
+            if (billDetail.hasErrors()) {
+                transactionStatus.setRollbackOnly()
+                respond billDetail.errors, view:'create'
+                return
+            }
+        } 
 
         billDetail.save flush:true
 
@@ -39,17 +54,25 @@ class BillDetailController {
 
     @Transactional
     def update(BillDetail billDetail) {
-        if (billDetail == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/billdetail_update.sql")
+        String sqlString = new File(sqlFilePath).text  
+        
+        if (sqlString) {
+            sqlString = sqlString.replace(" ?paramBillDetailId", billDetail.id.toString())
+            
+            if (billDetail == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
 
-        if (billDetail.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond billDetail.errors, view:'edit'
-            return
-        }
+            if (billDetail.hasErrors()) {
+                transactionStatus.setRollbackOnly()
+                respond billDetail.errors, view:'edit'
+                return
+            }
+        } 
 
         billDetail.save flush:true
 
@@ -58,13 +81,19 @@ class BillDetailController {
 
     @Transactional
     def delete(BillDetail billDetail) {
-
-        if (billDetail == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
+        def sql = new Sql(dataSource)
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/billdetail_delete.sql")
+        String sqlString = new File(sqlFilePath).text  
+        
+        if (sqlString) {
+              sqlString = sqlString.replace(" billdetailids", billDetail.id.toString())
+              
+            if (billDetail == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
         }
-
         billDetail.delete flush:true
 
         render status: NO_CONTENT

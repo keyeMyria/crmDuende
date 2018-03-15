@@ -25,7 +25,7 @@ class ClientsController {
     @Transactional
     def save(Clients clients) {
         def sql = new Sql(dataSource)
-        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/client_select.sql")
+        String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/client_insert.sql")
         String sqlString = new File(sqlFilePath).text
          if (sqlString) {
             sqlString = sqlString.replace(" ?phone", clients.phone)
@@ -56,8 +56,7 @@ class ClientsController {
         }
 
         clients.save flush:true
-        
-      // clients.executeQuery("INSERT INTO Clients",[])
+       
        respond clients, [status: CREATED, view:"show"]
     }
 
@@ -67,17 +66,21 @@ class ClientsController {
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/client_update.sql")
         String sqlString = new File(sqlFilePath).text
         
-        if (clients == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        if (sqlString) {
+            sqlString = sqlString.replace(" ?paramClientId", clients.id.toString())
+            
+            if (clients == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
 
-        if (clients.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond clients.errors, view:'edit'
-            return
-        }
+            if (clients.hasErrors()) {
+                transactionStatus.setRollbackOnly()
+                respond clients.errors, view:'edit'
+                return
+            }
+        } 
 
         clients.save flush:true
 
@@ -89,12 +92,16 @@ class ClientsController {
         def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/client_delete.sql")
         String sqlString = new File(sqlFilePath).text
-
-        if (clients == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        
+        if (sqlString) {
+            sqlString = sqlString.replace(" clientids", clients.id.toString())
+            
+            if (clients == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
+        } 
 
         clients.delete flush:true
 

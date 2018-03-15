@@ -29,19 +29,27 @@ class ProviderController {
         def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/provider_insert.sql")
         String sqlString = new File(sqlFilePath).text
+        if (sqlString) { 
+             sqlString = sqlString.replace(" ?phone", provider.phone)
+             sqlString = sqlString.replace(" ?mobile", provider.mobile)
+             sqlString = sqlString.replace(" ?address", provider.address)
+             sqlString = sqlString.replace(" ?country_code", provider.countryCode)
+             sqlString = sqlString.replace(" ?contact_name", provider.contactName)
+             sqlString = sqlString.replace(" ?location", provider.location)
+             sqlString = sqlString.replace(" ?name", provider.name)
+             sqlString = sqlString.replace(" ?email", provider.email)
         
-        // falta validacion sql 
-        
-        if (provider == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+            if (provider == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
 
-        if (provider.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond provider.errors, view:'create'
-            return
+            if (provider.hasErrors()) {
+                transactionStatus.setRollbackOnly()
+                respond provider.errors, view:'create'
+                return
+            }
         }
 
         provider.save flush:true
@@ -54,18 +62,21 @@ class ProviderController {
         def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/provider_update.sql")
         String sqlString = new File(sqlFilePath).text
-        
-        if (provider == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        if (sqlString) {
+            sqlString = sqlString.replace(" ?paramProviderId", provider.id.toString())
+             
+            if (provider == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
 
-        if (provider.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond provider.errors, view:'edit'
-            return
-        }
+            if (provider.hasErrors()) {
+                transactionStatus.setRollbackOnly()
+                respond provider.errors, view:'edit'
+                return
+            }
+        } 
 
         provider.save flush:true
 
@@ -77,12 +88,16 @@ class ProviderController {
         def sql = new Sql(dataSource)
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/provider_delete.sql")
         String sqlString = new File(sqlFilePath).text
-
-        if (provider == null) {
-            transactionStatus.setRollbackOnly()
-            render status: NOT_FOUND
-            return
-        }
+        
+        if (sqlString) {
+             sqlString = sqlString.replace(" providerids", provider.id.toString())
+             
+            if (provider == null) {
+                transactionStatus.setRollbackOnly()
+                render status: NOT_FOUND
+                return
+            }
+        } 
 
         provider.delete flush:true
 
