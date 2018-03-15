@@ -1,7 +1,0 @@
-import server.BillDetail
-
-model {
-	BillDetail billDetail
-}
-
-json tmpl.billDetail(billDetail)

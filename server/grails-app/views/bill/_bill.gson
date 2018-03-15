@@ -1,7 +1,0 @@
-import server.Bill
-
-model {
-	Bill bill
-}
-
-json g.render(bill)

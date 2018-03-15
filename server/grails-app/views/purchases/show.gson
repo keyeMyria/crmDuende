@@ -1,7 +1,0 @@
-import server.Purchases
-
-model {
-	Purchases purchases
-}
-
-json tmpl.purchases(purchases)
