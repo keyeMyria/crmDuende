@@ -13,12 +13,12 @@ CREATE TABLE public.bill
     CONSTRAINT bill_pkey PRIMARY KEY (billid),
     CONSTRAINT rel_bill_users FOREIGN KEY (userid)
         REFERENCES public.users (userid) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
     CONSTRAINT rel_bill_clients FOREIGN KEY (clientid)
         REFERENCES public.clients (clientid) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 )
 WITH (
     OIDS = FALSE

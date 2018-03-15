@@ -1,7 +1,7 @@
 -- Nombre de la tabla --> Table: public.existenceline
 
 -- Esta parte se descomenta despues de la segunda corrida del programa 
--- DROP TABLE public.existenceline;
+DROP TABLE public.existenceline;
 
 CREATE TABLE public.existenceline
 (
@@ -12,12 +12,12 @@ CREATE TABLE public.existenceline
     CONSTRAINT existenceline_pkey PRIMARY KEY (id),
     CONSTRAINT rel_existence_products FOREIGN KEY (productid)
         REFERENCES public.products (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
     CONSTRAINT rel_existence_store FOREIGN KEY (storeid)
         REFERENCES public.stores (storeid) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 )
 WITH (
     OIDS = FALSE

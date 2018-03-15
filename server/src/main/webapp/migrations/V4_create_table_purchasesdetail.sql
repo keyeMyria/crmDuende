@@ -1,7 +1,7 @@
 -- Nombre de la tabla --> Table: public.purchasesdetail
 
 -- Esta parte se descomenta despues de la segunda corrida del programa 
--- DROP TABLE public.purchasesdetail;
+DROP TABLE public.purchasesdetail;
 
 CREATE TABLE public.purchasesdetail
 (
@@ -14,12 +14,12 @@ CREATE TABLE public.purchasesdetail
     CONSTRAINT purchasesdetail_pkey PRIMARY KEY (purdetailid),
     CONSTRAINT rel_purDetail_product FOREIGN KEY (productid)
         REFERENCES public.products (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
     CONSTRAINT rel_purDetail_purchases FOREIGN KEY (purid)
         REFERENCES public.purchases (purid) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 )
 WITH (
     OIDS = FALSE

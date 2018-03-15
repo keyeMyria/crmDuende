@@ -1,7 +1,7 @@
 -- Nombre de la tabla --> Table: public.products
 
 -- Esta parte se descomenta despues de la segunda corrida del programa 
--- DROP TABLE public.products;
+DROP TABLE public.products;
 
 CREATE TABLE public.products
 (
@@ -14,8 +14,8 @@ CREATE TABLE public.products
     CONSTRAINT products_pkey PRIMARY KEY (id),
     CONSTRAINT rel_products_category FOREIGN KEY (categoryid)
         REFERENCES public.category (categoryid) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 )
 WITH (
     OIDS = FALSE

@@ -1,7 +1,7 @@
 -- Nombre de la tabla --> Table: public.purchases
 
 -- Esta parte se descomenta despues de la segunda corrida del programa 
--- DROP TABLE public.purchases;
+DROP TABLE public.purchases;
 
 CREATE TABLE public.purchases
 (
@@ -13,8 +13,8 @@ CREATE TABLE public.purchases
     CONSTRAINT purchases_pkey PRIMARY KEY (purid),
     CONSTRAINT rel_purchases_provider FOREIGN KEY (providerid)
         REFERENCES public.provider (providerid) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 )
 WITH (
     OIDS = FALSE

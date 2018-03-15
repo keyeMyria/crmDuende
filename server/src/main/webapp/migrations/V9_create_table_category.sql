@@ -1,7 +1,7 @@
 -- Nombre de la tabla --> Table: public.category
 
 -- Esta parte se descomenta despues de la segunda corrida del programa 
--- DROP TABLE public.category;
+DROP TABLE public.category;
 
 CREATE TABLE public.category
 (

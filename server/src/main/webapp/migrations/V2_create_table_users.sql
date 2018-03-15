@@ -1,7 +1,7 @@
 -- Nombre de la tabla --> Table: public.users
 
 -- Esta parte se descomenta despues de la segunda corrida del programa 
--- DROP TABLE public.users;
+DROP TABLE public.users;
 
 CREATE TABLE public.users
 (
@@ -17,8 +17,8 @@ CREATE TABLE public.users
     CONSTRAINT users_pkey PRIMARY KEY (userid),
     CONSTRAINT rel_users_store FOREIGN KEY (storeid)
         REFERENCES public.stores (storeid) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 )
 WITH (
     OIDS = FALSE

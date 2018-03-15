@@ -1,7 +1,7 @@
 -- Nombre de la tabla --> Table: public.clients
 
 -- Esta parte se descomenta despues de la segunda corrida del programa 
--- DROP TABLE public.clients;
+DROP TABLE public.clients;
 
 CREATE TABLE public.clients
 (

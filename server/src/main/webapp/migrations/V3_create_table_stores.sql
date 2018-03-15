@@ -1,7 +1,7 @@
 -- Nombre de la tabla --> Table: public.stores
 
 -- Esta parte se descomenta despues de la segunda corrida del programa 
--- DROP TABLE public.stores;
+DROP TABLE public.stores;
 
 CREATE TABLE public.stores
 (

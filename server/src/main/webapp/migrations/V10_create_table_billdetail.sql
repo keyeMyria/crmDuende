@@ -1,7 +1,7 @@
 --Nombre de la tabla -->  Table: public.billdetail
 
 -- Esta parte se descomenta despues de la segunda corrida del programa 
--- DROP TABLE public.billdetail;
+DROP TABLE public.billdetail;
 
 CREATE TABLE public.billdetail
 (
@@ -14,12 +14,12 @@ CREATE TABLE public.billdetail
     CONSTRAINT billdetail_pkey PRIMARY KEY (billdetailid),
     CONSTRAINT rel_billDetail_bill FOREIGN KEY (billid)
         REFERENCES public.bill (billid) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON UPDATE CASCADE 
+        ON DELETE CASCADE,
     CONSTRAINT rel_billDetail_product FOREIGN KEY (productid)
         REFERENCES public.products (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 )
 WITH (
     OIDS = FALSE

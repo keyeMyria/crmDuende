@@ -1,7 +1,7 @@
 -- Nombre de la tabla --> Table: public.provider
 
 -- Esta parte se descomenta despues de la segunda corrida del programa 
--- DROP TABLE public.provider;
+DROP TABLE public.provider;
 
 CREATE TABLE public.provider
 (
