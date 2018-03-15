@@ -1,0 +1,7 @@
+import server.Purchases
+
+model {
+	Purchases purchases
+}
+
+json g.render(purchases)

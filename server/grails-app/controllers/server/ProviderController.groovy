@@ -30,6 +30,8 @@ class ProviderController {
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/provider_insert.sql")
         String sqlString = new File(sqlFilePath).text
         
+        // falta validacion sql 
+        
         if (provider == null) {
             transactionStatus.setRollbackOnly()
             render status: NOT_FOUND

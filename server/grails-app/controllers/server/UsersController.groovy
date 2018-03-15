@@ -66,7 +66,7 @@ class UsersController {
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/users_update.sql")
         String sqlString = new File(sqlFilePath).text  
         if(sqlString) {
-            sqlString = sqlString.replace(" ?paramUserId", users.userId)
+            sqlString = sqlString.replace(" ?paramUserId", users.id)
             if (users == null) {
                 transactionStatus.setRollbackOnly()
                 render status: NOT_FOUND
@@ -92,7 +92,7 @@ class UsersController {
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/users_delete.sql")
         String sqlString = new File(sqlFilePath).text  
          if(sqlString) {
-            //sqlString = sqlString.replace(" ?delUserid")
+            sqlString = sqlString.replace(" ?delUserid", users.id.toString())
             if (users == null) {
                 transactionStatus.setRollbackOnly()
                 render status: NOT_FOUND

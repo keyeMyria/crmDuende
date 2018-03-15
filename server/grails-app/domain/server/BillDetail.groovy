@@ -10,7 +10,7 @@ class BillDetail {
          productId column: 'productId'
          dynamicUpdate true
          dynamicInsert true
-         sort 'billDetailId'         
+         sort 'id'         
     } 
     
         String cost 
@@ -28,6 +28,6 @@ class BillDetail {
     }
     
     String toString() {
-        return "${billDetailId}" 
+        return "${id}" 
     }
 }

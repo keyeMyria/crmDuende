@@ -24,6 +24,7 @@ class StoresController {
 
     @Transactional
     def save(Stores stores) {
+      // falta validacion 
         if (stores == null) {
             transactionStatus.setRollbackOnly()
             render status: NOT_FOUND

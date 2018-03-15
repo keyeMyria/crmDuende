@@ -32,9 +32,7 @@ class ProductsController {
             sqlString = sqlString.replace(" ?place_name", products.placeName)
             sqlString = sqlString.replace(" ?bar_code", products.barCode)
             sqlString = sqlString.replace(" ?serial_code", products.serialCode)
-            sqlString = sqlString.replace(" ?name", products.name)
-            sqlString = sqlString.replace(" ?categoryid", products.categoryId)
-            
+            sqlString = sqlString.replace(" ?name", products.name) 
             if (products == null) {
                 transactionStatus.setRollbackOnly()
                 render status: NOT_FOUND

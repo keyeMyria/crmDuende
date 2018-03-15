@@ -8,7 +8,7 @@ class Purchases {
          providerId column: 'providerId'
          dynamicUpdate true
          dynamicInsert true
-         sort 'purId'         
+         sort 'id'         
     } 
     
         Date date 
@@ -26,6 +26,6 @@ class Purchases {
     }
     
     String toString() {
-        return "${purId}" 
+        return "${id}" 
     }
 }

@@ -1,0 +1,8 @@
+import server.Bill
+
+model {
+	Iterable<Bill> billList
+}
+
+json tmpl.bill(billList ?: [])
+

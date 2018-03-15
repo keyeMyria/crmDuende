@@ -9,7 +9,7 @@ class PurchasesDetail {
          productId column: 'productId'
          dynamicUpdate true
          dynamicInsert true
-         sort 'purDetailId'         
+         sort 'id'         
     } 
     
         Integer count 
@@ -27,6 +27,6 @@ class PurchasesDetail {
     }
     
     String toString() {
-        return "${purDetailId}" 
+        return "${id}" 
     }
 }
