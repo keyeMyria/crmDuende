@@ -29,7 +29,6 @@ class ProductsController {
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/products_insert.sql")
         String sqlString = new File(sqlFilePath).text
         if (sqlString) {
-            sqlString = sqlString.replace(" ?id", products.productId)
             sqlString = sqlString.replace(" ?place_name", products.placeName)
             sqlString = sqlString.replace(" ?bar_code", products.barCode)
             sqlString = sqlString.replace(" ?serial_code", products.serialCode)

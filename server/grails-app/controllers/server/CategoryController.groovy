@@ -28,7 +28,6 @@ class CategoryController {
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/category_insert.sql")
         String sqlString = new File(sqlFilePath).text
         if (sqlString) {
-            sqlString = sqlString.replace( "?categoryid", category.categoryId)
             sqlString = sqlString.replace(" ?name", category.name)
             sqlString = sqlString.replace(" ?description", category.description)
            

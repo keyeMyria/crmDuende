@@ -28,7 +28,6 @@ class ClientsController {
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/client_select.sql")
         String sqlString = new File(sqlFilePath).text
          if (sqlString) {
-            sqlString = sqlString.replace(" ?clientid", clients.clientId)
             sqlString = sqlString.replace(" ?phone", clients.phone)
             sqlString = sqlString.replace(" ?birthday_date", clients.birthdayDate)
             sqlString = sqlString.replace(" ?place_name", clients.placeName)
