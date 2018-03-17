@@ -93,15 +93,15 @@ flyway:
 environments:
     development:
         dataSource:
-            dbCreate: none
+            dbCreate: create-drop
             url: jdbc:postgresql://localhost:5433/crmDuende
     test:
         dataSource:
-            dbCreate: none
+            dbCreate: update
             url:  jdbc:postgresql://localhost:5433/crmDuende
     production:
         dataSource:
-            dbCreate: none
+            dbCreate: update
             url:  jdbc:postgresql://localhost:5433/crmDuende
             properties:
                 jmxEnabled: true
