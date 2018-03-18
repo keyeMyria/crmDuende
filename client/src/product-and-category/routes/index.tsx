@@ -20,13 +20,13 @@ export default function() {
                 <nav className="tabs-container">
                     <ul className="nav nav-tabs">
                         <NavTab to="/products/" activeClassName="active">Productos</NavTab>
-                        <NavTab to="/category/" activeClassName="active">Categorías</NavTab>
+                        <NavTab to="/products/category/" activeClassName="active">Categorías</NavTab>
                     </ul>
                 </nav>
             </div>
             <Switch>
                 <Route path="/products/" component={ProductsManager} exact={true} />
-                <Route path="/category/" component={CategoryManager} />
+                <Route path="/products/category/" component={CategoryManager} />
             </Switch>
         </div>
     );

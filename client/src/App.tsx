@@ -8,6 +8,7 @@ import UsersManager from './users';
 import StoresManager from './store';
 import ClientsManager from './client';
 import NotFound from './not-found';
+import ProductManagerRoute from './product-and-category/routes/products-manager';
 
 class App extends React.Component<{}, {}> {
   render() {
@@ -18,6 +19,7 @@ class App extends React.Component<{}, {}> {
             <Route path="/store" component={StoresManager} />
             <Route path="/users" component={UsersManager} />
             <Route path="/client" component={ClientsManager} />
+            <Route path="/products" component={ProductManagerRoute} />
             <Route component={NotFound} />
           </Switch>
         </div>
