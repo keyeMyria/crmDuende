@@ -3,24 +3,25 @@ import { BootstrapTable, TableHeaderColumn, SortOrder } from 'react-bootstrap-ta
 import { observer } from 'mobx-react';
 import { Https } from '../../common/util/https';
 import { Loading } from '../../common/components/labels';
-import { Product } from '../types/product';
+import { Category } from '../types/category';
+
 
 const defaultSortOrder: SortOrder = 'asc';
 
-interface ProductsTableProps {
-    products: Product[];
-    onProductsClick: (clients: Product) => void;
+interface CategoryTableProps {
+    categories: Category[];
+    onCategoryClick: (clients: Category) => void;
     isFetching: boolean;
     https: Https;
 }
 @observer
-export default class ProductTable extends React.Component<ProductsTableProps> {
+export default class CategoryTable extends React.Component<CategoryTableProps> {
 
-    nameFilterValue = (name: string, catego: Product) => (
-        `${name} ${catego.serialCode} ${catego.categoryId}`
+    nameFilterValue = (name: string, catego: Category) => (
+        `${name} ${catego.categoryId}` 
     )
 
-    renderCellName = (name: string, prdu: Product) => {
+    renderCellName = (name: string, prdu: Category) => {
         return (
             <span>
                 <div>
@@ -34,9 +35,9 @@ export default class ProductTable extends React.Component<ProductsTableProps> {
     }
 
     renderTable = () => {
-        const { products, onProductsClick } = this.props;
+        const { categories, onCategoryClick } = this.props;
         const options = {
-            onRowClick: onProductsClick,
+            onRowClick: onCategoryClick,
             defaultSortName: 'name',
             sizePerPageList: [50],
             sizePerPage: 50,
@@ -46,7 +47,7 @@ export default class ProductTable extends React.Component<ProductsTableProps> {
 
         return (
             <BootstrapTable
-                data={products}
+                data={categories}
                 striped={true}
                 hover={true}
                 options={options}
