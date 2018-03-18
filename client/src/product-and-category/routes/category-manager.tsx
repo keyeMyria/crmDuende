@@ -80,7 +80,7 @@ export default class CategoryManagerRoute extends React.Component<CategoryProps,
                 <div className="table-action-buttons">
                     <div className="right-header-app">
                         <button className="btn btn-primary" onClick={this.handleNewCategory}>
-                            Nuevo Usuario
+                           Nueva Categoría
                             </button>
                     </div>
                 </div>
