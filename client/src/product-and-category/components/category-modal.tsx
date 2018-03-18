@@ -5,48 +5,48 @@ import { observer } from 'mobx-react';
 import {
     required, noNumbers, noAccents
 } from '../../common/components/input-validation/validators';
-import { Product } from '../types/product';
+import { Category } from '../types/category';
 import { IndexStore } from '../stores';
 
-interface ProductsModalProps {
+interface CategoryModalProps {
     store: IndexStore;
-    product: Product;
+    category: Category;
     show: boolean;
     onClose: () => void;
     onSubmit: () => void;
 }
 
-interface ProductsModalState {
+interface CategoryModalState {
     errors: { [valueName: string]: boolean };
     forceVerify: boolean;
     wantSubmit: boolean;
-    product: Product;
+    category: Category;
 
 }
 
 @observer
-export default class ProductModal extends React.Component<ProductsModalProps, ProductsModalState> {
+export default class CategoryModal extends React.Component<CategoryModalProps, CategoryModalState> {
 
     state = {
         errors: {},
         forceVerify: false,
         wantSubmit: false,
-        product: {} as Product
+        category: {} as Category
     };
 
     componentDidMount() {
-        this.setState({ product: this.props.product });
+        this.setState({ category: this.props.category });
     }
 
-    shouldComponentUpdate(nextProps: ProductsModalProps, nextState: ProductsModalState) {
-        const requiredFields = nextProps.product.productId === -1 ? 1 : 1;
+    shouldComponentUpdate(nextProps: CategoryModalProps, nextState: CategoryModalState) {
+        const requiredFields = nextProps.category.categoryId === -1 ? 1 : 1;
         if (nextState.wantSubmit && Object.keys(nextState.errors).length === requiredFields) {
             this.trySubmit();
         }
         return true;
     }
 
-    isEditing = () => this.props.product.productId !== -1;
+    isEditing = () => this.props.category.categoryId !== -1;
 
     onInputErrorsChanges = (valueKey: string, error?: string | JSX.Element) => {
         const haveError = !!error;
@@ -75,7 +75,7 @@ export default class ProductModal extends React.Component<ProductsModalProps, Pr
     }
 
     handleValueChanges = (change: number | string | string[], valueName: string) => {
-        this.props.store.productsStore.product = { ...this.props.store.productsStore.product, [valueName]: change };
+        this.props.store.categoryStore.category = { ...this.props.store.categoryStore.category, [valueName]: change };
     }
 
     renderHeader = () => (
@@ -83,8 +83,8 @@ export default class ProductModal extends React.Component<ProductsModalProps, Pr
             <Modal.Title>
                 {
                     this.isEditing()
-                        ? <span> Editando Producto-ID: + {this.props.store.productsStore.product.productId}</span>
-                        : <span> Ingreso De Producto</span>
+                        ? <span> Editando Categoría-ID: + {this.props.store.categoryStore.category.categoryId}</span>
+                        : <span> Nueva Categoría</span>
                 }
             </Modal.Title>
         </Modal.Header>
@@ -111,39 +111,25 @@ export default class ProductModal extends React.Component<ProductsModalProps, Pr
                         valueName="name"
                         onChange={this.handleValueChanges}
                         labelText="Nombre"
-                        inputValue={this.props.product.name}
+                        inputValue={this.props.category.name}
                         isRequired={true}
                         validators={[required, noNumbers, noAccents]}
                         onChangeError={this.onInputErrorsChanges}
                         forceVerify={this.state.forceVerify}
                         autoFocus={true}
+                        labelClassNames={'col-sm-4'}
+                        inputClassNames={'col-sm-8'}
                     />
                     <ModalField
-                        valueName="barCode"
+                        valueName="description"
                         onChange={this.handleValueChanges}
-                        labelText="Código de Barras"
-                        inputValue={this.props.product.barCode}
+                        labelText="Descripción"
+                        inputValue={this.props.category.description}
                         validators={[noAccents]}
                         onChangeError={this.onInputErrorsChanges}
                         forceVerify={this.state.forceVerify}
-                    />
-                    <ModalField
-                        valueName="serialCode"
-                        onChange={this.handleValueChanges}
-                        labelText="Número de Serie"
-                        inputValue={this.props.product.serialCode}
-                        validators={[noAccents]}
-                        onChangeError={this.onInputErrorsChanges}
-                        forceVerify={this.state.forceVerify}
-                    />
-                    <ModalField
-                        valueName="placeName"
-                        onChange={this.handleValueChanges}
-                        labelText="Lugar del Producto"
-                        inputValue={this.props.product.placeName}
-                        validators={[noAccents]}
-                        onChangeError={this.onInputErrorsChanges}
-                        forceVerify={this.state.forceVerify}
+                        labelClassNames={'col-sm-4'}
+                        inputClassNames={'col-sm-8'}
                     />
                 </div>
             </div>
@@ -174,7 +160,7 @@ export default class ProductModal extends React.Component<ProductsModalProps, Pr
         return (
             <Modal bsSize="lg" show={true} onHide={this.props.onClose}>
                 {this.renderHeader()}
-                {this.chooseRender(this.props.product.categoryId !== -1)}
+                {this.chooseRender(this.props.category.categoryId !== -1)}
                 {this.renderFooter()}
             </Modal>
         );
