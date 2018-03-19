@@ -25,21 +25,21 @@ export default class ProductsStore implements Store {
     @action async fetchProducts() {
         this.isFetching = true;
         const response = await this.https.get(`http://localhost:8080/${API_URL}`);
-        if (response.success) {
-            this.products = response.data || [];
+        if (response) {
+            this.products = response || [];
         }
         this.isFetching = false;
-        return response.success;
+        return response;
     }
 
     @action async fetchProduct(productId: number) {
         this.isFetchingUser = true;
         const response = await this.https.get(`http://localhost:8080/${API_URL}?cmd=detail&userId=${productId}`);
-        if (response.success) {
-            this.product = response.data;
+        if (response) {
+            this.product = response;
         }
         this.isFetchingUser = false;
-        return response.success;
+        return response;
     }
 
     @action async updateProduct(product: Product) {
@@ -47,7 +47,7 @@ export default class ProductsStore implements Store {
         const response = await
             // tslint:disable-next-line:max-line-length
             this.https.post(`http://localhost:8080/${API_URL}?cmd=update&userId=${product.productId}&${encodeObject(product)}`, form);
-        if (response.success) {
+        if (response) {
             const productList = toJS(this.products);
             const products = productList.map(prds => prds.productId === product.productId
                 ? { ...prds, ...product, name: `${product.name}` }
@@ -55,21 +55,21 @@ export default class ProductsStore implements Store {
             );
             this.products = products;
         } else { this.errors = response.errors; }
-        return response.success;
+        return response;
     }
 
     @action async createProduct(product: Product): Promise<boolean> {
         const form = new FormData();
         // tslint:disable-next-line:max-line-length
         const response = await this.https.post(`http://localhost:8080/${API_URL}?cmd=create&${encodeObject(product)}`, form);
-        if (response.success) {
+        if (response) {
             this.products = this.products.concat({
                 ...product,
                 productId: response.productId,
                 name: `${product.name}`
             });
         } else { this.errors = response.errors; }
-        return response.success;
+        return response;
     }
 
 }
