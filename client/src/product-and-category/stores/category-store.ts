@@ -25,21 +25,21 @@ export default class CategoriesStore implements Store {
     @action async fetchCategories() {
         this.isFetching = true;
         const response = await this.https.get(`http://localhost:8080/${API_URL}`);
-        if (response.success) {
-            this.categories = response.data || [];
+        if (response) {
+            this.categories = response || [];
         }
         this.isFetching = false;
-        return response.success;
+        return response;
     }
 
     @action async fetchCategory(userId: number) {
         this.isFetchingCategory = true;
         const response = await this.https.get(`http://localhost:8080/${API_URL}?cmd=detail&userId=${userId}`);
-        if (response.success) {
-            this.category = response.data;
+        if (response) {
+            this.category = response;
         }
         this.isFetchingCategory = false;
-        return response.success;
+        return response;
     }
 
     @action async updateCategory(cat: Category) {
@@ -47,7 +47,7 @@ export default class CategoriesStore implements Store {
         const response = await
             // tslint:disable-next-line:max-line-length
             this.https.post(`http://localhost:8080/${API_URL}?cmd=update&userId=${cat.categoryId}&${encodeObject(cat)}`, form);
-        if (response.success) {
+        if (response) {
             const categoryList = toJS(this.categories);
             const categories = categoryList.map(ctgry => ctgry.categoryId === cat.categoryId
                 ? { ...ctgry, ...cat, name: `${cat.name}` }
@@ -55,21 +55,21 @@ export default class CategoriesStore implements Store {
             );
             this.categories = categories;
         } else { this.errors = response.errors; }
-        return response.success;
+        return response;
     }
 
     @action async createCategory(category: Category): Promise<boolean> {
         const form = new FormData();
         // tslint:disable-next-line:max-line-length
         const response = await this.https.post(`http://localhost:8080/${API_URL}?cmd=create&${encodeObject(category)}`, form);
-        if (response.success) {
+        if (response) {
             this.categories = this.categories.concat({
                 ...category,
                 categoryId: response.categoryId,
                 name: `${category.name}`
             });
         } else { this.errors = response.errors; }
-        return response.success;
+        return response;
     }
 
 }

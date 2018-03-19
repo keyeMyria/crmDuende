@@ -31,29 +31,29 @@ export default class ClientStore {
     @action async fetchClients(useFetching: boolean = true) {
         if (useFetching) { this.isFetching = true; }
         const response = await this.https.get(`${API_URL}?cmd=list-fullkeys`);
-        if (response.success) {
-            this.clients = response.data || [];
+        if (response) {
+            this.clients = response || [];
         }
         if (useFetching) { this.isFetching = false; }
-        return response.success;
+        return response;
     }
 
     @action async fetchClient(clientId: number) {
         this.clientIsFetching = true;
         const response = await this.https.get(`${API_URL}?cmd=detail&driver_id=${clientId}`);
-        if (response.success) {
-            this.client = response.data;
+        if (response) {
+            this.client = response;
         }
         this.clientIsFetching = false;
-        return response.success;
+        return response;
     }
 
     @action async deleteClient(clientId: number) {
         const response = await this.https.get(`${API_URL}?cmd=delete&driver_id=${clientId}`);
-        if (response.success) {
+        if (response) {
             this.clients = this.clients.filter(client => client.clientId !== clientId);
         } else { this.errors = response.errors; }
-        return response.success;
+        return response;
     }
 
     @action async updateClient(client: Client): Promise<boolean> {
@@ -65,13 +65,13 @@ export default class ClientStore {
         }
         const response = await
             this.https.post(`${API_URL}?cmd=update&driver_id=${client.clientId}&${this.encodeObject(client)}`, form);
-        if (response.success) {
+        if (response) {
             this.clients = this.clients.map(item => item.clientId === client.clientId
                 ? { ...item, ...client, picture }
                 : item
             );
         } else { this.errors = response.errors; }
-        return response.success;
+        return response;
     }
 
     @action async createClient(client: Client) {
@@ -81,11 +81,11 @@ export default class ClientStore {
             form.append('picture', client.picture);
         }
         const response = await this.https.post(`${API_URL}?cmd=create&${this.encodeObject(client)}`, form);
-        if (response.success) {
+        if (response) {
             this.clients = this.clients.concat(client);
             this.fetchClients(false);
         } else { this.errors = response.errors; }
-        return response.success;
+        return response;
     }
 
     @action resetClient() {
