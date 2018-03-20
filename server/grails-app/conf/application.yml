@@ -83,12 +83,12 @@ dataSource:
     jmxExport: true
     driverClassName: "org.postgresql.Driver"
     username: "postgres"
-    password: "root"
+    password: "pascalito"
 
 flyway:
-    url: jdbc:postgresql://localhost:5433/crmDuende
+    url: jdbc:postgresql://localhost:5432/crmDuende
     user: "postgres"
-    password: "root"
+    password: "pascalito"
     
 environments:
     development:
