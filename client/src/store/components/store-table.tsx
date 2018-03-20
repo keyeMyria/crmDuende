@@ -35,20 +35,20 @@ export default class StoresTable extends React.Component<StoresTableProps, {}> {
             ignoreSinglePage={true}
         >
             <TableHeaderColumn
-                width="5%"
-                dataField="storeId"
+                width="25%"
+                dataField="id"
                 isKey={true}
                 dataSort={true}
-                headerText="storeId"
+                headerText="id"
             >
                 Número de Tienda
             </TableHeaderColumn>
-            <TableHeaderColumn width="15%" dataField="name" headerText="name">
+            <TableHeaderColumn width="25%" dataField="name" headerText="name">
                 Nombre de Tienda
             </TableHeaderColumn>
             <TableHeaderColumn
                 dataField="address"
-                width="20%"
+                width="25%"
                 dataSort={true}
                 headerText="address"
             >
