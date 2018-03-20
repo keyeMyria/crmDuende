@@ -6,9 +6,8 @@ import ModalPicture from '../../common/components/modal-picture';
 import { Store } from '../types/store';
 import { isPhone } from '../../common/components/input-validation/validators';
 import IndexStore from '../stores';
-const AvatarDefault = require('../../common/resources/pictures/avatar-default.svg');
 import '../styles/stores-modal.css';
-
+const AvatarDefault = require('../../common/resources/pictures/avatar-default.svg');
 interface EditModalProps {
     store: IndexStore;
     show: boolean;
@@ -89,7 +88,7 @@ export default class EditModal extends React.Component<EditModalProps, EditModal
         <Modal.Header closeButton={true}>
             <Modal.Title>
                 <span> Información de la Tienda </span>
-                {'ID' + `${this.props.shop.storeId}`}
+                {'ID' + `${this.props.shop.id}`}
             </Modal.Title>
         </Modal.Header>
     )
@@ -148,12 +147,6 @@ export default class EditModal extends React.Component<EditModalProps, EditModal
     renderPlaces = () => (
         <div className="col-sm-12">
             <div className="row veh-general-form acc-tab-content">
-                <ModalPicture
-                    valueName="map"
-                    picture={this.props.shop.picture!}
-                    picturePlaceholder={AvatarDefault}
-                    labelClassNames="col-sm-5"
-                />
                 <ModalField
                     valueName="address"
                     onChange={this.handleValueChanges}

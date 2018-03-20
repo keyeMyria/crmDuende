@@ -25,9 +25,9 @@ export default class StoresRoute extends React.Component<StoresRouteProps, Store
         selectedStore: {} as Store
     };
 
-    // componentDidMount() {
-    //     this.props.store.stores.fetchDataIfNeeded();
-    // }
+    componentDidMount() {
+        this.props.store.stores.fetchDataIfNeeded();
+    }
 
     closeModal = () => {
         this.setState({ showModal: false });
