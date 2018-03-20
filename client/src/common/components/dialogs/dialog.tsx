@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Modal } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
 import './dialog.css';
 
 export interface DialogProps {
@@ -49,7 +48,7 @@ export function Dialog(props: DialogProps) {
 
     const renderDialogTitle = () => (
         <div className="row d-text-container">
-            <FormattedMessage id={props.title || ''} values={props.titleValues}>
+            {props.title || ''} {props.titleValues}>
                 {
                     (text: string) => (
                         <label className="d-title">
@@ -57,13 +56,12 @@ export function Dialog(props: DialogProps) {
                         </label>
                     )
                 }
-            </FormattedMessage>
         </div>
     );
 
     const renderDialogText = () => (
         <div className="row d-text-container">
-            <FormattedMessage id={props.content} values={props.contentValues}>
+            {props.content} {props.contentValues}>
                 {
                     (text: string) => (
                         <label className="d-content">
@@ -71,19 +69,18 @@ export function Dialog(props: DialogProps) {
                         </label>
                     )
                 }
-            </FormattedMessage>
         </div>
     );
 
     const renderConfirmButton = () => (
         <div id="confirm" className="btn btn-primary" onClick={onResponse}>
-            <FormattedMessage id={props.confirmButtonText || 'global.dialog.confirm'} />
+            {props.confirmButtonText || 'Aceptar'} />
         </div>
     );
 
     const renderDeclineButton = () => (
         <div id="dialog" className="btn btn-default" onClick={onResponse}>
-            <FormattedMessage id={props.declineButtonText || 'global.dialog.decline'} />
+            {props.declineButtonText || 'Cancelar'} />
         </div>
     );
 

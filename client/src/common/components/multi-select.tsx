@@ -2,7 +2,6 @@ import * as React from 'react';
 const Select: NodeRequire = require('react-select');
 import MultiSelectProps from '../types/multi-select-props';
 import '../resources/styles/react-select.css';
-import { FormattedMessage } from 'react-intl';
 
 export default function MultiSelect(props: MultiSelectProps) {
 
@@ -30,7 +29,7 @@ export default function MultiSelect(props: MultiSelectProps) {
             labelKey={labelKey}
             valueKey={valueKey}
             onChange={handleChange}
-            placeholder={<FormattedMessage id={placeholder || 'global.choose'} />}
+            placeholder={placeholder || 'Elija..'}
             valueRenderer={props.valueRenderer}
             optionRenderer={props.optionRenderer}
             isLoading={props.isLoading}
