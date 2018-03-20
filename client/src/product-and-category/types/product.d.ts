@@ -1,6 +1,6 @@
 export interface Product {
-    productId: number;
-    categoryId: number;
+    id: number;
+    categoryId?: number;
     serialCode?: string;
     placeName?: string;
     barCode?: string;
