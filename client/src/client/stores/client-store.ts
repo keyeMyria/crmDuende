@@ -3,12 +3,12 @@ import { observable, action, computed } from 'mobx';
 import Store from '../../common/types/store';
 import { Client } from '../types/clients';
 
-const API_URL = 'aglo que va aqui ';
+const API_URL = 'clients';
 export default class ClientStore {
     @observable isFetching: boolean = false;
     @observable clientIsFetching: boolean = false;
     @observable clients: Client[] = [] as Client[];
-    @observable client: Client = { clientId: -1 } as Client;
+    @observable client: Client = { id: -1 } as Client;
     @observable errors: Store['errors'];
     private https: Https;
 
@@ -17,7 +17,7 @@ export default class ClientStore {
     }
 
     encodeObject = (client: Client) => {
-        return Object.keys(client).filter(key => key !== 'clientId').map(key => {
+        return Object.keys(client).filter(key => key !== 'id').map(key => {
             return `${encodeURIComponent(key)}=${encodeURIComponent(client[key])}`;
         }).join('&');
     }
@@ -30,7 +30,7 @@ export default class ClientStore {
 
     @action async fetchClients(useFetching: boolean = true) {
         if (useFetching) { this.isFetching = true; }
-        const response = await this.https.get(`${API_URL}?cmd=list-fullkeys`);
+        const response = await this.https.get(`http://localhost:8080/${API_URL}`);
         if (response) {
             this.clients = response || [];
         }
@@ -40,7 +40,7 @@ export default class ClientStore {
 
     @action async fetchClient(clientId: number) {
         this.clientIsFetching = true;
-        const response = await this.https.get(`${API_URL}?cmd=detail&driver_id=${clientId}`);
+        const response = await this.https.get(`http://localhost:8080/${API_URL}/${clientId}`);
         if (response) {
             this.client = response;
         }
@@ -49,9 +49,9 @@ export default class ClientStore {
     }
 
     @action async deleteClient(clientId: number) {
-        const response = await this.https.get(`${API_URL}?cmd=delete&driver_id=${clientId}`);
+        const response = await this.https.get(`http://localhost:8080/${API_URL}/${clientId}`);
         if (response) {
-            this.clients = this.clients.filter(client => client.clientId !== clientId);
+            this.clients = this.clients.filter(client => client.id !== clientId);
         } else { this.errors = response.errors; }
         return response;
     }
@@ -64,9 +64,9 @@ export default class ClientStore {
             form.append('picture', client.picture);
         }
         const response = await
-            this.https.post(`${API_URL}?cmd=update&driver_id=${client.clientId}&${this.encodeObject(client)}`, form);
+            this.https.post(`http://localhost:8080/${API_URL}/${client.id}/${this.encodeObject(client)}`, form);
         if (response) {
-            this.clients = this.clients.map(item => item.clientId === client.clientId
+            this.clients = this.clients.map(item => item.id === client.id
                 ? { ...item, ...client, picture }
                 : item
             );
@@ -80,7 +80,7 @@ export default class ClientStore {
         if (client.picture) {
             form.append('picture', client.picture);
         }
-        const response = await this.https.post(`${API_URL}?cmd=create&${this.encodeObject(client)}`, form);
+        const response = await this.https.post(`http://localhost:8080/${API_URL}/${this.encodeObject(client)}`, form);
         if (response) {
             this.clients = this.clients.concat(client);
             this.fetchClients(false);
@@ -89,7 +89,7 @@ export default class ClientStore {
     }
 
     @action resetClient() {
-        this.client = { clientId: -1 } as Client;
+        this.client = { id: -1 } as Client;
     }
 
     @computed get alphabeticClients(): Client[] {
