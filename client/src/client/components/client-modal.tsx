@@ -3,13 +3,13 @@ import { RootStore } from '../stores';
 import { Modal } from 'react-bootstrap';
 import ModalField from '../../common/components/modal-field';
 import {
-    required, isEmail, noNumbers, noAccents
+    required, isEmail, noNumbers, noAccents, isPhone
 } from '../../common/components/input-validation/validators';
 import { observer } from 'mobx-react';
 import { Client } from '../types/clients';
-// import ModalDate from '../../common/components/modal-date';
-// import ModalPicture from '../../common/components/modal-picture';
-// const AvatarDefault = require('../../common/resources/pictures/avatar-default.svg');
+import ModalPicture from '../../common/components/modal-picture';
+import ModalDate from '../../common/components/modal-date';
+const AvatarDefault = require('../../common/resources/pictures/avatar-default.svg');
 
 interface ClientModalProps {
     store: RootStore;
@@ -122,13 +122,13 @@ export default class ClientModal extends React.Component<ClientModalProps, Clien
             <div className="row" >
                 <div className="col-xs-3 col-sm-3">
                     <div className="row">
-                        {/* <ModalPicture
+                        <ModalPicture
                             valueName="picture"
                             picture={this.props.client.picture}
-                            onChangePicture={this.handlePictureChange}
-                            buttonText={this.props.intl.messages['global.change_picture']}
+                            // onChangePicture={this.handlePictureChange}
+                            //  buttonText={this.props.intl.messages['global.change_picture']}
                             picturePlaceholder={AvatarDefault}
-                        /> */} Pendiente de agregar
+                        />
                     </div>
                 </div>
                 <div className="col-sm-9">
@@ -158,11 +158,36 @@ export default class ClientModal extends React.Component<ClientModalProps, Clien
                         inputClassNames={'col-sm-8'}
                     />
                     <ModalField
-                        valueName="mobile_number"
+                        valueName="userName"
+                        onChange={this.handleValueChanges}
+                        labelText="Nombre de usuario"
+                        isRequired={true}
+                        validators={[required]}
+                        onChangeError={this.onInputErrorsChanges}
+                        forceVerify={this.state.forceVerify}
+                        inputValue={this.props.client.userName}
+                        labelClassNames={'col-sm-4'}
+                        inputClassNames={'col-sm-8'}
+                    />
+                    <ModalField
+                        valueName="mobile"
                         onChange={this.handleValueChanges}
                         labelText="Celular"
-                        inputValue={this.props.client.mobile}
+                        validators={[isPhone]}
+                        onChangeError={this.onInputErrorsChanges}
                         forceVerify={this.state.forceVerify}
+                        inputValue={this.props.client.mobile}
+                        labelClassNames={'col-sm-4'}
+                        inputClassNames={'col-sm-8'}
+                    />
+                    <ModalField
+                        valueName="phone"
+                        onChange={this.handleValueChanges}
+                        labelText="Teléfono"
+                        validators={[isPhone]}
+                        onChangeError={this.onInputErrorsChanges}
+                        forceVerify={this.state.forceVerify}
+                        inputValue={this.props.client.phone}
                         labelClassNames={'col-sm-4'}
                         inputClassNames={'col-sm-8'}
                     />
@@ -172,38 +197,68 @@ export default class ClientModal extends React.Component<ClientModalProps, Clien
                         labelText="Correo"
                         inputValue={this.props.client.email}
                         validators={[isEmail]}
+                        onChangeError={this.onInputErrorsChanges}
                         forceVerify={this.state.forceVerify}
                         labelClassNames={'col-sm-4'}
                         inputClassNames={'col-sm-8'}
                     />
-                    {/* <ModalField
-                        valueName="license"
+                    <ModalDate
+                        valueName="birthayDate"
                         onChange={this.handleValueChanges}
-                        labelText={this.props.intl.messages['drivers.license']}
-                        inputValue={this.props.client.license}
+                        labelText="Ingrese Fecha de Cumpleaños"
+                        isRequired={true}
+                        validators={[required]}
+                        locale="es"
+                        format="DD MMM YYYY"
                         labelClassNames={'col-sm-4'}
                         inputClassNames={'col-sm-8'}
                     />
                     <ModalDate
-                        valueName="license_expiration"
+                        valueName="firstBuy"
                         onChange={this.handleValueChanges}
-                        labelText={this.props.intl.messages['drivers.license_expiration'] + ':'}
+                        labelText="Primera Compra"
                         isRequired={true}
                         validators={[required]}
-                        locale={this.props.intl.locale}
-                        format={this.props.intl.messages['global.dateDefaultFormat']}
+                        locale="es"
+                        format="DD MMM YYYY"
                         labelClassNames={'col-sm-4'}
                         inputClassNames={'col-sm-8'}
                     />
-                    
-                    <ModalField
-                        valueName="rfid"
+                    <ModalDate
+                        valueName="lastBuy"
                         onChange={this.handleValueChanges}
-                        labelText={this.props.intl.messages['drivers.rfid']}
-                        inputValue={this.props.client.rfid}
+                        labelText="Última Compra"
+                        isRequired={true}
+                        validators={[required]}
+                        locale="es"
+                        format="DD MMM YYYY"
                         labelClassNames={'col-sm-4'}
                         inputClassNames={'col-sm-8'}
-                    /> */}
+                    />
+                    <ModalField
+                        valueName="address"
+                        onChange={this.handleValueChanges}
+                        labelText="Dirección"
+                        inputValue={this.props.client.address}
+                        labelClassNames={'col-sm-4'}
+                        inputClassNames={'col-sm-8'}
+                    />
+                    <ModalField
+                        valueName="countryCode"
+                        onChange={this.handleValueChanges}
+                        labelText="Codigo de País"
+                        inputValue={this.props.client.countryCode}
+                        labelClassNames={'col-sm-4'}
+                        inputClassNames={'col-sm-8'}
+                    />
+                    <ModalField
+                        valueName="location"
+                        onChange={this.handleValueChanges}
+                        labelText="Ubicación"
+                        inputValue={this.props.client.location}
+                        labelClassNames={'col-sm-4'}
+                        inputClassNames={'col-sm-8'}
+                    />
                 </div>
             </div>
         </div>
@@ -231,7 +286,7 @@ export default class ClientModal extends React.Component<ClientModalProps, Clien
 
     render() {
         return (
-            <Modal bsSize="lg" show={true} onHide={this.props.onClose}>
+            <Modal show={true} onHide={this.props.onClose}>
                 {this.renderHeader()}
                 {this.chooseRender(this.props.client.id !== -1)}
                 {this.renderFooter()}

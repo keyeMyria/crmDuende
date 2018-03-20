@@ -27,7 +27,7 @@ export default class ClientTable extends React.Component<ClientsTableProps> {
         if (!client.email && !client.userName) {
             return '';
         } else if (!client.email && client.location) {
-            return <span>Nombre de usuario</span> + ': ' + `${client.location}`;
+            return <span>Nombre del Cliente</span> + ': ' + `${client.location}`;
         } else if (!client.userName && client.email) {
             return `${client.email}`;
         }
@@ -35,7 +35,7 @@ export default class ClientTable extends React.Component<ClientsTableProps> {
             <div>
                 {client.email}
                 &nbsp;&bull;&nbsp;
-                        {<span> Nombre de usuario</span> + ':' + client.userName}
+                        {<span> Nombre del Cliente</span> + ':' + client.userName}
             </div>
         );
     }
@@ -110,7 +110,7 @@ export default class ClientTable extends React.Component<ClientsTableProps> {
                 </TableHeaderColumn>
                 <TableHeaderColumn
                     width="7%"
-                    dataField="clientId"
+                    dataField="id"
                     isKey={true}
                     dataFormat={this.renderActionsCell}
                 />
