@@ -1,7 +1,5 @@
 import * as React from 'react';
 import '../../resources/styles/modal-field.css';
-import { FormattedMessage } from 'react-intl';
-
 export interface ModalGenericProps {
     labelText?: string;
     isRequired?: boolean;
@@ -14,13 +12,16 @@ export interface ModalGenericProps {
 export default class ModalGeneric extends React.Component<ModalGenericProps> {
 
     getLabel = () => this.props.autoTranslate ? (
-        <FormattedMessage id={this.props.labelText || ''}>
+        <div>
+            {this.props.labelText || ''}
             {(text: string) => (
                 <label className={this.props.isRequired ? 'required-modal-field' : ''}>
                     {text}
                 </label>
             )}
-        </FormattedMessage>)
+
+        </div>
+    )
         : (
             <label className={this.props.isRequired ? 'required-modal-field' : ''}>
                 {this.props.labelText}

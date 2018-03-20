@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Select, { ReactSelectProps, Option } from 'react-select';
-import { FormattedMessage } from 'react-intl';
 import './select.css';
 
 export interface CustomSelectProps extends ReactSelectProps {
@@ -27,7 +26,7 @@ export default function CustomSelect(props: CustomSelectProps) {
     }
   };
 
-  const renderTranslate = (option: Option) => <FormattedMessage id={option[labelKey]} />;
+  const renderTranslate = (option: Option) => <span> {option[labelKey]} </span>;
 
   return (
     <Select
