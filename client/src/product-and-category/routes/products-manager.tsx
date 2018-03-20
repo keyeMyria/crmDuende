@@ -23,11 +23,11 @@ export default class ProductManagerRoute extends React.Component<ProductProps, P
     };
 
     componentDidMount() {
-     //  this.props.store.productsStore.fetchProductsIfNeed();
+     this.props.store.productsStore.fetchProductsIfNeed();
     }
 
     onProductClick = async (product: Product) => {
-        const success = await this.props.store.productsStore.fetchProduct(product.productId);
+        const success = await this.props.store.productsStore.fetchProduct(product.id);
         if (success) { this.setState({ showModal: true }); }
     }
 
@@ -39,7 +39,7 @@ export default class ProductManagerRoute extends React.Component<ProductProps, P
 
     onSubmitProduct = async () => {
         const product = toJS(this.props.store.productsStore.product);
-        const create = product.productId === -1;
+        const create = product.id === -1;
         if (create) {
             this.handleCreateProduct(product);
         } else {
@@ -70,7 +70,7 @@ export default class ProductManagerRoute extends React.Component<ProductProps, P
     }
 
     handleNewProduct = () => {
-        this.props.store.productsStore.product = { productId: -1 } as Product;
+        this.props.store.productsStore.product = { id: -1 } as Product;
         this.setState({ showModal: true });
     }
 
@@ -93,7 +93,7 @@ export default class ProductManagerRoute extends React.Component<ProductProps, P
                 {this.state.showModal && (
                     <ProductModal
                         product={toJS(this.props.store.productsStore.product)}
-                        store={this.props.store}
+                        store={this.props.store.productsStore}
                         show={this.state.showModal}
                         onClose={this.onHideModal}
                         onSubmit={this.onSubmitProduct}

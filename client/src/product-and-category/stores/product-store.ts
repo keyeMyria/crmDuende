@@ -9,7 +9,7 @@ const API_URL = 'products';
 export default class ProductsStore implements Store {
     @observable isFetching: boolean = false;
     @observable products: Product[] = [] as Product[];
-    @observable product: Product = { productId: -1 } as Product;
+    @observable product: Product = { id: -1 } as Product;
     @observable isFetchingUser: boolean = false;
     @observable errors: { [valueKey: string]: string };
     https: Https;
@@ -34,7 +34,7 @@ export default class ProductsStore implements Store {
 
     @action async fetchProduct(productId: number) {
         this.isFetchingUser = true;
-        const response = await this.https.get(`http://localhost:8080/${API_URL}?cmd=detail&userId=${productId}`);
+        const response = await this.https.get(`http://localhost:8080/${API_URL}/${productId}`);
         if (response) {
             this.product = response;
         }
@@ -46,10 +46,10 @@ export default class ProductsStore implements Store {
         const form = new FormData();
         const response = await
             // tslint:disable-next-line:max-line-length
-            this.https.post(`http://localhost:8080/${API_URL}?cmd=update&userId=${product.productId}&${encodeObject(product)}`, form);
+            this.https.post(`http://localhost:8080/${API_URL}/${product.id}/${encodeObject(product)}`, form);
         if (response) {
             const productList = toJS(this.products);
-            const products = productList.map(prds => prds.productId === product.productId
+            const products = productList.map(prds => prds.id === product.id
                 ? { ...prds, ...product, name: `${product.name}` }
                 : prds
             );
@@ -61,11 +61,11 @@ export default class ProductsStore implements Store {
     @action async createProduct(product: Product): Promise<boolean> {
         const form = new FormData();
         // tslint:disable-next-line:max-line-length
-        const response = await this.https.post(`http://localhost:8080/${API_URL}?cmd=create&${encodeObject(product)}`, form);
+        const response = await this.https.post(`http://localhost:8080/${API_URL}/${encodeObject(product)}`, form);
         if (response) {
             this.products = this.products.concat({
                 ...product,
-                productId: response.productId,
+                id: response.productId,
                 name: `${product.name}`
             });
         } else { this.errors = response.errors; }
