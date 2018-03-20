@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap';
 import './dialog.css';
 
 export interface DialogProps {
-    content: string;
+    content: string | JSX.Element;
     contentValues?: {};
     type?: 'confirm' | 'alert';
     dismissible?: boolean;
@@ -39,48 +39,54 @@ export function Dialog(props: DialogProps) {
                     <i className={'icon-error'} />
                 ) : (
                         typeof props.icon === 'string'
-                        ? <i className={props.icon} />
-                        : props.icon
-                )
+                            ? <i className={props.icon} />
+                            : props.icon
+                    )
             }
         </div>
     );
 
     const renderDialogTitle = () => (
         <div className="row d-text-container">
-            {props.title || ''} {props.titleValues}>
+            {props.title || '' + props.titleValues}>
                 {
-                    (text: string) => (
-                        <label className="d-title">
-                            {text}
-                        </label>
-                    )
-                }
+                (text: string) => (
+                    <label className="d-title">
+                        {text}
+                    </label>
+                )
+            }
+        </div>
+    );
+
+    const renderIntlText = (id: string) => (
+        <div>
+            {id + props.contentValues}>
+            {
+                (text: string) => (
+                    <label className="d-content">
+                        {text}
+                    </label>
+                )
+            }
         </div>
     );
 
     const renderDialogText = () => (
         <div className="row d-text-container">
-            {props.content} {props.contentValues}>
-                {
-                    (text: string) => (
-                        <label className="d-content">
-                            {text}
-                        </label>
-                    )
-                }
+            {typeof props.content === 'string' ? renderIntlText(props.content) : props.content}
         </div>
     );
 
     const renderConfirmButton = () => (
         <div id="confirm" className="btn btn-primary" onClick={onResponse}>
-            {props.confirmButtonText || 'Aceptar'} />
+            {props.confirmButtonText || 'Confirmar'}
         </div>
     );
 
     const renderDeclineButton = () => (
         <div id="dialog" className="btn btn-default" onClick={onResponse}>
-            {props.declineButtonText || 'Cancelar'} />
+            {props.declineButtonText || 'Cancelar'}
         </div>
     );
 
