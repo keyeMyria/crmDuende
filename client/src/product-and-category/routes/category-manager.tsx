@@ -23,11 +23,11 @@ export default class CategoryManagerRoute extends React.Component<CategoryProps,
     };
 
     componentDidMount() {
-       // this.props.store.user.fetchUsersIfNeed();
+       this.props.store.categoryStore.fetchCategoryIfNeed();
     }
 
     onCategoryClick = async (category: Category) => {
-        const success = await this.props.store.categoryStore.fetchCategory(category.categoryId);
+        const success = await this.props.store.categoryStore.fetchCategory(category.id);
         if (success) { this.setState({ showModal: true }); }
     }
 
@@ -39,7 +39,7 @@ export default class CategoryManagerRoute extends React.Component<CategoryProps,
 
     onSubmitCategory = async () => {
         const category = toJS(this.props.store.categoryStore.category);
-        const create = category.categoryId === -1;
+        const create = category.id === -1;
         if (create) {
             this.handleCreateCategory(category);
         } else {
@@ -70,7 +70,7 @@ export default class CategoryManagerRoute extends React.Component<CategoryProps,
     }
 
     handleNewCategory = () => {
-        this.props.store.categoryStore.category = { categoryId: -1 } as Category;
+        this.props.store.categoryStore.category = { id: -1 } as Category;
         this.setState({ showModal: true });
     }
 
@@ -93,7 +93,7 @@ export default class CategoryManagerRoute extends React.Component<CategoryProps,
                 {this.state.showModal && (
                     <CategoryModal
                         category={toJS(this.props.store.categoryStore.category)}
-                        store={this.props.store}
+                        store={this.props.store.categoryStore}
                         show={this.state.showModal}
                         onClose={this.onHideModal}
                         onSubmit={this.onSubmitCategory}

@@ -18,7 +18,7 @@ interface CategoryTableProps {
 export default class CategoryTable extends React.Component<CategoryTableProps> {
 
     nameFilterValue = (name: string, catego: Category) => (
-        `${name} ${catego.categoryId}` 
+        `${name} ${catego.id}` 
     )
 
     renderCellName = (name: string, prdu: Category) => {
@@ -28,7 +28,7 @@ export default class CategoryTable extends React.Component<CategoryTableProps> {
                     {name} {prdu.name}
                 </div>
                 <div className="description">
-                    Código de Categoría {prdu.categoryId}
+                    Código de Categoría {prdu.id}
                 </div>
             </span>
         );
