@@ -11,10 +11,13 @@ import { toJS } from 'mobx';
 const AvatarDefault = require('../../common/resources/pictures/avatar-default.svg');
 import '../styles/user-modal.css';
 import ModalPicture from '../../common/components/modal-picture';
+import ModalSelect from '../../common/components/modal/modal-select';
+import { Store } from '../../store/types/store';
 
 interface UserModalProps {
     show: boolean;
     user: User;
+    stores: Store[]; 
     userStore: UserStore;
     onClose: () => void;
     onSubmit: () => void;
@@ -44,14 +47,14 @@ export default class UserModal extends React.Component<UserModalProps, UserModal
     }
 
     shouldComponentUpdate(nextProps: UserModalProps, nextState: UserModalState) {
-        const requiredFields = nextProps.user.userId === -1 ? 4 : 4;
+        const requiredFields = nextProps.user.id === -1 ? 4 : 4;
         if (nextState.wantSubmit && Object.keys(nextState.errors).length === requiredFields) {
             this.trySubmit();
         }
         return true;
     }
 
-    isEditing = () => this.props.user.userId !== -1;
+    isEditing = () => this.props.user.id !== -1;
 
     getUsernameList = (): string[] => toJS(this.props.userStore.users.map(user => user.userName || ''));
 
@@ -81,14 +84,14 @@ export default class UserModal extends React.Component<UserModalProps, UserModal
         this.trySubmit(true);
     }
 
-    handleValueChanges = (change: number | string | string[], valueName: string) => {
+    handleValueChanges = (change: number | number[] | string | string[], valueName: string) => {
         this.props.userStore.user = { ...this.props.userStore.user, [valueName]: change };
     }
 
     renderHeader = () => (
         <Modal.Header closeButton={true}>
             <Modal.Title>
-                {this.props.user.userId !== -1
+                {this.props.user.id !== -1
                     ?
                     <span>
                         Editar Usuario {this.state.user.name + this.state.user.lastName!}
@@ -144,6 +147,17 @@ export default class UserModal extends React.Component<UserModalProps, UserModal
                         inputPlaceholder="Argueta"
                         onChangeError={this.onInputErrorsChanges}
                         forceVerify={this.state.forceVerify}
+                    />
+                    <ModalSelect
+                        valueName="storeId"
+                        value={this.state.user.storeId}
+                        handleChange={this.handleValueChanges}
+                        options={this.props.stores}
+                        multi={false}
+                        valueKey="id"
+                        labelKey="name"
+                        placeholder="23"
+                        labelText="Tienda a la que pertenece"
                     />
                     <ModalField
                         valueName="userName"
@@ -222,7 +236,7 @@ export default class UserModal extends React.Component<UserModalProps, UserModal
         return (
             <Modal bsSize="lg" show={true} onHide={this.props.onClose}>
                 {this.renderHeader()}
-                {this.chooseRender(this.props.user.userId !== -1)}
+                {this.chooseRender(this.props.user.id !== -1)}
                 {this.renderFooter()}
             </Modal>
         );
