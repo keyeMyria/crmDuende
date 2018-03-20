@@ -126,7 +126,7 @@ export default class ClientModal extends React.Component<ClientModalProps, Clien
                             valueName="picture"
                             picture={this.props.client.picture}
                             // onChangePicture={this.handlePictureChange}
-                            //  buttonText={this.props.intl.messages['global.change_picture']}
+                            //  buttonText="Cambiar Fotografía"
                             picturePlaceholder={AvatarDefault}
                         />
                     </div>
