@@ -9,7 +9,7 @@ const API_URL = 'category';
 export default class CategoriesStore implements Store {
     @observable isFetching: boolean = false;
     @observable categories: Category[] = [] as Category[];
-    @observable category: Category = { categoryId: -1 } as Category;
+    @observable category: Category = { id: -1 } as Category;
     @observable isFetchingCategory: boolean = false;
     @observable errors: { [valueKey: string]: string };
     https: Https;
@@ -32,9 +32,9 @@ export default class CategoriesStore implements Store {
         return response;
     }
 
-    @action async fetchCategory(userId: number) {
+    @action async fetchCategory(categoryId: number) {
         this.isFetchingCategory = true;
-        const response = await this.https.get(`http://localhost:8080/${API_URL}?cmd=detail&userId=${userId}`);
+        const response = await this.https.get(`http://localhost:8080/${API_URL}/${categoryId}`);
         if (response) {
             this.category = response;
         }
@@ -46,10 +46,10 @@ export default class CategoriesStore implements Store {
         const form = new FormData();
         const response = await
             // tslint:disable-next-line:max-line-length
-            this.https.post(`http://localhost:8080/${API_URL}?cmd=update&userId=${cat.categoryId}&${encodeObject(cat)}`, form);
+            this.https.post(`http://localhost:8080/${API_URL}/${cat.id}/${encodeObject(cat)}`, form);
         if (response) {
             const categoryList = toJS(this.categories);
-            const categories = categoryList.map(ctgry => ctgry.categoryId === cat.categoryId
+            const categories = categoryList.map(ctgry => ctgry.id === cat.id
                 ? { ...ctgry, ...cat, name: `${cat.name}` }
                 : ctgry
             );
@@ -61,11 +61,11 @@ export default class CategoriesStore implements Store {
     @action async createCategory(category: Category): Promise<boolean> {
         const form = new FormData();
         // tslint:disable-next-line:max-line-length
-        const response = await this.https.post(`http://localhost:8080/${API_URL}?cmd=create&${encodeObject(category)}`, form);
+        const response = await this.https.post(`http://localhost:8080/${API_URL}/${encodeObject(category)}`, form);
         if (response) {
             this.categories = this.categories.concat({
                 ...category,
-                categoryId: response.categoryId,
+                id: response.categoryId,
                 name: `${category.name}`
             });
         } else { this.errors = response.errors; }
