@@ -1,5 +1,6 @@
 interface User {
-    userId: number;
+    id: number;
+    storeId: number; 
     userName?: string;
     name?: string;
     lastName?: string;

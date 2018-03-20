@@ -9,7 +9,7 @@ const API_URL = 'users';
 export default class UserStore implements Store {
     @observable isFetching: boolean = false;
     @observable users: User[] = [] as User[];
-    @observable user: User = { userId: -1 } as User;
+    @observable user: User = { id: -1 } as User;
     @observable isFetchingUser: boolean = false;
     @observable errors: { [valueKey: string]: string };
     https: Https;
@@ -25,65 +25,65 @@ export default class UserStore implements Store {
     @action async fetchUsers() {
         this.isFetching = true;
         const response = await this.https.get(`http://localhost:8080/${API_URL}`);
-        if (response.success) {
-            this.users = response.data || [];
+        if (response) {
+            this.users = response || [];
         }
         this.isFetching = false;
-        return response.success;
+        return response;
     }
 
-    @action async fetchUser(userId: number) {
+    @action async fetchUser(id: number) {
         this.isFetchingUser = true;
-        const response = await this.https.get(`http://localhost:8080/${API_URL}?cmd=detail&userId=${userId}`);
-        if (response.success) {
-            this.user = response.data;
+        const response = await this.https.get(`http://localhost:8080/${API_URL}/${id}`);
+        if (response) {
+            this.user = response;
         }
         this.isFetchingUser = false;
-        return response.success;
+        return response;
     }
 
-    @action async deleteUser(userId: number) {
-        const response = await this.https.get(`http://localhost:8080/${API_URL}?cmd=delete&userId=${userId}`);
-        if (response.success) {
-            this.users = this.users.filter(user => user.userId !== userId);
+    @action async deleteUser(id: number) {
+        const response = await this.https.delete(`http://localhost:8080/${API_URL}/${id}`);
+        if (response) {
+            this.users = this.users.filter(user => user.id !== id);
         } else { this.errors = response.errors; }
-        return response.success;
+        return response;
     }
 
     @action async updateUser(user: User) {
         const form = new FormData();
         const response = await
             // tslint:disable-next-line:max-line-length
-            this.https.post(`http://localhost:8080/${API_URL}?cmd=update&userId=${user.userId}&${encodeObject(user)}`, form);
-        if (response.success) {
+            this.https.put(`http://localhost:8080/${API_URL}/${user.id}/${encodeObject(user)}`, form);
+        if (response) {
             const userList = toJS(this.users);
-            const users = userList.map(usr => usr.userId === user.userId
+            const users = userList.map(usr => usr.id === user.id
                 ? { ...usr, ...user, name: `${user.name} ${user.lastName}` }
                 : usr
             );
             this.users = users;
         } else { this.errors = response.errors; }
-        return response.success;
+        return response;
     }
 
     @action async createUser(user: User): Promise<boolean> {
         const form = new FormData();
+        delete user.id; 
         // tslint:disable-next-line:max-line-length
-        const response = await this.https.post(`http://localhost:8080/${API_URL}?cmd=create&${encodeObject(user)}`, form);
-        if (response.success) {
+        const response = await this.https.post(`http://localhost:8080/${API_URL}&${encodeObject(user)}`, form);
+        if (response) {
             this.users = this.users.concat({
                 ...user,
-                userId: response.userId,
                 name: `${user.name} ${user.lastName}`
             });
         } else {
-            if (response.errors.userId) {
-                this.errors = { ...response.errors, userName: response.errors.userId };
+            if (response.errors.id) {
+                this.errors = { ...response.errors, userName: response.errors.id };
             } else {
                 this.errors = { ...response.errors };
             }
         }
-        return response.success;
+        return response;
     }
 
 }
