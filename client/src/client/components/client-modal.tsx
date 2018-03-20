@@ -47,14 +47,14 @@ export default class ClientModal extends React.Component<ClientModalProps, Clien
     }
 
     shouldComponentUpdate(nextProps: ClientModalProps, nextState: ClientModalState) {
-        const requiredFields = nextProps.client.clientId === -1 ? 3 : 3;
+        const requiredFields = nextProps.client.id === -1 ? 3 : 3;
         if (nextState.wantSubmit && Object.keys(nextState.errors).length === requiredFields) {
             this.trySubmit();
         }
         return true;
     }
 
-    isEditing = () => this.props.client.clientId !== -1;
+    isEditing = () => this.props.client.id !== -1;
 
     onInputErrorsChanges = (valueKey: string, error?: string | JSX.Element) => {
         const haveError = !!error;
@@ -233,7 +233,7 @@ export default class ClientModal extends React.Component<ClientModalProps, Clien
         return (
             <Modal bsSize="lg" show={true} onHide={this.props.onClose}>
                 {this.renderHeader()}
-                {this.chooseRender(this.props.client.clientId !== -1)}
+                {this.chooseRender(this.props.client.id !== -1)}
                 {this.renderFooter()}
             </Modal>
         );
