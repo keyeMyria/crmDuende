@@ -5,6 +5,7 @@ import DeleteIcon from '../../common/components/delete-icon';
 import pictureCellFormat from '../../common/components/bootstrap-table/picture-cell-format';
 import { observer } from 'mobx-react';
 import { Https } from '../../common/util/https';
+import Loading from '../../common/components/labels/loading';
 
 require('../styles/users.css');
 const AvatarDefault: NodeRequire = require('../../common/resources/pictures/avatar-default.svg');
@@ -20,7 +21,7 @@ const TABLE_OPTIONS = {
 interface UserTableProps {
     users: User[];
     onUserClick: (user: User) => void;
-    onDeleteUser: (id: string, user: User) => void;
+    onDeleteUser: (id: number, user: User) => void;
     isFetching: boolean;
     https: Https;
 }
@@ -50,12 +51,6 @@ export default class UserTable extends React.Component<UserTableProps> {
 
     filterValueName = (name: string, user: User) => `${user.name} ${user.userName}`;
 
-    renderLoading = () => {
-        return (
-            <p className="react-loading">Cargando</p>
-        );
-    }
-
     renderActionsCell = (id: number, user?: User) => {
         return (
             <span className="table-options">
@@ -67,7 +62,7 @@ export default class UserTable extends React.Component<UserTableProps> {
     renderCellName = (name: string, user: User) => (
         <span>
             <div>
-                {user.name}
+                {user.name} {user.lastName}
             </div>
             <div className="description">
                 <span>@{user.userName}</span>
@@ -152,7 +147,7 @@ export default class UserTable extends React.Component<UserTableProps> {
                     </TableHeaderColumn>
                     <TableHeaderColumn
                         width="10%"
-                        dataField="id"
+                        dataField="userId"
                         isKey={true}
                         dataFormat={this.renderActionsCell}
                         columnClassName="action-column"
@@ -163,6 +158,6 @@ export default class UserTable extends React.Component<UserTableProps> {
     }
 
     render() {
-        return (this.props.isFetching ? this.renderLoading() : this.renderTable());
+        return (this.props.isFetching ? <Loading /> : this.renderTable());
     }
 }

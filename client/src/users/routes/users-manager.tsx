@@ -22,10 +22,11 @@ export default class UsersManagerRoute extends React.Component<UserProps, UsersR
     };
 
     componentDidMount() {
-       // this.props.store.user.fetchUsersIfNeed();
+       this.props.store.user.fetchUsersIfNeed();
+       this.props.store.stores.fetchDataIfNeeded(); 
     }
 
-    onDeleteUser = async (id: string, user: User) => {
+    onDeleteUser = async (id: number, user: User) => {
         this.props.store.messages.confirm({
             content: 'Eliminar a',
             contentValues: { user: user.name },
@@ -39,7 +40,7 @@ export default class UsersManagerRoute extends React.Component<UserProps, UsersR
     }
 
     onUserClick = async (user: User) => {
-        const success = await this.props.store.user.fetchUser(user.userId);
+        const success = await this.props.store.user.fetchUser(user.id);
         if (success) { this.setState({ showModal: true }); }
     }
 
@@ -51,7 +52,7 @@ export default class UsersManagerRoute extends React.Component<UserProps, UsersR
 
     onSubmitUser = async () => {
         const user = toJS(this.props.store.user.user);
-        const create = user.userId === -1;
+        const create = user.id === -1;
         if (create) {
             this.handleCreateUser(user);
         } else {
@@ -83,7 +84,7 @@ export default class UsersManagerRoute extends React.Component<UserProps, UsersR
 
     handleDeleteUser = async (shouldDelete: boolean, user: User) => {
         if (shouldDelete) {
-            const wasDeleted = await this.props.store.user.deleteUser(user.userId);
+            const wasDeleted = await this.props.store.user.deleteUser(user.id);
             const { name = '' } = user;
             if (wasDeleted) {
                 const message = 'Se ha eliminado correctamente al usuario ' + name;
@@ -97,7 +98,7 @@ export default class UsersManagerRoute extends React.Component<UserProps, UsersR
     }
 
     handleNewUser = () => {
-        this.props.store.user.user = { userId: -1 } as User;
+        this.props.store.user.user = { id: -1 } as User;
         this.setState({ showModal: true });
     }
 
@@ -121,6 +122,7 @@ export default class UsersManagerRoute extends React.Component<UserProps, UsersR
                 {this.state.showModal && (
                     <UsersModal
                         user={toJS(this.props.store.user.user)}
+                        stores={toJS(this.props.store.stores.stores)}
                         userStore={this.props.store.user}
                         show={this.state.showModal}
                         onClose={this.onHideModal}
