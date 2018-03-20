@@ -20,7 +20,7 @@ interface ClientsTableProps {
 export default class ClientTable extends React.Component<ClientsTableProps> {
 
     nameFilterValue = (name: string, client: Client) => (
-        `${name} ${client.email} ${client.lastName} ${client.clientId}`
+        `${name} ${client.email} ${client.lastName} ${client.id}`
     )
 
     getDescription = (client: Client): any => {

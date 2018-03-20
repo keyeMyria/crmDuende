@@ -20,9 +20,9 @@ export default class ClientsManagerRoute extends React.Component<ClientProps, Cl
         showError: false
     };
 
-    // componentDidMount() {
-    //     this.props.store.clientStore.fetchClientsIfNeeded();
-    // }
+    componentDidMount() {
+         this.props.store.clientStore.fetchClientsIfNeeded();
+    }
 
     onDeleteClient = (id: number, client: Client) => {
         this.props.store.messages.confirm({
@@ -39,7 +39,7 @@ export default class ClientsManagerRoute extends React.Component<ClientProps, Cl
 
     onClientClick = async (client: Client) => {
         const showModal = !this.state.showModal;
-        const success = await this.props.store.clientStore.fetchClient(client.clientId);
+        const success = await this.props.store.clientStore.fetchClient(client.id);
         if (success) { this.setState({ showModal }); }
     }
 
@@ -49,7 +49,7 @@ export default class ClientsManagerRoute extends React.Component<ClientProps, Cl
 
     onSubmitClient = async () => {
         const client = await this.props.store.clientStore.client;
-        const create = client.clientId === -1;
+        const create = client.id === -1;
         if (create) {
             this.handleCreateClient(client);
         } else {
@@ -86,7 +86,7 @@ export default class ClientsManagerRoute extends React.Component<ClientProps, Cl
     handleDeleteClient = async (shouldDelete: boolean, client: Client) => {
         if (shouldDelete) {
             const clientName = client.name || '';
-            const deleted = await this.props.store.clientStore.deleteClient(client.clientId);
+            const deleted = await this.props.store.clientStore.deleteClient(client.id);
             if (deleted) {
                 const message = 'Se ha eliminado correctamente a' + clientName;
                 this.props.store.messages.add(message, 'success');
@@ -99,7 +99,7 @@ export default class ClientsManagerRoute extends React.Component<ClientProps, Cl
     }
 
     handleNewClient = () => {
-        this.props.store.clientStore.client = { clientId: -1 };
+        this.props.store.clientStore.client = { id: -1 };
         this.setState({ showModal: true });
     }
 
