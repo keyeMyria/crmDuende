@@ -1,0 +1,64 @@
+.mdt-inputs-container {
+    display: flex;
+}
+.custom-modal .form-group{
+    margin-bottom: 0 !important;
+}
+.mdt-inputs-container .form-control {
+    width: 100%;
+}
+.hour-filter .ant-time-picker{
+    margin-left: 0 !important;
+    width: 100% !important;
+}
+.hour-filter .ant-time-picker .ant-time-picker-input:focus{
+    border-color: #0069FF;
+}
+.scheduled-reports-date-time .rdt .form-control{
+    position: relative;
+    z-index: inherit;
+}
+.scheduled-reports-date-time .rdt:after{
+    font-size: 20px;
+    border: 1px solid #d4d4d4;
+    width: 34px;
+    height: 34px;
+    position: absolute;
+    text-align: center;
+    color: #393f4f;
+    top: 0;
+    right: 0;
+    line-height: 34px;
+    border-radius: 0 3px 3px 0;
+}
+
+.ant-time-picker-input:focus{
+    border: 1px solid #0069FF;
+    box-shadow: none !important;
+}
+
+.ant-time-picker-panel-narrow .ant-time-picker-panel-input-wrap{
+    padding: 7px 8px 5px 8px;
+}
+.ant-time-picker-panel-narrow .ant-time-picker-panel-input-wrap .ant-time-picker-panel-input{
+    font-size: 14px;
+}
+.scheduled-reports-date-time .ant-time-picker{
+    margin-left: 15px;
+}
+.scheduled-reports-date-time .ant-time-picker .ant-time-picker-icon{
+    top: 6px !important;
+    right: 0 !important;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+}
+.scheduled-reports-date-time .ant-time-picker .ant-time-picker-icon:after{
+    font-family: "font-stsa" !important;
+    content: "\E2c9";
+}
+.scheduled-reports-date-time .ant-time-picker .ant-time-picker-input{
+    height: 34px;
+    border-radius: 3px;
+    font-size: 14px;
+}
