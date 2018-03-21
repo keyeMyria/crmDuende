@@ -16,7 +16,7 @@ interface UserProps {
 @observer
 export default class UsersManagerRoute extends React.Component<UserProps, UsersRouteState> {
     state = {
-        showModal: false,
+        showModal: false
     };
 
     componentDidMount() {

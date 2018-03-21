@@ -1,5 +1,4 @@
-// import ProviderManager from './routes/';
-// import '../common/resources/styles/styles.css';
+import ProviderManager from './routes/';
+import '../common/resources/styles/styles.css';
 
-// export default ProviderManager;
-
+export default ProviderManager;

@@ -24,7 +24,7 @@ const putRequest: RequestInit = {
 };
 
 export enum STATUS {
-    OK = 200,
+    OK = 200 || 201 || 204,
     LOGGED_OUT = 401,
     WITHOUT_PERMISSIONS = 403,
     BAD_REQUEST = 400,
@@ -92,8 +92,6 @@ export class Https {
     manageResponse = async (response: Response) => {
         try {
             if (response.status === STATUS.OK) {
-                // console.log('hola mundo');
-
                 return response.json();
             } else if (response.status === STATUS.WITHOUT_PERMISSIONS) {
                 this.contextMessageStore.add(this.renderMessage('Error interno del servidor'), 'error');

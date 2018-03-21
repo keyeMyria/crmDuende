@@ -1,5 +1,5 @@
 export interface Bill {
-    billId: number;
+    id: number;
     userId: number;
     clientId: number;
     numBill: string;
@@ -9,7 +9,7 @@ export interface Bill {
 export interface BillDetail {
     billId: number;
     productId: number;
-    billDetailId: number;
+    id: number;
     cost: string;
     count: string;
     salesPrice: string;
