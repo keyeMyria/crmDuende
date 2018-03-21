@@ -18,8 +18,6 @@ interface ProductProps {
 export default class ProductManagerRoute extends React.Component<ProductProps, ProductRouteState> {
     state = {
         showModal: false,
-        showTraces: false,
-        showPassword: false
     };
 
     componentDidMount() {

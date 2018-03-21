@@ -17,8 +17,6 @@ interface UserProps {
 export default class UsersManagerRoute extends React.Component<UserProps, UsersRouteState> {
     state = {
         showModal: false,
-        showTraces: false,
-        showPassword: false
     };
 
     componentDidMount() {

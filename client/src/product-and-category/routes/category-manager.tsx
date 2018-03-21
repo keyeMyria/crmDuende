@@ -18,8 +18,6 @@ interface CategoryProps {
 export default class CategoryManagerRoute extends React.Component<CategoryProps, CategoryRouteState> {
     state = {
         showModal: false,
-        showTraces: false,
-        showPassword: false
     };
 
     componentDidMount() {
