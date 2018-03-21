@@ -160,7 +160,7 @@ export default class ClientModal extends React.Component<ClientModalProps, Clien
                     <ModalField
                         valueName="userName"
                         onChange={this.handleValueChanges}
-                        labelText="Nombre de usuario"
+                        labelText="Nombre Usuario (Twitter)"
                         isRequired={true}
                         validators={[required]}
                         onChangeError={this.onInputErrorsChanges}

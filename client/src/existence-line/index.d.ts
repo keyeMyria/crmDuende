@@ -1,5 +1,4 @@
-// import ExistenceLineManager from './routes/';
-// import '../common/resources/styles/styles.css';
+import ExistenceLineManager from './routes/';
+import '../common/resources/styles/styles.css';
 
-// export default ExistenceLineManager;
-
+export default ExistenceLineManager;
