@@ -1,0 +1,239 @@
+.drf-container { 
+    background: #FFF;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-top: 0;
+    border-radius: 0 0px 3px 3px;
+    margin-bottom: 20px;
+}
+.filters{
+    display: flex;
+    align-items: center;
+}
+.filters .wrapper-YXn5r{
+    min-width: 268px;
+    width: 100%;
+    max-width: 300px;
+}
+.filters label{
+    margin: 0 0 0 15px;
+    min-width: 115px;
+    padding: 0;
+    font-size: 12px;
+}
+.filters label .icon-info::before{
+    font-size: 16px;
+    vertical-align: middle;
+    opacity: 0.5;
+    margin-left: 2px;
+}
+.filters label .icon-info:hover::before{
+    color: #0069FF;
+    cursor: pointer;
+    opacity: 1;
+}
+.tooltip-inner{
+    text-align: left;
+}
+.drf-container .row{
+    margin-bottom: 10px;
+}
+.driver-report{
+    min-height: 600px;
+}
+.container.report.driver-report .fix-react-select label{
+    line-height: 0 !important;
+}
+.container.report.driver-report .text-right label{
+    line-height: 34px !important;
+    font-size: 12px;
+    margin-right: -15px;
+}
+.drf-container .date-time-col{
+    padding-left: 0;
+    width: 150px;
+}
+.drf-container .label-checkbox{
+    margin-right: 15px !important;
+}
+.drf-container .label-checkbox label{
+    margin-right: 0;
+    font-weight: normal !important;
+}
+.drf-container .ant-time-picker input{
+    height: 32px !important;
+    background-color: #FFF;
+    border: 0;
+    border-radius: 1px;
+    outline: none;
+    font-size: 14px;
+}
+.drf-container .ant-time-picker:first-child .ant-time-picker-icon::after{
+    content: "\E204" !important;
+    font-family: "font-stsa" !important;
+    font-size: 14px;
+    color: #0E0E0E;
+}
+.drf-container .ant-time-picker .ant-time-picker-icon:after{
+    content: "\e08e" !important;
+    font-family: "font-stsa" !important;
+}
+.rdt .form-control{
+    position: absolute;
+    z-index: 2;
+    background: transparent !important;
+    cursor: default;
+}
+.rdt:after{
+    content: "\e28c" !important;
+    font-family: "font-stsa" !important;
+}
+.hour-range-picker-selector{
+    display: flex;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    position: relative;
+    max-width: 220px;
+    min-width: 140px;
+}
+.ant-time-picker-panel-inner{
+    left: 0 !important;
+    top: 2px !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+}
+.ant-time-picker-panel-input{
+    background: transparent;
+    font-size: 14px;
+}
+.ant-time-picker-panel-narrow .ant-time-picker-panel-input-wrap{
+    min-width: 80px;
+    padding: 6px 7px;
+    border-bottom: 0;
+    max-width: 122px;
+}
+.ant-time-picker-panel-combobox{
+    border-top: 0;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    display: flex;
+    border-radius: 0 0 3px 3px;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 14px;
+    background: #fff;
+}
+.ant-time-picker-panel-select{
+    width: 100%;
+}
+.drf-container .ant-time-picker:first-child .ant-time-picker-icon{
+    border: 0;
+    padding-top: 10px;
+}
+.ant-calendar-picker-clear, .ant-calendar-picker-icon, .ant-time-picker-icon{
+    color: #393f4f;
+    background: unset;
+    text-align: center;
+    padding: 6px 7px;
+    width: auto !important;
+    right: -1px !important;
+    height: auto !important;
+    top: 5px !important;
+    border: 1px solid #ccc;
+    border-radius: 0 3px 3px 0;
+}
+.ant-calendar-picker-clear, .ant-calendar-picker-icon::after {
+    font-size: 18px;
+    color: #393f4f;
+}
+.ant-time-picker{
+    width: 50% !important;
+}
+.ant-time-picker .ant-time-picker-icon::after{
+    font-size: 20px;
+    color: #393f4f;
+}
+.ant-calendar-picker-input{
+    display: flex;
+    align-items: center;
+}
+.ant-calendar-range-picker-input{
+    width: 35%;
+    text-align: left;
+}
+.date-range-picker-selector{
+    background: #fff;
+    height: 34px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 0 10px;
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    max-width: 300px;
+}
+.ant-calendar-range-picker-separator{
+    padding: 0 10px;
+    vertical-align: middle;
+}
+.ant-calendar-range-picker-separator::after{
+    margin-left: -10px;
+    font-size: 18px;
+}
+.ant-calendar-picker{
+    max-width: 270px;
+    display: flex;
+}
+.DateInput {
+    width: unset;
+}
+.DateRangePickerInput{
+    border-radius: 3px;
+    width: 230px;
+}
+.DateRangePickerInput__calendar-icon{
+    top: 0;
+    height: 100% !important;
+}
+.DateRangePickerInput__calendar-icon i{
+    text-align: center;
+}
+.ant-time-picker-panel-select ul{
+    padding: 0 !important;
+}
+.btn-reports .btn {
+    margin-right: 15px; 
+}
+@media screen and (max-width: 768px){
+    .drf-container{
+        padding: 10px;
+    }
+    .date-range-picker-selector{
+        width: 100%;
+        max-width: 100%;
+    }
+    .hour-range-picker-selector{
+        max-width: 100%;
+    }
+    .filters{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .filters .wrapper-YXn5r{
+        max-width: 100%;
+    }
+    .filters label{
+        margin: 10px 15px 10px 0;
+    }
+    .btn-reports .btn{
+        display: block;
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+}

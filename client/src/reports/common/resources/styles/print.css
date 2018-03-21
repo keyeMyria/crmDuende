@@ -1,0 +1,26 @@
+/* This document is to have a custom print version for reports */
+
+@media print {
+    * {
+        font-family: Helvetica, Arial, sans-serif;
+    }
+    .switch-to-old-version,
+    .btn-reports,
+    .reports-footer a,
+    #reportsTabs-tab-SCHEDTAB,
+    #reportsTabs-tab-MAPTAB,
+    #reportsTabs-tab-CREATETAB,
+    .menu-elements,
+    #headRight,
+    .footer,
+    .navigation-bar-members .logo {
+        display: none;
+    }
+    .reports-logo {
+        display: block !important;
+    }
+    th.sort-column,
+    th {
+        width: auto !important;
+    }
+}

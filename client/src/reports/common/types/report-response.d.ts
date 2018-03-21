@@ -1,0 +1,1 @@
+export interface ReportResponse<T> { timezone?: string; title?: string; detail: T; }

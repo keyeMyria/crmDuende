@@ -1,0 +1,30 @@
+div#hPanel {
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+    margin-top: -11px;
+    height: 550px;
+    padding-left: 10px;
+    position: relative;
+}
+
+.fillvertical .dropdown,
+.fillvertical .leaflet-right .map-settings {
+    display: none;
+}
+.report-results .fillvertical .leaflet-right .leaflet-control-fullscreen {
+    margin-top: -40px;
+}
+.heat-map-toogle {
+    position: absolute;
+    z-index: 9;
+    background: #fff;
+    left: 15px;
+    top: 20px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+.heat-map-toogle input[type=checkbox]{
+    cursor: pointer;
+}

@@ -1,0 +1,15 @@
+.required-df::after {
+    content: ' *';
+    color: #FF5252;
+    font-weight: 500
+}
+
+.df-warning {
+    border-color: #AB4340;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.df-warning:focus {
+    border-color: #AB4340;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
