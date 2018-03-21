@@ -17,7 +17,7 @@ interface ProductProps {
 @observer
 export default class ProductManagerRoute extends React.Component<ProductProps, ProductRouteState> {
     state = {
-        showModal: false,
+        showModal: false
     };
 
     componentDidMount() {

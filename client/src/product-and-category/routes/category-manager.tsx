@@ -17,7 +17,7 @@ interface CategoryProps {
 @observer
 export default class CategoryManagerRoute extends React.Component<CategoryProps, CategoryRouteState> {
     state = {
-        showModal: false,
+        showModal: false
     };
 
     componentDidMount() {

@@ -3,8 +3,7 @@ import { BootstrapTable, TableHeaderColumn, SortOrder } from 'react-bootstrap-ta
 import { observer } from 'mobx-react';
 import { Https } from '../../common/util/https';
 import Loading from '../../common/components/labels/loading';
-import { ExistenceLine } from '../types/existence-line';
-
+import { BillDetail } from '../types/bill';
 
 const defaultSortOrder: SortOrder = 'asc';
 
@@ -15,23 +14,23 @@ const TABLE_OPTIONS = {
     defaultSortOrder
 };
 // fijar estructura s
-interface ExistenceTableProps {
-    existences: ExistenceLine[];
-    onExistenceLineClick: (existence: ExistenceLine) => void;
+interface BillDetailTableProps {
+    billsDetail: BillDetail[];
+    onBillDetailClick: (pur: BillDetail) => void;
     isFetching: boolean;
     https: Https;
 }
 
 @observer
-export default class ExistenceLineTable extends React.Component<ExistenceTableProps> {
+export default class BillDetailTable extends React.Component<BillDetailTableProps> {
 
     renderTable = () => {
-        const { onExistenceLineClick } = this.props;
-        const existence = this.props.existences;
+        const { onBillDetailClick } = this.props;
+        const billDetail = this.props.billsDetail;
         return (
             <div>
                 <BootstrapTable
-                    data={existence}
+                    data={billDetail}
                     striped={true}
                     hover={true}
                     pagination={true}
@@ -39,7 +38,7 @@ export default class ExistenceLineTable extends React.Component<ExistenceTablePr
                     options={{
                         ...TABLE_OPTIONS,
                         noDataText: 'No hay información que mostrar',
-                        onRowClick: onExistenceLineClick
+                        onRowClick: onBillDetailClick
                     }}
                 >
                     <TableHeaderColumn
