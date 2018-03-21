@@ -2,7 +2,7 @@
 
 .dropbtn {
     color: #111;
-    padding: 10px;
+    padding: 12px;
     font-size: 14px;
     border: none;
     line-height: 2;
@@ -41,5 +41,5 @@
 .dropdown:hover .dropbtn {
     color: #0069FF;
     background-color: transparent;
-    border-color: #0069FF;
+    border-color: transparent;
 }
