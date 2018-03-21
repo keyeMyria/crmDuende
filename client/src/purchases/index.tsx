@@ -1,5 +1,4 @@
-// import PurchasesManager from './routes/';
-// import '../common/resources/styles/styles.css';
+import PurchasesManager from './routes/';
+import '../common/resources/styles/styles.css';
 
-// export default PurchasesManager;
-
+export default PurchasesManager;

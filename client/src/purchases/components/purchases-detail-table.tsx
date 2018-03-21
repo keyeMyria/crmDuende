@@ -3,7 +3,8 @@ import { BootstrapTable, TableHeaderColumn, SortOrder } from 'react-bootstrap-ta
 import { observer } from 'mobx-react';
 import { Https } from '../../common/util/https';
 import Loading from '../../common/components/labels/loading';
-import { Purchases } from '../types/purchases';
+import { PurchasesDetail } from '../types/purchases';
+
 
 const defaultSortOrder: SortOrder = 'asc';
 
@@ -14,23 +15,23 @@ const TABLE_OPTIONS = {
     defaultSortOrder
 };
 // fijar estructura s
-interface UserTableProps {
-    purchases: Purchases[];
-    onPurchaseClick: (pur: Purchases) => void;
+interface PurchasesTableProps {
+    purchasesDetail: PurchasesDetail[];
+    onPurchaseDetailClick: (pur: PurchasesDetail) => void;
     isFetching: boolean;
     https: Https;
 }
 
 @observer
-export default class PurchasesTable extends React.Component<UserTableProps> {
+export default class PurchasesDetailTable extends React.Component<PurchasesTableProps> {
 
     renderTable = () => {
-        const { onPurchaseClick } = this.props;
-        const users = this.props.purchases;
+        const { onPurchaseDetailClick } = this.props;
+        const purDetail = this.props.purchasesDetail;
         return (
             <div>
                 <BootstrapTable
-                    data={users}
+                    data={purDetail}
                     striped={true}
                     hover={true}
                     pagination={true}
@@ -38,7 +39,7 @@ export default class PurchasesTable extends React.Component<UserTableProps> {
                     options={{
                         ...TABLE_OPTIONS,
                         noDataText: 'No hay información que mostrar',
-                        onRowClick: onPurchaseClick
+                        onRowClick: onPurchaseDetailClick
                     }}
                 >
                     <TableHeaderColumn
