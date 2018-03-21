@@ -2,20 +2,21 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import { toJS } from 'mobx';
 import { IndexStore } from '../stores';
-import { Purchases } from '../types/purchases';
-import PurchasesTable from '../components/purchases-table';
-import PurchasesModal from '../components/purchases-modal';
+import { PurchasesDetail } from '../types/purchases';
+import PurchasesDetailTable from '../components/purchases-detail-table';
+import PurchasesDetailModal from '../components/purchases-detail-modal';
 
-interface PurchasesRouteState {
+interface PurchasesDetailRouteState {
     showModal: boolean;
 }
-// fijar estructura s
-interface PurchasesProps {
+
+interface PurchasesDetailProps {
     store: IndexStore;
 }
-
+// fijar estructura s
 @observer
-export default class PurchasesManagerRoute extends React.Component<PurchasesProps, PurchasesRouteState> {
+export default class PurchasesDetailManagerRoute extends
+    React.Component<PurchasesDetailProps, PurchasesDetailRouteState> {
     state = {
         showModal: false,
     };
@@ -25,24 +26,24 @@ export default class PurchasesManagerRoute extends React.Component<PurchasesProp
         this.props.store.purchasesDetail.fetchPurchasesDetailIfNeed();
     }
 
-    onPurchaseClick = async (pur: Purchases) => {
-        const success = await this.props.store.purchases.fetchPurchase(pur.id);
+    onPurchaseDetailClick = async (pur: PurchasesDetail) => {
+        const success = await this.props.store.purchasesDetail.fetchPurchaseDetail(pur.id);
         if (success) { this.setState({ showModal: true }); }
     }
 
     onHideModal = () => {
         const showModal = false;
-        this.props.store.purchases.errors = {};
+        this.props.store.purchasesDetail.errors = {};
         this.setState({ showModal });
     }
 
     onSubmitPurchases = async () => {
-        const pur = toJS(this.props.store.purchases.purchase);
+        const pur = toJS(this.props.store.purchasesDetail.purchaseDetail);
         const create = pur.id === -1;
         if (create) {
             this.handleCreatePurchase(pur);
         } else {
-            const isOk = await this.props.store.purchases.updatePurchase(pur);
+            const isOk = await this.props.store.purchasesDetail.updatePurchaseDetail(pur);
             const name = `${pur.id || ''}`;
             if (isOk) {
                 const message = 'Se ha actualizado correctamente';
@@ -55,21 +56,21 @@ export default class PurchasesManagerRoute extends React.Component<PurchasesProp
         }
     }
 
-    handleCreatePurchase = async (pur: Purchases) => {
-        const wasCreated = await this.props.store.purchases.createPurchases(toJS(pur));
+    handleCreatePurchase = async (pur: PurchasesDetail) => {
+        const wasCreated = await this.props.store.purchasesDetail.createPurchasesDetail(toJS(pur));
         const { id = '' } = pur;
         if (wasCreated) {
             const message = 'Se ha creado correctamente';
             this.props.store.messages.add(message.replace('{name}', id.toString()), 'success');
             this.onHideModal();
         } else {
-            const message = 'Ha ocurrido un error al crear la compra';
+            const message = 'Ha ocurrido un error al crear el detalle de compra';
             this.props.store.messages.add(message.replace('{name}', id.toString()), 'error');
         }
     }
 
     handleNewPurchase = () => {
-        this.props.store.purchases.purchase = { id: -1 } as Purchases;
+        this.props.store.purchasesDetail.purchaseDetail = { id: -1 } as PurchasesDetail;
         this.setState({ showModal: true });
     }
 
@@ -79,20 +80,20 @@ export default class PurchasesManagerRoute extends React.Component<PurchasesProp
                 <div className="table-action-buttons">
                     <div className="right-header-app">
                         <button className="btn btn-primary" onClick={this.handleNewPurchase}>
-                            Nueva Compra
+                            Nuevo Detalle de Compra
                             </button>
                     </div>
                 </div>
-                <PurchasesTable
-                    purchases={toJS(this.props.store.purchases.purchases)}
-                    onPurchaseClick={this.onPurchaseClick}
-                    isFetching={this.props.store.purchases.isFetching}
+                <PurchasesDetailTable
+                    purchasesDetail={toJS(this.props.store.purchasesDetail.purchasesDetail)}
+                    onPurchaseDetailClick={this.onPurchaseDetailClick}
+                    isFetching={this.props.store.purchasesDetail.isFetching}
                     https={this.props.store.https}
                 />
                 {this.state.showModal && (
-                    <PurchasesModal
-                        pur={toJS(this.props.store.purchases.purchase)}
-                        purStore={this.props.store.purchases}
+                    <PurchasesDetailModal
+                        purDetail={toJS(this.props.store.purchasesDetail.purchaseDetail)}
+                        purDetailStore={this.props.store.purchasesDetail}
                         show={this.state.showModal}
                         onClose={this.onHideModal}
                         onSubmit={this.onSubmitPurchases}

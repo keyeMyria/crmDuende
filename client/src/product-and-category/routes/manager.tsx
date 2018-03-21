@@ -3,8 +3,9 @@ import { Tabs, Tab } from 'react-bootstrap';
 import { ContextMessage } from '../../common/components/context-message';
 import { observer } from 'mobx-react';
 import { IndexStore } from '../stores';
-import PurchasesDetailManagerRoute from './purchasesDetail-manager';
-import PurchasesManagerRoute from './purchases-manager';
+import ProductManagerRoute from './products-manager';
+import CategoryManagerRoute from './category-manager';
+
 export interface ManagerProps {
     store: IndexStore;
 }
@@ -12,14 +13,14 @@ export interface ManagerProps {
 interface ManagerState {
     selectedTab: number;
 }
-// fijar estructura s
-enum ActiveTab { Purchases, PurchasesDetail }
+
+enum ActiveTab { Products, Category }
 
 @observer
 class Manager extends React.Component<ManagerProps, ManagerState> {
 
     state = {
-        selectedTab: ActiveTab.Purchases
+        selectedTab: ActiveTab.Products
     };
 
     handleTab = (selectedTab: any): void => {
@@ -30,26 +31,26 @@ class Manager extends React.Component<ManagerProps, ManagerState> {
         return (
             <div>
                 <ContextMessage messages={this.props.store.messages.messages} store={this.props.store.messages} />
-                <Tabs activeKey={this.state.selectedTab} onSelect={this.handleTab} id="bill-manager-tabs" >
+                <Tabs activeKey={this.state.selectedTab} onSelect={this.handleTab} id="pc-manager-tabs" >
                     <Tab
-                        eventKey={ActiveTab.Purchases}
-                        title="Compras"
+                        eventKey={ActiveTab.Products}
+                        title="Productos"
                     >
                         {
-                            this.state.selectedTab === ActiveTab.Purchases && (
-                                <PurchasesManagerRoute
+                            this.state.selectedTab === ActiveTab.Products && (
+                                <ProductManagerRoute
                                     store={this.props.store}
                                 />
                             )
                         }
                     </Tab>
                     <Tab
-                        eventKey={ActiveTab.PurchasesDetail}
-                        title="Detalle de Compra"
+                        eventKey={ActiveTab.Category}
+                        title="Categorías"
                     >
                         {
-                            this.state.selectedTab === ActiveTab.PurchasesDetail && (
-                                <PurchasesDetailManagerRoute
+                            this.state.selectedTab === ActiveTab.Category && (
+                                <CategoryManagerRoute
                                     store={this.props.store}
                                 />
                             )
@@ -62,3 +63,4 @@ class Manager extends React.Component<ManagerProps, ManagerState> {
 }
 
 export default Manager;
+// fijar estructura s
