@@ -1,0 +1,8 @@
+.days-container{
+    display: flex;
+    align-items: center;
+}
+.days-container .check-box{
+    display: flex;
+    margin-right: 20px;
+}

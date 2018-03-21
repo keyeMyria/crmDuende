@@ -1,0 +1,6 @@
+.pr-req::after{
+    content: '*';
+    color: #FF5252;
+    font-weight: 500;
+    display: inline-block;
+}
