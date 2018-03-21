@@ -1,5 +1,5 @@
 export interface Purchases {
-    puiId: number;
+    id: number;
     providerId: number;
     date?: Date;
     documentNumber?: string;
@@ -7,7 +7,7 @@ export interface Purchases {
 
 export interface PurchasesDetail {
     purId: number;
-    purDetailId: number;
+    id: number;
     productId: number;
     count: string;
     salesPrice?: string;
