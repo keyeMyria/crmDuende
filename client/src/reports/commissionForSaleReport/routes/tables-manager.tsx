@@ -6,7 +6,6 @@ import { observer } from 'mobx-react';
 import { toJS } from 'mobx';
 import { IndexStore } from '../stores/index';
 import { Tabs, Tab } from 'react-bootstrap';
-import { Detail, Summary } from '../../common/types';
 import '../styles/tables-manager.css';
 export interface TablesManagerProps {
   store: IndexStore;
@@ -15,7 +14,7 @@ interface TablesManagerState {
   selectedTab: number;
 }
 
-enum TABS { Summary, SumByRule, Detail, DetailAlerts }
+enum TABS { Summary, Detail}
 @observer
 export default class TablesManager extends React.Component<TablesManagerProps, TablesManagerState> {
   state = {
@@ -25,7 +24,7 @@ export default class TablesManager extends React.Component<TablesManagerProps, T
   // Receive a number, types don't allow use it explicit.
   handleTab = (selectedTab: any): void => this.setState({ selectedTab });
 
-  isEmptyTab = (tab: (Detail | Summary)[]) => !tab || tab.length === 0;
+  isEmptyTab = (tab: (any | any)[]) => !tab || tab.length === 0;
 
   isEmpty = () => this.isEmptyTab(this.props.store.report.data.detail)
     && this.isEmptyTab(this.props.store.report.data.summary)

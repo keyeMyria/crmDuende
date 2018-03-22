@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Select from '../../../common/components/select/index';
-import { FormattedMessage } from 'react-intl';
-import { User, UserGroup } from '../../../users-manager/types/index';
+import { User } from '../../../users/types';
+
 
 enum POSITION {
     A_FIRST = -1,
@@ -12,7 +12,7 @@ enum POSITION {
 export interface UsersFiltersProps {
     onChange: (users: string[], valueName?: string) => void;
     value: string[];
-    usersItems: (User | UserGroup)[];
+    usersItems: User[];
     isLoading?: boolean;
     valueName?: string;
     onClose?(): void;
@@ -20,19 +20,15 @@ export interface UsersFiltersProps {
 
 export default function UsersFilter(props: UsersFiltersProps) {
 
-    const isGroup = (option: UserGroup | User) => option.id.includes('g-');
+    const isGroup = (option: any | User) => option.id.includes('g-');
 
-    const getLabelOption = (option: User | UserGroup) => {
-        if (isGroup(option)) {
-            const userGroup = option as UserGroup;
-            return userGroup.name.toLowerCase();
-        } else {
-            const user = option as User;
-            return (user.first_name || user.last_name || user.name || '').toLowerCase();
-        }
+    const getLabelOption = (option: User) => {
+        const user = option as User;
+        return (user.lastName || user.name || '').toLowerCase();
+
     };
 
-    const sortOptions = (a: User | UserGroup, b: User | UserGroup) => {
+    const sortOptions = (a: User, b: User) => {
         const aIsGroup = isGroup(a), bIsGroup = isGroup(b);
         if ((aIsGroup && bIsGroup) || (!aIsGroup && !bIsGroup)) {
             const aKey = getLabelOption(a);
@@ -49,30 +45,18 @@ export default function UsersFilter(props: UsersFiltersProps) {
         }
     };
 
-    const filterOption = (option: User | UserGroup, query: string) => {
+    const filterOption = (option: User, query: string) => {
         if (isGroup(option)) {
-            const { name, id } = option as UserGroup;
+            const { name, id } = option as any;
             return (name || id || '').toLowerCase().includes(query);
         } else {
-            const { first_name, last_name, name } = option as User;
-            return (first_name || last_name || name || '').toLowerCase().includes(query);
+            const { lastName, name } = option as User;
+            return (lastName || name || '').toLowerCase().includes(query);
         }
     };
 
-    const renderGroup = (group: UserGroup) => (
-        <FormattedMessage id="global.group">
-            {(text: string) => (
-                <div>{text}: {group.name}</div>
-            )}
-        </FormattedMessage>
-    );
-
-    const renderOption = (option: User | UserGroup) => {
-        if (option.id.includes('g-')) {
-            return renderGroup(option as UserGroup);
-        } else {
-            return <div>{option.name}</div>;
-        }
+    const renderOption = (option: User) => {
+        return <div>{option.name}</div>;
     };
 
     return (
@@ -84,13 +68,12 @@ export default function UsersFilter(props: UsersFiltersProps) {
             valueKey="id"
             handleChange={props.onChange}
             multi={true}
-            placeholder={<FormattedMessage id="common.filters.all_users" />}
+            placeholder={"Filtrar usuarios"}
             optionRenderer={renderOption}
             valueRenderer={renderOption}
             filterOption={filterOption}
             isLoading={props.isLoading}
             searchable={true}
-            className="driver-selector"
             onClose={props.onClose}
         />
     );
