@@ -1,0 +1,32 @@
+.legend-item span:first-child{
+    width: 140px;
+    display: inline-block;
+    text-align: right;
+    font-weight: 600;
+}
+.legend-container{
+    display: block;
+    margin-left: 10px;
+    width: 100%;
+}
+@media (max-width: 385px) {
+    .cl-item {
+        display: block;
+    }
+    .legend-item span:first-child{
+        width: auto;
+        margin-bottom: 4px;
+    }
+    .legend-container{
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-around;
+        padding-left: 14%;
+    }
+    .legend-container .legend-item{
+        text-align: left;
+    }
+    .legend-container .legend-item .chart-legend{
+        margin: 0;
+    }
+}

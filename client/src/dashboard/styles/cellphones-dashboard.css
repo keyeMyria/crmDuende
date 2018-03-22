@@ -1,0 +1,15 @@
+.cellphones-dashboard-container{
+    background: #fff;
+    border-radius: 3px;
+    border: 1px solid #D5DCE6;
+    padding: 15px;
+}
+@media (max-width: 350px){
+    .cellphones-dashboard-container{
+        padding: 15px 10px;
+    }
+}
+
+.cellphones-dashboard-container .react-loading {
+    margin-top: 50px;
+}

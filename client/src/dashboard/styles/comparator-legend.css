@@ -1,0 +1,37 @@
+.cl-container {
+    text-align: center;
+    color: #7A8BA1;
+}
+
+.cl-percent {
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.cl-up {
+    color: #14C432;
+}
+
+.cl-down {
+    color: #FF5454;
+}
+
+.cl-equal {
+    font-weight: bold;
+}
+
+.cl-icon {
+    font-size: 18px;
+}
+
+.cl-icon-equal::before {
+    font-family: 'font-stsa';
+    content: "\e201\e203";    
+    display: inline-block;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}

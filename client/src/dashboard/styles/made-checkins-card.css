@@ -1,0 +1,16 @@
+.mcc-chart-container {
+    height: 147px;
+    max-width: 147px;
+    margin-left: 15px;
+    overflow: hidden;
+}
+
+.mcc-chart-container .recharts-wrapper {
+    margin: 0;
+}
+
+@media (max-width: 768px){
+    .mcc-chart-container{
+        margin: auto;
+    }
+}

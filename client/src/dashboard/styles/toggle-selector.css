@@ -1,0 +1,29 @@
+.ts-container {
+    width: 100%;
+}
+
+.ts-left-option, .ts-rigth-option {
+    height: 36px;
+    width: 50%;
+    display: inline-block;
+    background-color: #FCFCFC;
+    color: #344152;
+    padding-top: 7px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #D5DCE6;
+}
+
+.ts-left-option {
+    border-radius: 4px 0 0 4px;
+}
+
+.ts-rigth-option {
+    border-radius: 0 4px 4px 0;
+}
+
+.ts-selected-option {
+    background-color: #0069FF;
+    color: #FFFFFF;
+    border: 1px solid #0069FF;
+}

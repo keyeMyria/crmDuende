@@ -1,0 +1,19 @@
+.df-item{
+    text-align: left;
+}
+
+.df-title {
+    color: #344152;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.df-select .Select-arrow {
+    border-color: #344152 transparent transparent;
+}
+@media (max-width: 350px){
+    .df-select{
+        margin-bottom: 15px;
+    }
+}

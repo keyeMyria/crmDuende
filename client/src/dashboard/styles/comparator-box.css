@@ -1,0 +1,16 @@
+.cb-value {
+    font-weight: bold;
+    text-align: center;
+    font-size: 102px;
+    color: #344152;
+}
+
+.cb-container {
+    min-height: 230px;
+}
+
+.cb-container .cl-container {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+}

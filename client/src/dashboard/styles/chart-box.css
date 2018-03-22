@@ -1,0 +1,27 @@
+.cb-header .card-title {
+    text-align: left;
+}
+
+.cb-toggle {
+    text-align: right;
+    color: #344152;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.cb-chart {
+    margin-top: 10px;
+}
+.chart-header-container{
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+}
+.label-text{
+    font-weight: 600;
+}
+@media (max-width: 560px) {
+    .chart-header-container{
+        flex-direction: column;
+    }
+}
