@@ -1,0 +1,15 @@
+.tabs-container ul.nav-tabs {
+	padding-top: 10px;
+}
+
+.tabs-container ul.nav-tabs li a {
+	outline: none !important;
+	color: #0069FF !important;
+}
+
+.tabs-container ul.nav-tabs li.active a,
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+	color: #111 !important;
+	font-weight: 600;
+	cursor: default !important;
+}
