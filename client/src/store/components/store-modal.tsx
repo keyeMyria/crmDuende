@@ -4,7 +4,7 @@ import { Modal } from 'react-bootstrap';
 import { Tabs, Tab } from 'react-bootstrap';
 import ModalPicture from '../../common/components/modal-picture';
 import { Store } from '../types/store';
-import { isPhone } from '../../common/components/input-validation/validators';
+import { isPhone, required, noNumbers, noAccents } from '../../common/components/input-validation/validators';
 import IndexStore from '../stores';
 import '../styles/stores-modal.css';
 const AvatarDefault = require('../../common/resources/pictures/avatar-default.svg');
@@ -36,7 +36,7 @@ export default class EditModal extends React.Component<EditModalProps, EditModal
     };
 
     shouldComponentUpdate(nextProps: EditModalProps, nextState: EditModalState) {
-        const fieldsToVerify = 1;
+        const fieldsToVerify = 2;
         if (nextState.wantSubmit && Object.keys(nextState.errors).length === fieldsToVerify) {
             this.trySubmit();
         }
@@ -127,6 +127,9 @@ export default class EditModal extends React.Component<EditModalProps, EditModal
                     labelText="Nombre de la Tienda"
                     valueName="name"
                     inputValue={this.props.shop.name}
+                    isRequired={true}
+                    validators={[required, noNumbers, noAccents]}
+                    forceVerify={this.state.forceVerify}
                     inputClassNames="col-sm-7 input-style"
                     labelClassNames="col-sm-5"
                     disabled={true}
