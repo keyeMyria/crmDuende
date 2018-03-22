@@ -156,7 +156,7 @@ export default class UserModal extends React.Component<UserModalProps, UserModal
                         multi={false}
                         valueKey="id"
                         labelKey="name"
-                        placeholder="23"
+                        placeholder="Galerías Prima..."
                         labelText="Tienda a la que pertenece"
                     />
                     <ModalField
