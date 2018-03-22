@@ -3,7 +3,6 @@ import { BootstrapTable, TableHeaderColumn, SortOrder } from 'react-bootstrap-ta
 import { Https } from '../../../common/util/https';
 import { observer } from 'mobx-react';
 import { Loading } from '../../../common/components/labels/index';
-import { Summary } from '../../common/types';
 
 const defaultSortOrder: SortOrder = 'asc';
 
@@ -13,7 +12,7 @@ const TABLE_OPTIONS = {
 };
 
 interface SummaryTableProps {
-    summaryData: Summary[];
+    summaryData: any[];
     usersList: { [id: number]: string };
     isFetching: boolean;
     https: Https;

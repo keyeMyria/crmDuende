@@ -16,7 +16,7 @@ interface DatesPresetsState {
     focusedInput: DateRangePickerShape['focusedInput'];
 }
 
-const DATE_FORMAT = 'YYYY-MM-DD';
+const DATE_FORMAT = 'DD MMM YYYY';
 
 export class DatePresets extends React.Component<DatePresetsProps, DatesPresetsState> {
 

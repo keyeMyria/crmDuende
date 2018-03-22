@@ -5,7 +5,7 @@ import { dateFormatter } from '../../../common/components/bootstrap-table/date-f
 import { Https } from '../../../common/util/https';
 import { observer } from 'mobx-react';
 import { Loading } from '../../../common/components/labels/index';
-import { Detail } from '../../common/types'; // Temporal
+
 
 const defaultSortOrder: SortOrder = 'asc';
 
@@ -15,7 +15,7 @@ const TABLE_OPTIONS = {
 };
 
 interface DetailTableProps {
-    detailData: Detail[];
+    detailData: any[];
     usersList: { [id: number]: string };
     isFetching: boolean;
     https: Https;
@@ -24,7 +24,7 @@ interface DetailTableProps {
 @observer
 export default class DetailTable extends React.Component<DetailTableProps> {
 
-    sortDates = (a: Detail, b: Detail, order: 'asc' | 'desc') => (
+    sortDates = (a: any, b: any, order: 'asc' | 'desc') => (
         sortDate(a.date || a.startDate, b.startDate || b.date, order)
     )
 
