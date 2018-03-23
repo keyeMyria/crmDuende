@@ -12,8 +12,7 @@ class CategoryController {
     
     def dataSource
     
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+    def index() {
         respond Category.list(params), model:[categoryCount: Category.count()]
     }
 

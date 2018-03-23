@@ -13,8 +13,7 @@ class ProductsController {
     
     def dataSource
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+    def index() {
         respond Products.list(params), model:[productsCount: Products.count()]
     }
 

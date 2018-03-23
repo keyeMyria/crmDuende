@@ -13,8 +13,7 @@ class ProviderController {
     
     def dataSource
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+    def index() {
         respond Provider.list(params), model:[providerCount: Provider.count()]
     }
 

@@ -12,8 +12,7 @@ class StoresController {
     
     def dataSource
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+    def index() {
         respond Stores.list(params), model:[storesCount: Stores.count()]
     }
 

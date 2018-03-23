@@ -12,8 +12,7 @@ class UsersController {
     
     def dataSource
     
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+    def index() {
         respond Users.list(params), model:[usersCount: Users.count()]
     }
     
@@ -21,8 +20,20 @@ class UsersController {
     
     def show(Users users) {
         def sql = new Sql(dataSource)
+
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/users_select.sql")
         String sqlString = new File(sqlFilePath).text  
+        if (sqlString) {
+             sqlString = sqlString.replace(" ?userId", (users.id.toString()) ? users.id.toString(): "")
+             sqlString = sqlString.replace(" ?phone", (users.phone) ? users.phone : "")
+             sqlString = sqlString.replace(" ?user_name", (users.userName) ? users.userName : "")
+             sqlString = sqlString.replace(" ?mobile", (users.mobile) ? users.mobile : "")
+             sqlString = sqlString.replace(" ?name", (users.name) ? users.name : "")
+             sqlString = sqlString.replace(" ?picture", (users.picture) ? users.picture : "")
+             sqlString = sqlString.replace(" ?last_name", (users.lastName) ? users.lastName : "")
+             sqlString = sqlString.replace(" ?email", (users.email) ? users.email : "")
+        }
+
         respond users
     }
     

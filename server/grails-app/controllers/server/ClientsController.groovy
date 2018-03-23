@@ -12,8 +12,7 @@ class ClientsController {
     
     def dataSource
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+    def index() {
         respond Clients.list(params), model:[clientsCount: Clients.count()]
     }
 

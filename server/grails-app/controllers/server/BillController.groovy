@@ -12,8 +12,7 @@ class BillController {
     
     def dataSource
     
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+    def index() {
         respond Bill.list(params), model:[billCount: Bill.count()]
     }
 
