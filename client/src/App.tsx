@@ -8,9 +8,9 @@ import UsersManager from './users';
 import StoresManager from './store';
 import ClientsManager from './client';
 import NotFound from './not-found';
-import ProductManagerRoute from './product-and-category/routes/products-manager';
+import ProductManagerRoute from './product-and-category/';
 import ProviderManager from './provider';
-import BillManager from './bill/routes/manager';
+import BillandDetailManager from './bill/';
 
 
 class App extends React.Component<{}, {}> {
@@ -24,7 +24,7 @@ class App extends React.Component<{}, {}> {
             <Route path="/users" component={UsersManager} />
             <Route path="/client" component={ClientsManager} />
             <Route path="/products" component={ProductManagerRoute} />
-            <Route path="/bill" component={BillManager} />
+            <Route path="/bill" component={BillandDetailManager} />
             <Route component={NotFound} />
           </Switch>
         </div>

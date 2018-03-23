@@ -24,7 +24,7 @@ const putRequest: RequestInit = {
 };
 
 export enum STATUS {
-    OK = 200 || 201 || 204,
+    OK = 200,
     LOGGED_OUT = 401,
     WITHOUT_PERMISSIONS = 403,
     BAD_REQUEST = 400,
@@ -39,11 +39,12 @@ export class Https {
         this.contextMessageStore = messageStore;
     }
 
-    post = async (url: string, body: object): Promise<any> => {
+    post = async (url: string, body: object | string, others?: object): Promise<any> => {
         try {
             const response = await fetch(url, {
                 ...postRequest,
-                body
+                body: body,
+                ...others
             });
             return this.manageResponse(response);
         } catch (error) {
@@ -84,7 +85,7 @@ export class Https {
             return { success: false };
         }
     }
-
+    
     download = (url: string) => {
         download(url);
     }
