@@ -76,6 +76,7 @@ export default class CategoryTable extends React.Component<CategoryTableProps> {
                     width="15%"
                     dataField="description"
                     dataSort={true}
+                    isKey={true}
                 >
                     Descripción de Categoría
                 </TableHeaderColumn>

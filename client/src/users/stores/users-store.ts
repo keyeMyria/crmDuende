@@ -52,38 +52,49 @@ export default class UserStore implements Store {
 
     @action async updateUser(user: User) {
         const form = new FormData();
+        delete user.id;
         const response = await
             // tslint:disable-next-line:max-line-length
-            this.https.put(`http://localhost:8080/${API_URL}/${user.id}/${encodeObject(user)}`, form);
+            this.https.put(`http://localhost:8080/${API_URL}/${user.id}?${encodeObject(user)}`, form);
         if (response) {
             const userList = toJS(this.users);
-            const users = userList.map(usr => usr.id === user.id
-                ? { ...usr, ...user, name: `${user.name} ${user.lastName}` }
-                : usr
-            );
-            this.users = users;
+            this.users = userList;
         } else { this.errors = response.errors; }
         return response;
     }
 
     @action async createUser(user: User): Promise<boolean> {
-        const form = new FormData();
-        delete user.id; 
-        // tslint:disable-next-line:max-line-length
-        const response = await this.https.post(`http://localhost:8080/${API_URL}&${encodeObject(user)}`, form);
-        if (response) {
-            this.users = this.users.concat({
-                ...user,
-                name: `${user.name} ${user.lastName}`
-            });
-        } else {
-            if (response.errors.id) {
-                this.errors = { ...response.errors, userName: response.errors.id };
-            } else {
-                this.errors = { ...response.errors };
+        delete user.id;
+        user.picture = 'jkdf';
+        var data = JSON.stringify({
+            "name": user.name,
+            "lastName": user.lastName,
+            "storeId": {
+                "id": user.storeId
+            },
+            "userName": user.userName,
+            "email": user.email,
+            "phone": user.phone,
+            "mobile": user.mobile,
+            "picture": user.picture ? user.picture : "juasjuas"
+        });
+
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === 4) {
+                console.log(this.responseText);
             }
-        }
-        return response;
+        });
+
+        xhr.open("POST", "http://localhost:8080/users");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("Cache-Control", "no-cache");
+        xhr.setRequestHeader("Postman-Token", "b2544e6d-7f77-4641-b1fc-44834360d313");
+
+        xhr.send(data);
+        return true;
     }
 
 }

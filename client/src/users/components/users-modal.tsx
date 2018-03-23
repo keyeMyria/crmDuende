@@ -150,13 +150,13 @@ export default class UserModal extends React.Component<UserModalProps, UserModal
                     />
                     <ModalSelect
                         valueName="storeId"
-                        value={this.state.user.storeId}
+                        value={toJS(this.props.userStore.user.storeId)}
                         handleChange={this.handleValueChanges}
                         options={this.props.stores}
                         multi={false}
                         valueKey="id"
                         labelKey="name"
-                        placeholder="Galerías Prima..."
+                        placeholder="elija una tienda..."
                         labelText="Tienda a la que pertenece"
                     />
                     <ModalField
