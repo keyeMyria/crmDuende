@@ -24,6 +24,11 @@ class Clients {
         String location
         String placeName
         String picture
+        String bloodType = ""
+        String preferences = ""
+        String gender = ""
+        String civilStatus = ""
+        String favoriteSport = ""
     
      static hasMany=[bill: Bill]
  
@@ -42,7 +47,11 @@ class Clients {
         location(nullable:true, size: 0..60)
         placeName(nullable:true, size: 0..60)
         address(nullable:true, size: 0..60)
-        
+        bloodType(nullable:true, size: 0..20)
+        preferences(nullable:true, size: 0..20)
+        gender(nullable:true, size: 0..20)
+        civilStatus(nullable:true, size: 0..20)
+        favoriteSport(nullable:true, size: 0..20)
     }
     
     String toString() {
