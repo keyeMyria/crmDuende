@@ -72,16 +72,8 @@ export default class PurchasesStore implements Store {
         // tslint:disable-next-line:max-line-length
         const response = await this.https.post(`http://localhost:8080/${API_URL}&${encodeObject(pur)}`, form);
         if (response) {
-            this.purchases = this.purchases.concat({
-                ...pur,
-                documentNumber: `${pur.documentNumber}`
-            });
-        } else {
-            if (response.errors.id) {
-                this.errors = { ...response.errors, documentNumber: response.errors.id };
-            } else {
-                this.errors = { ...response.errors };
-            }
+            this.purchases = this.purchases; 
+
         }
         return response;
     }

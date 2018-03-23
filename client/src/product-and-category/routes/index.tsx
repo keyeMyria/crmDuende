@@ -10,6 +10,7 @@ export default function () {
                 <Manager
                     store={IndexStore}
                 />
+        
             </div>
         </div>
     );

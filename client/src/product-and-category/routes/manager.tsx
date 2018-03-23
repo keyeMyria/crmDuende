@@ -17,7 +17,7 @@ interface ManagerState {
 enum ActiveTab { Products, Category }
 
 @observer
-class Manager extends React.Component<ManagerProps, ManagerState> {
+export default class Manager extends React.Component<ManagerProps, ManagerState> {
 
     state = {
         selectedTab: ActiveTab.Products
@@ -61,6 +61,3 @@ class Manager extends React.Component<ManagerProps, ManagerState> {
         );
     }
 }
-
-export default Manager;
-// fijar estructura s
