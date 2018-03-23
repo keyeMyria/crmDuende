@@ -11,7 +11,8 @@ import NotFound from './not-found';
 import ProductManagerRoute from './product-and-category/';
 import ProviderManager from './provider';
 import BillandDetailManager from './bill/';
-
+import PurchasesManager from './purchases';
+import ExistenceLineManager from './existence-line';
 
 class App extends React.Component<{}, {}> {
   render() {
@@ -25,6 +26,8 @@ class App extends React.Component<{}, {}> {
             <Route path="/client" component={ClientsManager} />
             <Route path="/products" component={ProductManagerRoute} />
             <Route path="/bill" component={BillandDetailManager} />
+            <Route path="/purchases" component={PurchasesManager} />
+            <Route path="/existenceLine" component={ExistenceLineManager} />
             <Route component={NotFound} />
           </Switch>
         </div>
