@@ -30,7 +30,7 @@ class ExistenceLineController {
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/existenceline_insert.sql")
         String sqlString = new File(sqlFilePath).text
         if (sqlString) {
-            sqlString = sqlString.replace(" ?quantity", existenceLine.quantit.toString())
+            sqlString = sqlString.replace(" ?quantity", (existenceLine.quantity) ? existenceLine.quantity.toString() : "")
             
             if (existenceLine == null) {
                 transactionStatus.setRollbackOnly()

@@ -30,9 +30,9 @@ class PurchasesDetailController {
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/purchasesdetail_insert.sql")
         String sqlString = new File(sqlFilePath).text
         if(sqlString) { 
-             sqlString = sqlString.replace(" ?cost", purchasesDetail.cost)
-             sqlString = sqlString.replace(" ?sales_price", purchasesDetail.salePrice)
-             sqlString = sqlString.replace(" ?count", purchasesDetail.placeName.toString())
+             sqlString = sqlString.replace(" ?cost", (purchasesDetail.cost) ? purchasesDetail.cost : "")
+             sqlString = sqlString.replace(" ?sales_price", (purchasesDetail.salePrice) ? purchasesDetail.salePrice : "")
+             sqlString = sqlString.replace(" ?count", (purchasesDetail.count) ? purchasesDetail.count.toString() : "")
        
             if (purchasesDetail == null) {
                 transactionStatus.setRollbackOnly()

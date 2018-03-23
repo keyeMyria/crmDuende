@@ -30,10 +30,10 @@ class StoresController {
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/stores_insert.sql")
         String sqlString = new File(sqlFilePath).text
         if (sqlString) {
-             sqlString = sqlString.replace(" ?phone", stores.phone)
-             sqlString = sqlString.replace(" ?address", stores.address)
-             sqlString = sqlString.replace(" ?place_name", stores.placeName)
-             sqlString = sqlString.replace(" ?name", stores.name)
+             sqlString = sqlString.replace(" ?phone", (stores.phone) ? stores.phone : "")
+             sqlString = sqlString.replace(" ?address", (stores.address) ? stores.address : "")
+             sqlString = sqlString.replace(" ?place_name",(stores.placeName) ? stores.placeName : "")
+             sqlString = sqlString.replace(" ?name", (stores.name) ? stores.name : "")
              
             if (stores == null) {
                 transactionStatus.setRollbackOnly()

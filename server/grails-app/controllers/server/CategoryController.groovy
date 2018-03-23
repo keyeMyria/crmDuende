@@ -31,8 +31,8 @@ class CategoryController {
         String sqlString = new File(sqlFilePath).text
         
         if (sqlString) {
-            sqlString = sqlString.replace(" ?name", category.name)
-            sqlString = sqlString.replace(" ?description", category.description)
+            sqlString = sqlString.replace(" ?name", (category.name) ? category.name : "")
+            sqlString = sqlString.replace(" ?description", (category.description) ? category.description : "")
            
             if (category == null) {
                 transactionStatus.setRollbackOnly()

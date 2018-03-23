@@ -32,9 +32,9 @@ class BillDetailController {
         String sqlString = new File(sqlFilePath).text  
      
         if (sqlString) {
-            sqlString = sqlString.replace(" ?sale_price", billDetail.salePrice)
-            sqlString = sqlString.replace(" ?cost", billDetail.cost.toString())
-            sqlString = sqlString.replace(" ?count", billDetail.count)
+            sqlString = sqlString.replace(" ?sale_price", (billDetail.salePrice) ? billDetail.salePrice : "")
+            sqlString = sqlString.replace(" ?cost", (billDetail.cost) ? billDetail.cost.toString() : "")
+            sqlString = sqlString.replace(" ?count", (billDetail.count) ? billDetail.count.toString() : "" )
             
             if (billDetail == null) {
                 transactionStatus.setRollbackOnly()

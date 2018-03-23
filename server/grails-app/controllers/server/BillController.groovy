@@ -30,7 +30,7 @@ class BillController {
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/bill_insert.sql")
         String sqlString = new File(sqlFilePath).text  
         if (sqlString) {
-             sqlString = sqlString.replace(" ?date", bill.date.toString())
+             sqlString = sqlString.replace(" ?date", (bill.date) ? bill.date.toString() : "")
              sqlString = sqlString.replace(" ?num_bill", bill.numBill)
         
             if (bill == null) {

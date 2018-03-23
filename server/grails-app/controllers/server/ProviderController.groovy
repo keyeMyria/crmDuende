@@ -32,14 +32,14 @@ class ProviderController {
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/provider_insert.sql")
         String sqlString = new File(sqlFilePath).text
         if (sqlString) { 
-             sqlString = sqlString.replace(" ?phone", provider.phone)
-             sqlString = sqlString.replace(" ?mobile", provider.mobile)
-             sqlString = sqlString.replace(" ?address", provider.address)
-             sqlString = sqlString.replace(" ?country_code", provider.countryCode)
-             sqlString = sqlString.replace(" ?contact_name", provider.contactName)
-             sqlString = sqlString.replace(" ?location", provider.location)
-             sqlString = sqlString.replace(" ?name", provider.name)
-             sqlString = sqlString.replace(" ?email", provider.email)
+             sqlString = sqlString.replace(" ?phone", (provider.phone) ? provider.phone : "")
+             sqlString = sqlString.replace(" ?mobile",(provider.mobile) ? provider.mobile : "")
+             sqlString = sqlString.replace(" ?address", (provider.address) ? provider.address : "")
+             sqlString = sqlString.replace(" ?country_code", (provider.countryCode) ? provider.countryCode : "")
+             sqlString = sqlString.replace(" ?contact_name",(provider.contactName) ? provider.contactName : "")
+             sqlString = sqlString.replace(" ?location", (provider.location) ? provider.location : "")
+             sqlString = sqlString.replace(" ?name", (provider.name) ? provider.name : "")
+             sqlString = sqlString.replace(" ?email", (provider.email) ? provider.email : "")
         
             if (provider == null) {
                 transactionStatus.setRollbackOnly()

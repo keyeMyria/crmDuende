@@ -33,13 +33,13 @@ class UsersController {
         String sqlFilePath = grailsApplication.parentContext.servletContext.getRealPath("/migrations/users_insert.sql")
         String sqlString = new File(sqlFilePath).text  
         if(sqlString) {
-             sqlString = sqlString.replace(" ?phone", users.phone)
-             sqlString = sqlString.replace(" ?user_name", users.userName)
-             sqlString = sqlString.replace(" ?mobile", users.mobile)
-             sqlString = sqlString.replace(" ?name", users.name)
-             sqlString = sqlString.replace(" ?picture", users.picture)
-             sqlString = sqlString.replace(" ?last_name", users.lastName)
-             sqlString = sqlString.replace(" ?email", users.email)
+             sqlString = sqlString.replace(" ?phone", (users.phone) ? users.phone : "")
+             sqlString = sqlString.replace(" ?user_name", (users.userName) ? users.userName : "")
+             sqlString = sqlString.replace(" ?mobile", (users.mobile) ? users.mobile : "")
+             sqlString = sqlString.replace(" ?name", (users.name) ? users.name : "")
+             sqlString = sqlString.replace(" ?picture", (users.picture) ? users.picture : "")
+             sqlString = sqlString.replace(" ?last_name", (users.lastName) ? users.lastName : "")
+             sqlString = sqlString.replace(" ?email", (users.email) ? users.email : "")
              
             if (users == null) {
                 transactionStatus.setRollbackOnly()
