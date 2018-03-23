@@ -54,7 +54,7 @@ class UsersController {
             }
         }
 
-        users.save flush:true
+        users.save failOnError:true
 
         respond users, [status: CREATED, view:"show"]
     }
@@ -67,7 +67,7 @@ class UsersController {
         String sqlString = new File(sqlFilePath).text  
         if(sqlString) {
             
-            sqlString = sqlString.replace(" ?paramUserId", users.id.toString())
+            sqlString = sqlString.replace(" ?paramUserId", (users.id.toString()) ? users.id.toString() : "" )
             
             if (users == null) {
                 transactionStatus.setRollbackOnly()
