@@ -35,7 +35,7 @@ class Manager extends React.Component<ManagerProps, ManagerState> {
                 <Tabs activeKey={this.state.selectedTab} onSelect={this.handleTab} id="bill-manager-tabs" >
                     <Tab
                         eventKey={ActiveTab.Bill}
-                        title="Compras"
+                        title="Ventas"
                     >
                         {
                             this.state.selectedTab === ActiveTab.Bill && (
@@ -47,7 +47,7 @@ class Manager extends React.Component<ManagerProps, ManagerState> {
                     </Tab>
                     <Tab
                         eventKey={ActiveTab.BillDetail}
-                        title="Detalle de Compra"
+                        title="Detalle de Venta"
                     >
                         {
                             this.state.selectedTab === ActiveTab.BillDetail && (
